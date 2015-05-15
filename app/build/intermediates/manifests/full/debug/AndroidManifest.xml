@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="info.androidhive.slidingmenu"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launch"
+        android:label="@string/app_name"
+        android:theme="@style/CustomActionBarTheme" >
+        <activity
+            android:name="info.androidhive.slidingmenu.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.AddNewTopic"
+            android:label="@string/title_activity_add_new_topic" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.EditTopic"
+            android:label="@string/title_activity_edit_topic" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.Category"
+            android:label="@string/title_activity_category" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.AddNewCat"
+            android:label="@string/title_activity_add_new_cat" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.EditCategory"
+            android:label="@string/title_activity_edit_category" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.Term"
+            android:label="@string/title_activity_term" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.AddNewTerm"
+            android:label="@string/title_activity_add_term" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.EditTerm"
+            android:label="@string/title_activity_edit_term" >
+        </activity>
+        <activity
+            android:name="info.androidhive.slidingmenu.Description"
+            android:label="@string/title_activity_description" >
+        </activity>
+    </application>
+
+</manifest>

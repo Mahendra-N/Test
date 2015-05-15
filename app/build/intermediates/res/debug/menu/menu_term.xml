@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.quickee.Term">
+
+    <item
+        android:id="@+id/add_term"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Add Term"/>
+
+    <item
+        android:id="@+id/edit_term"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Edit Term"/>
+
+</menu>
+<!-- From: file:/C:/xampp/htdocs/Android/Android_Sample_projects/SlidingMenu1/app/src/main/res/menu/menu_term.xml -->
