@@ -52,4 +52,4 @@
         android:id="@+id/edit_term_listView"
         android:layout_gravity="center_horizontal" />
 
-</LinearLayout><!-- From: file:/C:/xampp/htdocs/Android/Android_Sample_projects/SlidingMenu1/app/src/main/res/layout/activity_edit_term.xml -->
+</LinearLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_edit_term.xml -->

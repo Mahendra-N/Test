@@ -136,6 +136,7 @@
 
 </RelativeLayout>
 
+
     <TextView
         android:layout_width="122dp"
         android:layout_height="29dp"
@@ -156,44 +157,46 @@
         android:id="@+id/editText"
         android:layout_weight="0.12" />
 
+
     <RelativeLayout
-         android:id="@+id/footer"
-         android:layout_width="match_parent"
-         android:layout_height="58dp"
-         android:background="#fff"
-         android:layout_marginTop="180dp"
-         android:gravity="center">
 
-         <ImageButton
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/imageButton"
-             android:src="@drawable/ic_image"
-             android:layout_alignParentBottom="true"
-             android:layout_alignParentLeft="true"
-             android:layout_alignParentStart="true"
-             android:layout_marginLeft="22dp"
-             android:layout_marginStart="22dp" />
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="#fff"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+       >
 
-         <ImageButton
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/imageButton2"
-             android:src="@drawable/ic_video"
-             android:layout_alignParentBottom="true"
-             android:layout_centerHorizontal="true" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:src="@drawable/ic_image"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp" />
 
-         <ImageButton
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/imageButton3"
-             android:src="@drawable/ic_audio"
-             android:layout_alignParentBottom="true"
-             android:layout_alignParentRight="true"
-             android:layout_alignParentEnd="true"
-             android:layout_marginRight="24dp"
-             android:layout_marginEnd="24dp" />
-     </RelativeLayout>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:src="@drawable/ic_video"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton3"
+            android:src="@drawable/ic_audio"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp" />
+    </RelativeLayout>
 </LinearLayout>
-<!-- From: file:/C:/xampp/htdocs/Android/Android_Sample_projects/SlidingMenu1/app/src/main/res/layout/activity_add_new_term.xml -->
+<!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_add_new_term.xml -->

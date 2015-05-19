@@ -50,9 +50,10 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/Topic_Name"
+        android:hint="Enter Topic Name"
         android:paddingTop="50dp" />
 
 
 
 </LinearLayout>
-<!-- From: file:/C:/xampp/htdocs/Android/Android_Sample_projects/SlidingMenu1/app/src/main/res/layout/activity_add_new_topic.xml -->
+<!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_add_new_topic.xml -->
