@@ -1,6 +1,7 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +25,6 @@ public class AddNewTopic extends Activity {
         setContentView(R.layout.activity_add_new_topic);
         getActionBar().hide();
         backButton = (ImageView) findViewById(R.id.back_icon);
-
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +34,7 @@ public class AddNewTopic extends Activity {
         });
         topic_save=(TextView)findViewById(R.id.topic_save);
         topic_save.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
                   Topic_Name =(EditText)findViewById(R.id.Topic_Name);
 
@@ -44,9 +45,12 @@ public class AddNewTopic extends Activity {
                     tableinfo.topic_name =Topic_Name.getText().toString();
                     topicDb.insert_topic(tableinfo);
                     Topic_Name.setText("");
-                    TopicsFragment topic = new TopicsFragment();
-                    topic.TopicListView();
-                    finish();
+                   Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+
+                  //  TopicsFragment fragment =new TopicsFragment();
+                   // fragment.refresh();
+                     //   finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Nothing  to Save",
                             Toast.LENGTH_LONG).show();

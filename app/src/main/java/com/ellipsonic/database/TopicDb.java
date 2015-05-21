@@ -31,10 +31,10 @@ public class TopicDb {
 
     public ArrayList<String> getTopicList() {
         //Open connection to read only
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         String selectQuery =  "SELECT  " +
-                NotesTable.KEY_TOPIC_NAME  +
-                " FROM " + NotesTable.TABLE_NOTES;
+                "DISTINCT  "+NotesTable.KEY_TOPIC_NAME  +
+                " FROM  " + NotesTable.TABLE_NOTES;
 
 
         ArrayList<String> topicList = new ArrayList<String>();

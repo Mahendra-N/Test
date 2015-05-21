@@ -15,8 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.ellipsonic.database.DatabaseHandler;
 import com.ellipsonic.quickee.adapter.NavDrawerListAdapter;
 import com.ellipsonic.quickee.model.NavDrawerItem;
+
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -40,7 +42,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        DatabaseHandler mDbHelper= new DatabaseHandler(this);
         setContentView(R.layout.activity_main);
 
         mTitle = mDrawerTitle = getTitle();
@@ -167,7 +169,7 @@ public class MainActivity extends Activity {
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
-    private void displayView(int position) {
+    public void displayView(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
         switch (position) {

@@ -1,7 +1,9 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,16 +11,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.ellipsonic.database.CategoryDb;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class EditCategory extends Activity {
-
+    String selectedTopic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_category);
         getActionBar().hide();
 
+        Intent activityThatCalled = getIntent();
+        selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
 
+        EDitCatListView(selectedTopic);
         ImageView back_button =(ImageView) findViewById(R.id.edit_cat_back_icon);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +38,7 @@ public class EditCategory extends Activity {
         });
 
 
-        String[]  myStringArray={"Air Force","Plane","Auto","Military"};
+    /*    String[]  myStringArray={"Air Force","Plane","Auto","Military"};
         ArrayAdapter<String> myAdapter=new
                 ArrayAdapter<String>(
                 this,
@@ -36,7 +46,7 @@ public class EditCategory extends Activity {
                 myStringArray);
         ListView myList=(ListView)
                 findViewById(R.id.edit_cat_listView);
-        myList.setAdapter(myAdapter);
+        myList.setAdapter(myAdapter);*/
 
 
     }
@@ -63,4 +73,34 @@ public class EditCategory extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void EDitCatListView( String selectedTopic){
+        CategoryDb cat_Db=new CategoryDb(getApplicationContext());
+        ArrayList<String> CatList =  cat_Db.getCatList(selectedTopic);
+        CatList.removeAll(Collections.singleton(null));
+        if(CatList!=null) {
+            ArrayAdapter<String> Adapter = new
+                    ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1,
+                    CatList);
+            ListView List = (ListView) this.findViewById(R.id.edit_cat_listView);
+            List.setAdapter(Adapter);
+
+     /*       List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+
+                    Intent intent = new Intent(Category.this, Term.class);
+                    startActivity(intent);
+
+                }
+
+            });*/
+        }else{
+            Log.d("message", "nothing is there in database");
+        }
+
+    }
+
 }
