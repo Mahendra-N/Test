@@ -21,29 +21,37 @@ public class TopicsFragment extends Fragment {
 	
 	public TopicsFragment(){}
     View rootView;
+    public TopicDb topic_Db = null;
+    public ArrayList<String> topicList = null;
+    public Context context = null;
 
     private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_topics, container, false);
-        TopicListView(container.getContext());
-           return rootView;
+        this.context = container.getContext();
+        TopicListView(this.context);
+        return rootView;
     }
-  /*  public void onActivityCreated(Bundle savedInstanceState ) {
-        super.onActivityCreated(savedInstanceState);
 
-    }*/
+    @Override
+    public void onPause() {
+        super.onPause();
+        topic_Db = null;
+        topicList = null;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        TopicListView(this.context);
+    }
 
     public void TopicListView(Context context) {
-
-        TopicDb topic_Db = new TopicDb(context);
-
-        ArrayList<String> topicList = topic_Db.getTopicList();
-        topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
+        topic_Db = new TopicDb(this.context);
+        topicList = topic_Db.getTopicList();
+        topicList.removeAll(Collections.singleton(null));
         if (topicList != null) {
             ArrayAdapter<String> myAdapter = new
                     ArrayAdapter<String>(this.getActivity(),
@@ -51,8 +59,6 @@ public class TopicsFragment extends Fragment {
                     topicList);
             ListView myList = (ListView) rootView.findViewById(R.id.topic_listView);
             myList.setAdapter(myAdapter);
-
-
             myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -62,20 +68,10 @@ public class TopicsFragment extends Fragment {
                     final int result = 1;
                     intent.putExtra("selectedTopic",clickedItem);
                     startActivityForResult(intent, result);
-               //     Intent intent = new Intent(getActivity(), Category.class);
-                //    startActivity(intent);
-                    //     Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_LONG).show();
                 }
             });
         }else{
             Log.d("message", "nothing is there in database");
                 }
     }
-   /* public void refresh(){
-        topicList =  topic_Db.getTopicList();
-        myAdapter.addAll(topicList);
-        myList.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
-
-    }*/
 }

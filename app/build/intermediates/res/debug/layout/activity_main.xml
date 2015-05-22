@@ -21,4 +21,4 @@
         android:dividerHeight="1dp"        
         android:listSelector="@drawable/list_selector"
         android:background="@color/list_background"/>
-</android.support.v4.widget.DrawerLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_main.xml -->
+</android.support.v4.widget.DrawerLayout><!-- From: file:/H:/Projects/Quickee_native/app/src/main/res/layout/activity_main.xml -->
