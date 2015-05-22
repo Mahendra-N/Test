@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SAVE"
-            android:id="@+id/topic_save"
+            android:id="@+id/term_save"
             android:textColor="#fff"
             android:layout_marginRight="18dp"
             android:layout_marginEnd="18dp"
@@ -55,7 +55,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/sel_topic_name"
-
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
@@ -68,7 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/sel_cat_name"
-
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:hint="Category"
@@ -79,7 +77,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
-
         android:id="@+id/input_term_name"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
@@ -142,7 +139,7 @@
         android:layout_height="29dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Description"
-        android:id="@+id/desc"
+
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_weight="0.10" />
@@ -152,9 +149,9 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="45"
+        android:id="@+id/desc"
         android:layout_marginTop="15dp"
         android:hint="Enter Description"
-        android:id="@+id/editText"
         android:layout_weight="0.12" />
 
 

@@ -75,7 +75,6 @@ public final class R {
         public static final int desc=0x7f0a000d;
         public static final int desc_back_icon=0x7f0a0018;
         public static final int drawer_layout=0x7f0a0027;
-        public static final int editText=0x7f0a000e;
         public static final int edit_cat_back_icon=0x7f0a001e;
         public static final int edit_cat_listView=0x7f0a001f;
         public static final int edit_cat_save=0x7f0a001c;
@@ -90,9 +89,9 @@ public final class R {
         public static final int edit_topic_save=0x7f0a0024;
         public static final int frame_container=0x7f0a0028;
         public static final int icon=0x7f0a002c;
-        public static final int imageButton=0x7f0a000f;
-        public static final int imageButton2=0x7f0a0010;
-        public static final int imageButton3=0x7f0a0011;
+        public static final int imageButton=0x7f0a000e;
+        public static final int imageButton2=0x7f0a000f;
+        public static final int imageButton3=0x7f0a0010;
         public static final int img=0x7f0a001b;
         public static final int input_term_name=0x7f0a0009;
         public static final int list_slidermenu=0x7f0a0029;
@@ -102,6 +101,7 @@ public final class R {
         public static final int sel_topic_name=0x7f0a0007;
         public static final int term_listView=0x7f0a002b;
         public static final int term_name=0x7f0a0004;
+        public static final int term_save=0x7f0a0006;
         public static final int term_searchView=0x7f0a002a;
         public static final int textView=0x7f0a000a;
         public static final int textView1=0x7f0a0017;
@@ -110,8 +110,8 @@ public final class R {
         public static final int textView4=0x7f0a0021;
         public static final int title=0x7f0a002d;
         public static final int topic_listView=0x7f0a0031;
-        public static final int topic_name=0x7f0a0012;
-        public static final int topic_save=0x7f0a0006;
+        public static final int topic_name=0x7f0a0011;
+        public static final int topic_save=0x7f0a0012;
         public static final int topic_searchView=0x7f0a0030;
         public static final int txtLabel=0x7f0a002f;
     }

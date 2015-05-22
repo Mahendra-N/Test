@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     // Database Name
     private static final String DATABASE_NAME = "Quickee.db";
 
@@ -25,10 +25,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         // Creating Tables
         String CREATE_NOTES_TABLE = "CREATE TABLE " + NotesTable.TABLE_NOTES + "("
-                + NotesTable.KEY_ID + " INTEGER PRIMARY KEY," + NotesTable.KEY_TOPIC_NAME + " TEXT,"
-                + NotesTable.KEY_CATEGORY_NAME + " TEXT" + NotesTable.KEY_TERM_NAME +"TEXT"+
-                NotesTable.KEY_DESCRIPTION +"TEXT"+NotesTable.KEY_IMAGE +"TEXT"+ NotesTable.KEY_AUDIO
-                +"TEXT"+ NotesTable.KEY_VIDEO+"TEXT" +")";
+                + NotesTable.KEY_ID + " INTEGER PRIMARY KEY,"
+                + NotesTable.KEY_TOPIC_NAME + " TEXT,"
+                + NotesTable.KEY_CATEGORY_NAME + " TEXT,"
+                + NotesTable.KEY_TERM_NAME +" TEXT,"
+                + NotesTable.KEY_DESCRIPTION +" TEXT,"
+                + NotesTable.KEY_IMAGE +" TEXT,"
+                + NotesTable.KEY_AUDIO +" TEXT,"
+                + NotesTable.KEY_VIDEO+" TEXT )";
+
         db.execSQL(CREATE_NOTES_TABLE);
             Log.d("database :","Quickee table is created");
     }

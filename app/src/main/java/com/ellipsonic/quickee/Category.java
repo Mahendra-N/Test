@@ -19,7 +19,7 @@ import java.util.Collections;
 
 public class Category extends Activity {
     String selectedTopic;
-   public CategoryDb cat_Db=null;
+    public CategoryDb cat_Db=null;
     public ArrayList<String> CatList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class Category extends Activity {
         CatListView(selectedTopic);
     }
 
-   public void CatListView( String selectedTopic){
+   public void CatListView( final String selectedTopic){
       cat_Db=new CategoryDb(getApplicationContext());
       CatList =  cat_Db.getCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
@@ -91,10 +91,12 @@ public class Category extends Activity {
                @Override
                public void onItemClick(AdapterView<?> parent, View view, int position,
                                        long id) {
-
+                   String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
                    Intent intent = new Intent(Category.this, Term.class);
-                   startActivity(intent);
-
+                   final int result = 1;
+                   intent.putExtra("selectedTopic",selectedTopic);
+                   intent.putExtra("selectedCategory",clickedItem);
+                   startActivityForResult(intent, result);
                }
 
            });
