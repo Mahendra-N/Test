@@ -28,5 +28,6 @@ public class NotesTable {
     public String image;
     public String audio;
     public String video;
-
+    public String old_topic_name;
+    public String old_cat_name;
 }

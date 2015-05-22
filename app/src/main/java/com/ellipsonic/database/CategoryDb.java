@@ -56,4 +56,25 @@ public class CategoryDb {
         return CatList;
 
     }
+
+    public void delete_category( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String  topic_name =tableinfo.topic_name;
+        String  cat_name=tableinfo.category_name;
+        ContentValues values = new ContentValues();
+        db.delete(NotesTable.TABLE_NOTES, NotesTable.KEY_TOPIC_NAME + "='"+topic_name+"'" +" AND "+
+                NotesTable.KEY_CATEGORY_NAME+ "='"+cat_name+"'"  , null);
+        db.close(); // Closing database connection
+
+    }
+
+    public void update_category( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put(NotesTable.KEY_CATEGORY_NAME,tableinfo.category_name);
+        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_CATEGORY_NAME + "= '"+tableinfo.old_cat_name+"'"
+                +" AND "+NotesTable.KEY_TOPIC_NAME+ "='"+tableinfo.topic_name+"'", null);
+        db.close(); // Closing database connection*/
+
+    }
 }

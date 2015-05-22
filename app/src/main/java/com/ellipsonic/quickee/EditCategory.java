@@ -15,9 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
+import com.ellipsonic.database.NotesTable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,6 +113,7 @@ public class EditCategory extends Activity {
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
         final EditText input = new EditText(this);
+        final String defaultTextValue  =clickedItem;
         input.setText(clickedItem);
         alertDialog.setView(input);
         // Setting Dialog Message
@@ -123,7 +124,9 @@ public class EditCategory extends Activity {
             public void onClick(DialogInterface dialog,int which) {
                 Editable YouEditTextValue = input.getText();
                 // Write your code here to invoke YES event
-                Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_SHORT).show();
+                String updateTextValue = String.valueOf(input.getText());
+                UpdateCategory(defaultTextValue, updateTextValue,selectedTopic);
+                //Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -131,13 +134,42 @@ public class EditCategory extends Activity {
         alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
-                Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
-                dialog.cancel();
+                String deleteTextValue = String.valueOf(input.getText());
+                Delete_Category(deleteTextValue, selectedTopic);
+               // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
+                //dialog.cancel();
             }
         });
 
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    public void  Delete_Category(String deleteTextValue,String selectedTopic){
+        //    Toast.makeText(getApplicationContext(), deleteTextValue, Toast.LENGTH_SHORT).show();
+        CategoryDb catDB =new CategoryDb(getApplicationContext());
+        NotesTable tableinfo = new NotesTable();
+        tableinfo.topic_name =selectedTopic;
+        tableinfo.category_name=deleteTextValue;
+        catDB.delete_category(tableinfo);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
+    }
+    public void UpdateCategory(String defaultTextValue, String updateTextValue,String selectedTopic){
+        //   Toast.makeText(getApplicationContext(), updateTextValue, Toast.LENGTH_SHORT).show();
+        CategoryDb catDB =new CategoryDb(getApplicationContext());
+        NotesTable tableinfo = new NotesTable();
+        tableinfo.old_cat_name=defaultTextValue;
+        tableinfo.category_name =updateTextValue;
+        tableinfo.topic_name=selectedTopic;
+
+        catDB.update_category(tableinfo);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
     }
 
 }

@@ -62,11 +62,28 @@ public class TopicDb {
 
     public void delete_topic( NotesTable tableinfo) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-     String  delete_topic_name =tableinfo.topic_name;
+        String  delete_topic_name =tableinfo.topic_name;
         ContentValues values = new ContentValues();
         db.delete(NotesTable.TABLE_NOTES, NotesTable.KEY_TOPIC_NAME + "='"+delete_topic_name+"'", null);
         db.close(); // Closing database connection
-        db.close(); // Closing database connection
+
+    }
+    public void update_topic( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues val = new ContentValues();
+     /*   String  update_topic_name =tableinfo.topic_name;
+         String  old_topic_name=tableinfo.old_topic_name;
+             String updateQuery =  "UPDATE  " +
+             NotesTable.TABLE_NOTES +
+            "  SET  "+ NotesTable.KEY_TOPIC_NAME +" = '"+update_topic_name+"' "+
+            "  WHERE  "+NotesTable.KEY_TOPIC_NAME +" = '"+old_topic_name+"' ";
+        db.rawQuery(updateQuery, null);
+
+      db.close();*/ // Closing database connection*/
+       val.put(NotesTable.KEY_TOPIC_NAME ,tableinfo.topic_name);
+        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TOPIC_NAME + "= '"+tableinfo.old_topic_name+"'", null);
+        db.close(); // Closing database connection*/
+
     }
 
 }
