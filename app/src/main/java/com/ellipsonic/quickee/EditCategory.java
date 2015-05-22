@@ -1,15 +1,21 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
 
@@ -86,21 +92,52 @@ public class EditCategory extends Activity {
             ListView List = (ListView) this.findViewById(R.id.edit_cat_listView);
             List.setAdapter(Adapter);
 
-     /*       List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
-
-                    Intent intent = new Intent(Category.this, Term.class);
-                    startActivity(intent);
+                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
+                  AlertWindow(clickedItem);
 
                 }
-
-            });*/
+            });
         }else{
             Log.d("message", "nothing is there in database");
         }
 
+    }
+
+    public void AlertWindow(String clickedItem){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+        final EditText input = new EditText(this);
+        input.setText(clickedItem);
+        alertDialog.setView(input);
+        // Setting Dialog Message
+        alertDialog.setMessage("you want Update or Delete?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                Editable YouEditTextValue = input.getText();
+                // Write your code here to invoke YES event
+                Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Write your code here to invoke NO event
+                Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 
 }

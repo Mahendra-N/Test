@@ -1,16 +1,23 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.ellipsonic.database.NotesTable;
 import com.ellipsonic.database.TopicDb;
 
 import java.util.ArrayList;
@@ -62,20 +69,14 @@ public class EditTopic extends Activity {
           myList.setAdapter(myAdapter);
 
 
-         /* myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
               @Override
               public void onItemClick(AdapterView<?> parent, View view, int position,
                                       long id) {
                   String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                  Intent intent = new Intent(getApplicationContext() , Category.class);
-                  final int result = 1;
-                  intent.putExtra("selectedTopic",clickedItem);
-                  startActivityForResult(intent, result);
-                  //     Intent intent = new Intent(getActivity(), Category.class);
-                  //    startActivity(intent);
-                  //     Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_LONG).show();
+                  AlertWindowTopic(clickedItem);
               }
-          });*/
+          });
       }else{
           Log.d("message", "nothing is there in database");
       }
@@ -101,4 +102,59 @@ public class EditTopic extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void AlertWindowTopic(String clickedItem){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+        final EditText input = new EditText(this);
+        input.setText(clickedItem);
+        alertDialog.setView(input);
+        // Setting Dialog Message
+        alertDialog.setMessage("you want Update or Delete?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                String updateTextValue = String.valueOf(input.getText());
+
+                  UpdateTopic(updateTextValue);
+              //  Toast.makeText(getApplicationContext(), EditTextValue, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                String deleteTextValue = String.valueOf(input.getText());
+                DeleteTopic(deleteTextValue);
+               // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
+               // dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    public void UpdateTopic(String updateTextValue){
+        Toast.makeText(getApplicationContext(), updateTextValue, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void  DeleteTopic(String deleteTextValue){
+        Toast.makeText(getApplicationContext(), deleteTextValue, Toast.LENGTH_SHORT).show();
+        TopicDb topicDb =new TopicDb(getApplicationContext());
+        NotesTable tableinfo = new NotesTable();
+        tableinfo.topic_name =deleteTextValue;
+        topicDb.delete_topic(tableinfo);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+        //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+       // startActivity(intent);
+    }
+
 }

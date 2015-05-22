@@ -60,4 +60,13 @@ public class TopicDb {
 
     }
 
+    public void delete_topic( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+     String  delete_topic_name =tableinfo.topic_name;
+        ContentValues values = new ContentValues();
+        db.delete(NotesTable.TABLE_NOTES, NotesTable.KEY_TOPIC_NAME + "='"+delete_topic_name+"'", null);
+        db.close(); // Closing database connection
+        db.close(); // Closing database connection
+    }
+
 }
