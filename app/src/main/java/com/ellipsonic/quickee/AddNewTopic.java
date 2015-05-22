@@ -45,12 +45,7 @@ public class AddNewTopic extends Activity {
                     tableinfo.topic_name =Topic_Name.getText().toString();
                     topicDb.insert_topic(tableinfo);
                     Topic_Name.setText("");
-                   Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-
-                  //  TopicsFragment fragment =new TopicsFragment();
-                   // fragment.refresh();
-                     //   finish();
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Nothing  to Save",
                             Toast.LENGTH_LONG).show();
@@ -60,6 +55,19 @@ public class AddNewTopic extends Activity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Toast.makeText(getApplicationContext(), "Closing add new topic",Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "Closing add new topic",Toast.LENGTH_LONG).show();
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -60,11 +60,11 @@ public final class R {
         public static final int Cat_Name=0x7f0a0003;
         public static final int ScrollView01=0x7f0a0019;
         public static final int Topic_Name=0x7f0a0014;
-        public static final int action_settings=0x7f0a0034;
-        public static final int add_category=0x7f0a0035;
+        public static final int action_settings=0x7f0a0033;
+        public static final int add_category=0x7f0a0034;
         public static final int add_new_cat=0x7f0a0000;
-        public static final int add_term=0x7f0a0037;
-        public static final int add_topic=0x7f0a0032;
+        public static final int add_term=0x7f0a0036;
+        public static final int add_topic=0x7f0a0031;
         public static final int back_icon=0x7f0a0013;
         public static final int cat_listView=0x7f0a0016;
         public static final int cat_name=0x7f0a001d;
@@ -79,12 +79,12 @@ public final class R {
         public static final int edit_cat_back_icon=0x7f0a001e;
         public static final int edit_cat_listView=0x7f0a001f;
         public static final int edit_cat_save=0x7f0a001c;
-        public static final int edit_category=0x7f0a0036;
-        public static final int edit_term=0x7f0a0038;
+        public static final int edit_category=0x7f0a0035;
+        public static final int edit_term=0x7f0a0037;
         public static final int edit_term_back_icon=0x7f0a0022;
         public static final int edit_term_listView=0x7f0a0023;
         public static final int edit_term_save=0x7f0a0020;
-        public static final int edit_topic=0x7f0a0033;
+        public static final int edit_topic=0x7f0a0032;
         public static final int edit_topic_back_icon=0x7f0a0025;
         public static final int edit_topic_listView=0x7f0a0026;
         public static final int edit_topic_save=0x7f0a0024;
@@ -109,10 +109,9 @@ public final class R {
         public static final int textView3=0x7f0a000c;
         public static final int textView4=0x7f0a0021;
         public static final int title=0x7f0a002d;
-        public static final int topic_listView=0x7f0a0031;
+        public static final int topic_listView=0x7f0a0030;
         public static final int topic_name=0x7f0a0012;
         public static final int topic_save=0x7f0a0006;
-        public static final int topic_searchView=0x7f0a0030;
         public static final int txtLabel=0x7f0a002f;
     }
     public static final class layout {
