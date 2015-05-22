@@ -7,6 +7,14 @@
     tools:context="com.ellipsomic.qweekie.MainActivity"
     >
 
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topic_searchView"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

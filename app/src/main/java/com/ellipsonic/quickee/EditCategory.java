@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ellipsonic.database.CategoryDb;
 import com.ellipsonic.database.NotesTable;
@@ -36,23 +37,20 @@ public class EditCategory extends Activity {
 
         EDitCatListView(selectedTopic);
         ImageView back_button =(ImageView) findViewById(R.id.edit_cat_back_icon);
+        TextView editclose=(TextView)findViewById(R.id.edit_cat_save);
+
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
-    /*    String[]  myStringArray={"Air Force","Plane","Auto","Military"};
-        ArrayAdapter<String> myAdapter=new
-                ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                myStringArray);
-        ListView myList=(ListView)
-                findViewById(R.id.edit_cat_listView);
-        myList.setAdapter(myAdapter);*/
+        editclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }

@@ -49,11 +49,11 @@ public class AddNewCat extends Activity {
                     tableinfo.topic_name=selectedTopic;
                     categoryDb.insert_category(tableinfo);
                     Category_Name.setText("");
-         Intent intent = new Intent(getApplicationContext(),Category.class);
+     /*    Intent intent = new Intent(getApplicationContext(),Category.class);
                     final int result = 1;
                     intent.putExtra("selectedTopic",selectedTopic);
-                    startActivityForResult(intent, result);
-
+                    startActivityForResult(intent, result);*/
+                 finish();
                //Category cat =new Category();
                //  cat.CatListView(selectedTopic);
 
@@ -67,7 +67,18 @@ public class AddNewCat extends Activity {
         });
     }
 
-
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Toast.makeText(getApplicationContext(), "Closing add new category",Toast.LENGTH_LONG).show();
+        finish();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "Closing add new topic",Toast.LENGTH_LONG).show();
+        finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -25,7 +25,6 @@ public class TopicsFragment extends Fragment {
     public ArrayList<String> topicList = null;
     public Context context = null;
 
-    private final static String TAG_FRAGMENT = "TAG_FRAGMENT";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {

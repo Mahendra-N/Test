@@ -1,7 +1,6 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +24,7 @@ public class AddNewTopic extends Activity {
         setContentView(R.layout.activity_add_new_topic);
         getActionBar().hide();
         backButton = (ImageView) findViewById(R.id.back_icon);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

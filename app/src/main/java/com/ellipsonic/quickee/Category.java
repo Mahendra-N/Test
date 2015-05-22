@@ -19,6 +19,8 @@ import java.util.Collections;
 
 public class Category extends Activity {
     String selectedTopic;
+   public CategoryDb cat_Db=null;
+    public ArrayList<String> CatList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +62,22 @@ public class Category extends Activity {
         return true;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        cat_Db = null;
+        CatList = null;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        CatListView(selectedTopic);
+    }
 
    public void CatListView( String selectedTopic){
-       CategoryDb cat_Db=new CategoryDb(getApplicationContext());
-        ArrayList<String> CatList =  cat_Db.getCatList(selectedTopic);
+      cat_Db=new CategoryDb(getApplicationContext());
+      CatList =  cat_Db.getCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
             if(CatList!=null) {
                 ArrayAdapter<String> Adapter = new
