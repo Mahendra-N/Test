@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_new_topic">AddNewTopic</string>
     <string name="title_activity_edit_topic">EditTopic</string>
-    <string name="title_activity_category">category</string>
+    <string name="title_activity_category">Category</string>
     <string name="title_activity_term">Term</string>
     <string name="title_activity_add_term">AddTerm</string>
     <string name="title_activity_add_new_cat">AddNewCat</string>

@@ -2,6 +2,7 @@ package com.ellipsonic.quickee;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,9 +35,11 @@ public class AddNewTerm extends Activity {
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
         sel_topic=(EditText)findViewById(R.id.sel_topic_name);
         sel_topic.setText(selectedTopic);
+        sel_topic.setTextColor(Color.parseColor("#000000"));
         sel_topic.setEnabled(false);
         sel_cat=(EditText)findViewById(R.id.sel_cat_name);
         sel_cat.setText(selectedCategory);
+        sel_cat.setTextColor(Color.parseColor("#000000"));
         sel_cat.setEnabled(false);
         backButton_term = (ImageView) findViewById(R.id.new_term_back_icon);
         backButton_term.setOnClickListener(new View.OnClickListener() {

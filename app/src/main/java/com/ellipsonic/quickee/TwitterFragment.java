@@ -15,7 +15,12 @@ public class TwitterFragment extends Fragment {
             Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_twitter, container, false);
-         
+
         return rootView;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getTargetFragment().setMenuVisibility(false);
     }
 }

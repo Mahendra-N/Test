@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +44,7 @@ public class EditCategory extends Activity {
                 finish();
             }
         });
+
         editclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,9 +120,7 @@ public class EditCategory extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                Editable YouEditTextValue = input.getText();
-                // Write your code here to invoke YES event
-                String updateTextValue = String.valueOf(input.getText());
+                 String updateTextValue = String.valueOf(input.getText());
                 UpdateCategory(defaultTextValue, updateTextValue,selectedTopic);
                 //Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_SHORT).show();
             }

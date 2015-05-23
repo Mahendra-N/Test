@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.ellipsonic.database.NotesTable;
 import com.ellipsonic.database.TermDb;
 
 import java.util.ArrayList;
@@ -37,7 +38,15 @@ public class EditTerm extends Activity {
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
         EditTermListView(selectedTopic, selectedCategory);
         ImageView back_button =(ImageView) findViewById(R.id.edit_term_back_icon);
+        TextView editclose=(TextView)findViewById(R.id.edit_term_save);
         back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        editclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -56,10 +65,7 @@ public class EditTerm extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+          int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -109,26 +115,51 @@ public class EditTerm extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                Editable YouEditTextValue = input.getText();
-                // Write your code here to invoke YES event
                 String updateTextValue = String.valueOf(input.getText());
-             //   UpdateCategory(defaultTextValue, updateTextValue,selectedTopic);
-                //Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_SHORT).show();
+                UpdateTerm(defaultTextValue, updateTextValue, selectedTopic, selectedCategory);
             }
         });
 
-        // Setting Negative "NO" Button
+
         alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
                 String deleteTextValue = String.valueOf(input.getText());
-             //   Delete_Category(deleteTextValue, selectedTopic);
-                // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
-                //dialog.cancel();
+                Delete_Term(deleteTextValue, selectedTopic, selectedCategory);
+
             }
         });
 
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    public void  Delete_Term(String deleteTextValue,String selectedTopic,String selectedCategory){
+        //    Toast.makeText(getApplicationContext(), deleteTextValue, Toast.LENGTH_SHORT).show();
+        term_Db=new TermDb(getApplicationContext());
+        NotesTable tableinfo = new NotesTable();
+        tableinfo.topic_name =selectedTopic;
+        tableinfo.category_name=selectedCategory;
+        tableinfo.term_name=deleteTextValue;
+        term_Db.delete_term(tableinfo);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
+    }
+
+    public void UpdateTerm(String defaultTextValue, String updateTextValue,String selectedTopic,String selectedCategory){
+        //   Toast.makeText(getApplicationContext(), updateTextValue, Toast.LENGTH_SHORT).show();
+        term_Db=new TermDb(getApplicationContext());
+        NotesTable tableinfo = new NotesTable();
+        tableinfo.old_term_name=defaultTextValue;
+        tableinfo.term_name=updateTextValue;
+        tableinfo.topic_name=selectedTopic;
+        tableinfo.category_name=selectedCategory;
+        term_Db.update_term(tableinfo);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
     }
 }

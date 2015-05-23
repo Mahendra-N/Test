@@ -139,7 +139,6 @@
         android:layout_height="29dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Description"
-
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_weight="0.10" />
@@ -155,8 +154,7 @@
         android:layout_weight="0.12" />
 
 
-    <RelativeLayout
-
+  <!--  <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:background="#fff"
@@ -194,5 +192,5 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="24dp"
             android:layout_marginEnd="24dp" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 </LinearLayout>

@@ -61,5 +61,28 @@ public class TermDb {
         return TermList;
 
     }
+    public void delete_term( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String  topic_name =tableinfo.topic_name;
+        String  cat_name=tableinfo.category_name;
+        String  term_name=tableinfo.term_name;
+        ContentValues values = new ContentValues();
+        db.delete(NotesTable.TABLE_NOTES,  NotesTable.KEY_TERM_NAME + "='"+term_name+"'" +" AND "
+                +NotesTable.KEY_TOPIC_NAME + "='"+topic_name+"'" +" AND "+
+                NotesTable.KEY_CATEGORY_NAME+ "='"+cat_name+"'"  , null);
+        db.close(); // Closing database connection
+
+    }
+    public void update_term( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put(NotesTable.KEY_TERM_NAME,tableinfo.term_name);
+        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TERM_NAME + "= '"+tableinfo.old_term_name+"'"
+                +" AND "+NotesTable.KEY_TOPIC_NAME+ "='"+tableinfo.topic_name+"'"
+                +" AND "+NotesTable.KEY_CATEGORY_NAME+ "='"+tableinfo.category_name+"'", null);
+        db.close(); // Closing database connection*/
+
+    }
+
 
 }

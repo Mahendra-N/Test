@@ -30,27 +30,7 @@ public class Term extends Activity {
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
 
-     //   TermListView(selectedTopic, selectedCategory);
-       /* String[]  myStringArray={"Air Force","Plane","Auto","Military"};
-        ArrayAdapter<String> myAdapter=new
-                ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                myStringArray);
-        ListView myList=(ListView)
-                findViewById(R.id.term_listView);
-        myList.setAdapter(myAdapter);
-
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-
-               Intent intent = new Intent(Term.this, Description.class);
-               startActivity(intent);
-
-            }        });*/
-    }
+     }
     @Override
     public void onPause() {
         super.onPause();
@@ -92,10 +72,11 @@ public class Term extends Activity {
 
         return true;
     }
+
     public void TermListView( final String selectedTopic,final String selectedCategory){
         term_Db=new TermDb(getApplicationContext());
         TermList =  term_Db.getTermList(selectedTopic,selectedCategory);
-       TermList.removeAll(Collections.singleton(null));
+        TermList.removeAll(Collections.singleton(null));
         if(TermList!=null) {
             ArrayAdapter<String> Adapter = new
                     ArrayAdapter<String>(this,
@@ -108,14 +89,13 @@ public class Term extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
+                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
                     Intent intent = new Intent(Term.this, Description.class);
-                        startActivity(intent);
-                 /*   String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                    Intent intent = new Intent(Category.this, Term.class);
                     final int result = 1;
                     intent.putExtra("selectedTopic",selectedTopic);
-                    intent.putExtra("selectedCategory",clickedItem);
-                    startActivityForResult(intent, result);*/
+                    intent.putExtra("selectedCategory",selectedCategory);
+                    intent.putExtra("selectedTerm",clickedItem);
+                    startActivityForResult(intent, result);
                 }
 
             });

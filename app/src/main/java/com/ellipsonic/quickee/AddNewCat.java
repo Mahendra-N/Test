@@ -70,14 +70,12 @@ public class AddNewCat extends Activity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Toast.makeText(getApplicationContext(), "Closing add new category",Toast.LENGTH_LONG).show();
-        finish();
+              finish();
     }
     @Override
     public void onPause() {
         super.onPause();
-        Toast.makeText(getApplicationContext(), "Closing add new topic",Toast.LENGTH_LONG).show();
-        finish();
+             finish();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

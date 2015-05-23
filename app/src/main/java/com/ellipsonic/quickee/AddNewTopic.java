@@ -58,15 +58,13 @@ public class AddNewTopic extends Activity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Toast.makeText(getApplicationContext(), "Closing add new topic",Toast.LENGTH_LONG).show();
         finish();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Toast.makeText(getApplicationContext(), "Closing add new topic",Toast.LENGTH_LONG).show();
-        finish();
+              finish();
     }
 
     @Override
