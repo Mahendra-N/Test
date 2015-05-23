@@ -70,7 +70,7 @@ public class AddNewTerm extends Activity {
                      finish();
 
                 }else{
-                    Toast.makeText(getApplicationContext(), "Nothing  to Save",
+                    Toast.makeText(getApplicationContext(), "Enter required Fields",
                             Toast.LENGTH_LONG).show();
                 }
 

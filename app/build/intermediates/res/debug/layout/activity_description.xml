@@ -87,7 +87,6 @@
                 android:layout_height="200dp"
                 android:id="@+id/img"
                 android:scaleType="fitXY"
-                android:src="@drawable/airplane"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"/>

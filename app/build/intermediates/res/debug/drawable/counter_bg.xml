@@ -13,7 +13,7 @@
     </padding>
 
     <!-- Here is the corner radius -->
-    <corners android:radius="2dp" >
+    <corners android:radius="0dp" >
     </corners>
 
 </shape><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/drawable/counter_bg.xml -->

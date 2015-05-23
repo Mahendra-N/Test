@@ -4,12 +4,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.ellipsonic.database.TopicDb;
@@ -23,13 +26,15 @@ public class TopicsFragment extends Fragment {
     View rootView;
     public TopicDb topic_Db = null;
     public ArrayList<String> topicList = null;
+    ArrayAdapter<String> myAdapter;
     public Context context = null;
-
+    EditText myFilter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_topics, container, false);
         this.context = container.getContext();
+        myFilter = (EditText) rootView.findViewById(R.id.search);
         TopicListView(this.context);
         return rootView;
     }
@@ -52,12 +57,13 @@ public class TopicsFragment extends Fragment {
         topicList = topic_Db.getTopicList();
         topicList.removeAll(Collections.singleton(null));
         if (topicList != null) {
-            ArrayAdapter<String> myAdapter = new
+                 myAdapter = new
                     ArrayAdapter<String>(this.getActivity(),
                     android.R.layout.simple_list_item_1,
                     topicList);
             ListView myList = (ListView) rootView.findViewById(R.id.topic_listView);
             myList.setAdapter(myAdapter);
+            myList.setTextFilterEnabled(true);
             myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -69,8 +75,23 @@ public class TopicsFragment extends Fragment {
                     startActivityForResult(intent, result);
                 }
             });
+
+            myFilter.addTextChangedListener(new TextWatcher() {
+
+                public void afterTextChanged(Editable s) {
+                }
+
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    myAdapter.getFilter().filter(s.toString());
+                }
+            });
         }else{
             Log.d("message", "nothing is there in database");
                 }
     }
+
+
 }

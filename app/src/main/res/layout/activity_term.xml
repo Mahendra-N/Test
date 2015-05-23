@@ -42,16 +42,14 @@
 
     </RelativeLayout>-->
 
-    <SearchView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/term_searchView"
-       />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:layout_height="40dp"
+        android:id="@+id/search"
+        android:hint="Search"
+        android:background="@drawable/counter_bg"
+        android:drawableLeft="@drawable/ic_search"
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"

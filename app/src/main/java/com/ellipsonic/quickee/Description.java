@@ -62,8 +62,8 @@ public class Description extends Activity {
             }
         });
 
-        ImageView img= (ImageView) findViewById(R.id.img);
-        img.setImageResource(R.drawable.airplane);
+       // ImageView img= (ImageView) findViewById(R.id.img);
+       /// img.setImageResource(R.drawable.airplane);
     }
     @Override
     public void onPause() {

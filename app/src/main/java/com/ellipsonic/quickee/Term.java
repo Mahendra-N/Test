@@ -3,12 +3,15 @@ package com.ellipsonic.quickee;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.ellipsonic.database.TermDb;
@@ -22,6 +25,8 @@ public class Term extends Activity {
     String selectedCategory;
     public TermDb term_Db=null;
     public ArrayList<String> TermList=null;
+    EditText myFilter;
+    ArrayAdapter<String> Adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,7 @@ public class Term extends Activity {
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
-
+        myFilter = (EditText) findViewById(R.id.search);
      }
     @Override
     public void onPause() {
@@ -78,13 +83,13 @@ public class Term extends Activity {
         TermList =  term_Db.getTermList(selectedTopic,selectedCategory);
         TermList.removeAll(Collections.singleton(null));
         if(TermList!=null) {
-            ArrayAdapter<String> Adapter = new
+            Adapter   = new
                     ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1,
                     TermList);
             ListView List = (ListView) this.findViewById(R.id.term_listView);
             List.setAdapter(Adapter);
-
+            List.setTextFilterEnabled(true);
             List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -98,6 +103,18 @@ public class Term extends Activity {
                     startActivityForResult(intent, result);
                 }
 
+            });
+            myFilter.addTextChangedListener(new TextWatcher() {
+
+                public void afterTextChanged(Editable s) {
+                }
+
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Adapter.getFilter().filter(s.toString());
+                }
             });
         }else{
             Log.d("message", "nothing is there in database");
