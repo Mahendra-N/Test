@@ -107,3 +107,11 @@ uses-permission#android.permission.SET_DEBUG_APP
 ADDED from AndroidManifest.xml:75:5
 	android:name
 		ADDED from AndroidManifest.xml:75:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:76:5
+	android:name
+		ADDED from AndroidManifest.xml:76:22
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:77:5
+	android:name
+		ADDED from AndroidManifest.xml:77:22

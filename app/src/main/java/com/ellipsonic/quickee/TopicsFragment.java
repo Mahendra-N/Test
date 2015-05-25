@@ -1,7 +1,9 @@
 package com.ellipsonic.quickee;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.ellipsonic.database.ExternalFolders;
 import com.ellipsonic.database.TopicDb;
 
 import java.util.ArrayList;
@@ -29,13 +32,15 @@ public class TopicsFragment extends Fragment {
     ArrayAdapter<String> myAdapter;
     public Context context = null;
     EditText myFilter;
-
+    ExternalFolders folder=null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_topics, container, false);
         this.context = container.getContext();
         myFilter = (EditText) rootView.findViewById(R.id.search);
         TopicListView(this.context);
+        folder=new ExternalFolders();
+        folder.Createfolder(this.context);
         return rootView;
     }
 
@@ -92,6 +97,5 @@ public class TopicsFragment extends Fragment {
             Log.d("message", "nothing is there in database");
                 }
     }
-
 
 }
