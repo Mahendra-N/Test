@@ -10,23 +10,19 @@
     <string name="title_activity_term">Term</string>
     <string name="title_activity_add_term">AddTerm</string>
     <string name="title_activity_add_new_cat">AddNewCat</string>
-
     <string name="title_activity_edit_category">EditCategory</string>
     <string name="title_activity_edit_term">EditTerm</string>
-    <string name="title_activity_description">Air Force One </string>
+    <string name="title_activity_description">Description </string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
-    
+
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item >Topics</item>
-        <item >Dropbox</item>
-        <item >Google Drive</item>
-        <item >Facebook</item>
-        <item >Twitter</item>
-        <item >Mail</item>
+        <item>Home</item>
+        <item>Dropbox Sync.</item>
+        <item>Google Drive Sync.</item>
     </string-array>
-    
+
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
@@ -37,8 +33,14 @@
         <item>@drawable/ic_twitter</item>
         <item>@drawable/ic_mail</item>
     </array>
-    
+
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
-
+    <string name="title_activity_add_description">AddDescription</string>
+    <string name="backImgAttribute">backImage</string>
+    <string name="AddDescriptionPlaceholder">Add Description</string>
+    <string name="saveDescription">SAVE</string>
+    <string name="addDesPlaceholder">Type in the description, accepts paragraph texts</string>
+    <string name="share">Share</string>
+    <string name="addDescriptionButtonText">Add Description</string>
 </resources>

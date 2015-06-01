@@ -16,7 +16,15 @@ public class DescriptionDb {
     public DescriptionDb(Context context) {
         dbHelper = new DatabaseHandler(context);
     }
-
+    public void insert_description( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NotesTable.KEY_TERM_NAME,tableinfo.input_term_name); // Contact Name
+        values.put(NotesTable.KEY_DESCRIPTION,tableinfo.add_des);
+        // Inserting Row
+        db.insert(NotesTable.TABLE_NOTES, null, values);
+        db.close(); // Closing database connection
+    }
 
     public String[] getDetails(NotesTable tableinfo){
         SQLiteDatabase db = dbHelper.getWritableDatabase();

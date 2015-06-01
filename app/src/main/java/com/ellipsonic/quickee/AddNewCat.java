@@ -42,22 +42,12 @@ public class AddNewCat extends Activity {
             public void onClick(View v) {
                 Category_Name =(EditText)findViewById(R.id.Cat_Name);
                 if(Category_Name.getText().toString().length()>0){
-                    //insert into db
-                   CategoryDb categoryDb =new CategoryDb(getApplicationContext());
+                    CategoryDb categoryDb = new CategoryDb(getApplicationContext());
                     NotesTable tableinfo = new NotesTable();
-                    tableinfo.category_name =Category_Name.getText().toString();
-                    tableinfo.topic_name=selectedTopic;
+                    tableinfo.category_name = Category_Name.getText().toString();
+                    tableinfo.topic_name = selectedTopic;
                     categoryDb.insert_category(tableinfo);
-                    Category_Name.setText("");
-     /*    Intent intent = new Intent(getApplicationContext(),Category.class);
-                    final int result = 1;
-                    intent.putExtra("selectedTopic",selectedTopic);
-                    startActivityForResult(intent, result);*/
-                 finish();
-               //Category cat =new Category();
-               //  cat.CatListView(selectedTopic);
-
-
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Nothing  to Save",
                             Toast.LENGTH_LONG).show();

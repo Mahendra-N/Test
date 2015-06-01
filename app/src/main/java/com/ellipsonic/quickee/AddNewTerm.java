@@ -7,24 +7,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ellipsonic.database.NotesTable;
-import com.ellipsonic.database.TermDb;
-
 
 public class AddNewTerm extends Activity {
     public ImageView backButton_term;
     public TextView term_save;
-    public TextView term_name;
+    public EditText term_name;
     public EditText sel_topic;
     public EditText sel_cat;
     public EditText description;
-    String selectedTopic;
-    String selectedCategory;
+    public TextView add_desc;
+   public  String selectedTopic;
+   public  String selectedCategory;
+   public  String selectedTerm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,36 +49,35 @@ public class AddNewTerm extends Activity {
                 finish();
             }
         });
-
-
-        term_save=(TextView)findViewById(R.id.term_save);
-        term_save.setOnClickListener(new View.OnClickListener() {
+        Button button = (Button) findViewById(R.id.add_button);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                term_name =(EditText)findViewById(R.id.input_term_name);
-                description =(EditText)findViewById(R.id.desc);
-                if(term_name.getText().toString().length()>0 && description.getText().toString().length()>0 ){
-                    //insert into db
-                 TermDb termDb =new TermDb(getApplicationContext());
-                    NotesTable tableinfo = new NotesTable();
-                    tableinfo.topic_name=selectedTopic;
-                    tableinfo.category_name=selectedCategory;
-                    tableinfo.term_name =term_name.getText().toString();
-                    tableinfo.description=description.getText().toString();
-                    termDb.insert_term(tableinfo);
-                     term_name.setText("");
-                     description.setText("");
-                     finish();
+                // Perform action on click
+                term_name = (EditText) findViewById(R.id.input_term_name);
+                selectedTerm = term_name.getText().toString();
+                if (selectedTerm.length()> 0) {
 
-                }else{
-                    Toast.makeText(getApplicationContext(), "Enter required Fields",
-                            Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(v.getContext(), AddDescription.class);
+                final int result = 1;
+                intent.putExtra("selectedTopic",selectedTopic);
+                intent.putExtra("selectedCategory",selectedCategory);
+                intent.putExtra("selectedTerm",selectedTerm);
+                term_name.setText("");
+                    startActivityForResult(intent, result);
+
                 }
+                else{ Toast.makeText(getApplicationContext(), "Enter Term Name",
+                        Toast.LENGTH_LONG).show();}
 
             }
         });
-
     }
 
+    @Override
+     public void onPause() {
+        super.onPause();
+       finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,7 +94,8 @@ public class AddNewTerm extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 

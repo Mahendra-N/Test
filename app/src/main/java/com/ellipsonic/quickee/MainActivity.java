@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
+
 import com.ellipsonic.database.DatabaseHandler;
 import com.ellipsonic.quickee.adapter.NavDrawerListAdapter;
 import com.ellipsonic.quickee.model.NavDrawerItem;
@@ -25,7 +27,7 @@ public class MainActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    private ShareActionProvider mShareActionProvider;
     // nav drawer title
     private CharSequence mDrawerTitle;
 
@@ -62,16 +64,14 @@ public class MainActivity extends Activity {
         // adding nav drawer items to array
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-        // Find People
+        // Dropbox
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-        // Photos
+        // Google drive
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-        // Communities, Will add a counter here
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
-        // Pages
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-        // What's hot, We  will add a counter here
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+
+        //navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+        //navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+        //navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
 
 
         // Recycle the typed array
@@ -129,7 +129,16 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        /** Inflating the current activity's menu with res/menu/items.xml */
+        getMenuInflater().inflate(R.menu.items, menu);
+
+        /** Getting the actionprovider associated with the menu item whose id is share */
+        mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.share).getActionProvider();
+
+        /** Setting a share intent */
+        mShareActionProvider.setShareIntent(getDefaultShareIntent());
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -140,7 +149,7 @@ public class MainActivity extends Activity {
         }
         // Handle action bar actions click
         switch (item.getItemId()) {
-                case R.id.add_topic:
+            case R.id.add_topic:
                 Intent intent = new Intent(this, AddNewTopic.class);
                 this.startActivity(intent);
                 break;
@@ -152,6 +161,16 @@ public class MainActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+
+    /** Returns a share intent */
+    private Intent getDefaultShareIntent(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Quickee: The easy notes taking app");
+        intent.putExtra(Intent.EXTRA_TEXT,"Download Quickee, the easiest way to take notes on your mobile. Free download at https://play.google.com/store/search?q=quickee");
+        return intent;
     }
 
     /* *

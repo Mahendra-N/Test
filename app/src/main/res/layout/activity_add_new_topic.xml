@@ -19,7 +19,8 @@
             android:textColor="#fff"
             android:text="Topic Name"
                  android:layout_alignTop="@+id/topic_save"
-                 android:layout_centerHorizontal="true" />
+                 android:layout_centerHorizontal="true"
+            android:textSize="16dp"/>
 
         <ImageView
             android:id="@+id/back_icon"

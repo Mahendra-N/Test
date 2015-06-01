@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context="com.ellipsomic.qweekie.AddNewTerm"
     android:weightSum="1">
@@ -19,8 +19,9 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:text="Add New Term"
-            android:layout_alignBottom="@+id/new_term_back_icon"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="16dp"/>
 
         <ImageView
             android:id="@+id/new_term_back_icon"
@@ -28,27 +29,15 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/ic_back_arrow"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SAVE"
-            android:id="@+id/term_save"
-            android:textColor="#fff"
-            android:layout_marginRight="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_alignBottom="@+id/new_term_back_icon"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:layout_alignParentTop="true">
 
     <EditText
@@ -130,28 +119,38 @@
         android:layout_toStartOf="@+id/input_term_name"
         android:layout_alignTop="@+id/input_term_name" />
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addDescriptionButtonText"
+        android:id="@+id/add_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="false"
+        android:background="#3671d0"
+        android:textColor="#FFFFFF"/>
+
 
 </RelativeLayout>
 
 
-    <TextView
-        android:layout_width="122dp"
-        android:layout_height="29dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Description"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_weight="0.10" />
+    <!--  <TextView
+          android:layout_width="122dp"
+          android:layout_height="29dp"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:text="Description"
+          android:layout_marginTop="10dp"
+          android:layout_marginLeft="10dp"
+          android:layout_weight="0.10" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="45"
-        android:id="@+id/desc"
-        android:layout_marginTop="15dp"
-        android:hint="Enter Description"
-        android:layout_weight="0.12" />
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="textMultiLine"
+          android:ems="45"
+          android:id="@+id/desc"
+          android:layout_marginTop="15dp"
+          android:hint="Enter Description"
+          android:layout_weight="0.12" />-->
 
 
   <!--  <RelativeLayout

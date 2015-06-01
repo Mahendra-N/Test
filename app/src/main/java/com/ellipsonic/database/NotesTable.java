@@ -31,4 +31,6 @@ public class NotesTable {
     public String old_topic_name;
     public String old_cat_name;
     public String old_term_name;
+    public  String input_term_name;
+    public String add_des;
 }

@@ -19,7 +19,8 @@
             android:textColor="#fff"
             android:text="Add New Category"
             android:layout_alignTop="@+id/cat_save"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textSize="16dp"/>
 
         <ImageView
             android:id="@+id/new_cat_back_icon"
@@ -51,5 +52,10 @@
         android:id="@+id/Cat_Name"
         android:hint="Enter Category Name"
         android:paddingTop="50dp" />
+
+    <ViewStub
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewStub" />
 
 </LinearLayout>
