@@ -46,6 +46,7 @@
     <string name="title_activity_category">Category</string>
     <string name="title_activity_description">Air Force One </string>
     <string name="title_activity_edit_category">EditCategory</string>
+    <string name="title_activity_edit_description">EditDescription</string>
     <string name="title_activity_edit_term">EditTerm</string>
     <string name="title_activity_edit_topic">EditTopic</string>
     <string name="title_activity_term">Term</string>

@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.ellipsonic.database.DescriptionDb;
 import com.ellipsonic.database.NotesTable;
@@ -18,6 +22,7 @@ import com.ellipsonic.database.NotesTable;
 
 public class Description extends Activity {
     public DescriptionDb desc_Db=null;
+    MediaController mediaController;
     TextView article;
     TextView header;
     ImageView delete;
@@ -26,6 +31,9 @@ public class Description extends Activity {
     String selectedTopic;
     String selectedCategory;
     String selectedTerm;
+    ImageView img;
+    VideoView video;
+    VideoView audio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,9 @@ public class Description extends Activity {
         selectedTerm =activityThatCalled.getExtras().getString("selectedTerm");
         article = (TextView) findViewById(R.id.content);
         header=(TextView) findViewById(R.id.details_header);
+        img  = (ImageView) findViewById(R.id.img);
+        video=(VideoView)findViewById(R.id.videoView);
+      audio=(VideoView)findViewById(R.id.audioView);
         Description(selectedTopic,selectedCategory,selectedTerm);
         ImageView back_button =(ImageView) findViewById(R.id.desc_back_icon);
         delete =(ImageView) findViewById(R.id.desc_delete);
@@ -58,12 +69,20 @@ public class Description extends Activity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertWindowTopic(content);
+               // AlertWindowTopic(content);
+                Intent intent = new Intent(Description.this,EditDescription.class);
+                intent.putExtra("content",content);
+                intent.putExtra("selectedTopic",selectedTopic);
+                intent.putExtra("selectedCategory",selectedCategory);
+                intent.putExtra("selectedTerm",selectedTerm);
+                startActivityForResult(intent,1);
+               // startActivity(intent);
             }
         });
 
-       // ImageView img= (ImageView) findViewById(R.id.img);
-       /// img.setImageResource(R.drawable.airplane);
+
+
+
     }
     @Override
     public void onPause() {
@@ -105,10 +124,35 @@ public class Description extends Activity {
         tableinfo.category_name=selectedCategory;
         tableinfo.term_name=selectedTerm;
         String[] details=desc_Db.getDetails(tableinfo);
+
         content=details[0];
         article.setText(content);
         header.setText(details[1]);
-
+        if((details[2] != null)) {
+            img.setImageURI(Uri.parse(details[2]));
+        }
+        if((details[3]!=null)){
+          mediaController =new MediaController(this);
+            DisplayMetrics dm = new DisplayMetrics();
+            this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+            int height = dm.heightPixels;
+            int width = dm.widthPixels;
+            video.setMinimumWidth(width);
+            video.setMinimumHeight(height);
+            video.setMediaController(mediaController);
+            video.setVideoURI(Uri.parse(details[3]));
+            video.requestFocus();
+            video.seekTo(100);
+        }else{
+            video.setVisibility(View.GONE);
+        }
+        if((details[4]!=null)){
+            mediaController =new MediaController(this);
+            audio.setMediaController(mediaController);
+            audio.setVideoURI(Uri.parse(details[4]));
+            audio.requestFocus();
+            audio.start();
+        }
     }
 
  public void  DeleteDescription(String selectedTopic,String selectedCategory,String selectedTerm){
@@ -136,7 +180,7 @@ public class Description extends Activity {
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String updateTextValue = String.valueOf(input.getText());
-                UpdateDescription(updateTextValue,selectedTopic,selectedCategory,selectedTerm);
+             //   UpdateDescription(updateTextValue,selectedTopic,selectedCategory,selectedTerm);
                 //  Toast.makeText(getApplicationContext(), EditTextValue, Toast.LENGTH_SHORT).show();
             }
         });
@@ -151,17 +195,5 @@ public class Description extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
-    public void UpdateDescription(String updateTextValue,String selectedTopic,String selectedCategory,String selectedTerm){
-        desc_Db=new DescriptionDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.description=updateTextValue;
-        tableinfo.topic_name=selectedTopic;
-        tableinfo.category_name=selectedCategory;
-        tableinfo.term_name=selectedTerm;
-        desc_Db.update_description(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
 
-    }
 }

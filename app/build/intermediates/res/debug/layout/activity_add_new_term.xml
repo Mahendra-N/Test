@@ -131,9 +131,8 @@
         android:layout_alignTop="@+id/input_term_name" />
 
 
+
 </RelativeLayout>
-
-
     <TextView
         android:layout_width="122dp"
         android:layout_height="29dp"
@@ -151,22 +150,22 @@
         android:id="@+id/desc"
         android:layout_marginTop="15dp"
         android:hint="Enter Description"
-        android:layout_weight="0.12" />
+         />
 
 
-  <!--  <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="38dp"
         android:background="#fff"
         android:layout_marginTop="150dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-       >
+        android:layout_weight="0.12">
 
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/image"
             android:src="@drawable/ic_image"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -174,24 +173,27 @@
             android:layout_marginLeft="22dp"
             android:layout_marginStart="22dp" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton2"
+            android:id="@+id/video"
             android:src="@drawable/ic_video"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton3"
+            android:adjustViewBounds="true"
+            android:id="@+id/audio"
             android:src="@drawable/ic_audio"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="24dp"
             android:layout_marginEnd="24dp" />
-    </RelativeLayout>-->
+    </RelativeLayout>
+
+
 </LinearLayout>
 <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_add_new_term.xml -->

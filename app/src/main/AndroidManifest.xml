@@ -8,15 +8,20 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launch"
         android:label="@string/app_name"
         android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name="com.ellipsonic.quickee.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,55 +29,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ellipsonic.quickee.AddNewTopic"
-            android:label="@string/title_activity_add_new_topic">
-
-            </activity>
-
+            android:name=".AddNewTopic"
+            android:label="@string/title_activity_add_new_topic" >
+        </activity>
         <activity
-            android:name="com.ellipsonic.quickee.EditTopic"
+            android:name=".EditTopic"
             android:label="@string/title_activity_edit_topic" >
         </activity>
         <activity
-            android:name="com.ellipsonic.quickee.Category"
-            android:label="@string/title_activity_category"
-           >
-
+            android:name=".Category"
+            android:label="@string/title_activity_category" >
         </activity>
-
         <activity
-            android:name="com.ellipsonic.quickee.AddNewCat"
+            android:name=".AddNewCat"
             android:label="@string/title_activity_add_new_cat" >
         </activity>
-
         <activity
-            android:name="com.ellipsonic.quickee.EditCategory"
+            android:name=".EditCategory"
             android:label="@string/title_activity_edit_category" >
         </activity>
         <activity
-            android:name="com.ellipsonic.quickee.Term"
-            android:label="@string/title_activity_term"
->
-
+            android:name=".Term"
+            android:label="@string/title_activity_term" >
         </activity>
-
         <activity
-            android:name="com.ellipsonic.quickee.AddNewTerm"
+            android:name=".AddNewTerm"
             android:label="@string/title_activity_add_term" >
         </activity>
-
         <activity
-            android:name="com.ellipsonic.quickee.EditTerm"
+            android:name=".EditTerm"
             android:label="@string/title_activity_edit_term" >
         </activity>
-
-         <activity
-            android:name="com.ellipsonic.quickee.Description"
-            android:label="@string/title_activity_description">
-         </activity>
-
+        <activity
+            android:name=".Description"
+            android:label="@string/title_activity_description" >
+        </activity>
+        <activity
+            android:name=".EditDescription"
+            android:label="@string/title_activity_edit_description" >
+        </activity>
     </application>
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 </manifest>

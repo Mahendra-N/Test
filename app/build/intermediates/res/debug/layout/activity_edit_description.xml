@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.ellipsomic.qweekie.EditDescription"
+    android:weightSum="1">
+
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:background="#3671d0" >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:id="@+id/edit_details_save"
+            android:textColor="#fff"
+            android:layout_marginRight="17dp"
+            android:layout_marginEnd="17dp"
+            android:layout_alignTop="@+id/name"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Edit Description"
+            android:layout_marginLeft="84dp"
+            android:layout_marginStart="84dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/edit_details_back_icon"
+            android:layout_toEndOf="@+id/edit_details_back_icon" />
+
+        <ImageView
+            android:id="@+id/edit_details_back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></ScrollView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/counter_bg"
+        android:id="@+id/editdetails"/>
+    </LinearLayout>
+<!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_edit_description.xml -->

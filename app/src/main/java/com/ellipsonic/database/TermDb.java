@@ -26,6 +26,9 @@ public class TermDb {
         values.put(NotesTable.KEY_CATEGORY_NAME,tableinfo.category_name);
         values.put(NotesTable.KEY_TERM_NAME,tableinfo.term_name);
         values.put(NotesTable.KEY_DESCRIPTION,tableinfo.description);
+        values.put(NotesTable.KEY_IMAGE,tableinfo.image);
+        values.put(NotesTable.KEY_VIDEO,tableinfo.video);
+       values.put(NotesTable.KEY_AUDIO,tableinfo.audio);
         // Inserting Row
         db.insert(NotesTable.TABLE_NOTES, null, values);
         db.close(); // Closing database connection

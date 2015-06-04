@@ -1,0 +1,62 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.ellipsomic.qweekie.AddNewTerm"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:background="#3671d0"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/term_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Add Description"
+            android:layout_alignBottom="@+id/new_term_back_icon"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/new_term_back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:id="@+id/term_save"
+            android:textColor="#fff"
+            android:layout_marginRight="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_alignBottom="@+id/new_term_back_icon"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="textMultiLine"
+          android:ems="45"
+          android:id="@+id/desc"
+          android:layout_marginTop="15dp"
+          android:hint="Enter Description"
+          android:layout_weight="0.12" />
+
+
+
+</LinearLayout>
+<!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/Quickee_native/app/src/main/res/layout/activity_add_description.xml -->

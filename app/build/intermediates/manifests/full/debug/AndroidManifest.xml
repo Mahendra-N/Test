@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -61,6 +63,10 @@
         <activity
             android:name="com.ellipsonic.quickee.Description"
             android:label="@string/title_activity_description" >
+        </activity>
+        <activity
+            android:name="com.ellipsonic.quickee.EditDescription"
+            android:label="@string/title_activity_edit_description" >
         </activity>
     </application>
 
