@@ -15,7 +15,7 @@ public class DropboxFragment extends Fragment {
             Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dropbox, container, false);
-         
+        setHasOptionsMenu(true);
         return rootView;
     }
 

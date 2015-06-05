@@ -7,11 +7,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ellipsonic.database.CategoryDb;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class AddNewTerm extends Activity {
@@ -22,9 +29,13 @@ public class AddNewTerm extends Activity {
     public EditText sel_cat;
     public EditText description;
     public TextView add_desc;
-   public  String selectedTopic;
+    public  String selectedTopic;
    public  String selectedCategory;
    public  String selectedTerm;
+    Spinner spinner;
+    public CategoryDb cat_Db=null;
+    ArrayAdapter<String> Adapter;
+    ArrayList<String> CatList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +48,11 @@ public class AddNewTerm extends Activity {
         sel_topic.setText(selectedTopic);
         sel_topic.setTextColor(Color.parseColor("#000000"));
         sel_topic.setEnabled(false);
-        sel_cat=(EditText)findViewById(R.id.sel_cat_name);
+        CategoryDropDown(selectedTopic);
+     /*   sel_cat=(EditText)findViewById(R.id.sel_cat_name);
         sel_cat.setText(selectedCategory);
         sel_cat.setTextColor(Color.parseColor("#000000"));
-        sel_cat.setEnabled(false);
+        sel_cat.setEnabled(false);*/
         backButton_term = (ImageView) findViewById(R.id.new_term_back_icon);
         backButton_term.setOnClickListener(new View.OnClickListener() {
 
@@ -53,6 +65,7 @@ public class AddNewTerm extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
+                selectedCategory= String.valueOf(spinner.getSelectedItem());
                 term_name = (EditText) findViewById(R.id.input_term_name);
                 selectedTerm = term_name.getText().toString();
                 if (selectedTerm.length()> 0) {
@@ -64,10 +77,11 @@ public class AddNewTerm extends Activity {
                 intent.putExtra("selectedTerm",selectedTerm);
                 term_name.setText("");
                     startActivityForResult(intent, result);
-
                 }
-                else{ Toast.makeText(getApplicationContext(), "Enter Term Name",
-                        Toast.LENGTH_LONG).show();}
+                else{
+                         Toast.makeText(getApplicationContext(), "Enter Term Name",
+                        Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -100,5 +114,18 @@ public class AddNewTerm extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void CategoryDropDown(String selectedTopic) {
+        cat_Db = new CategoryDb(getApplicationContext());
+        spinner = (Spinner) findViewById(R.id.sel_cat_name);
+        CatList = cat_Db.getCatList(selectedTopic);
+        CatList.removeAll(Collections.singleton(null));
+        if (CatList != null) {
+            Adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, CatList);
+            Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(Adapter);
+                   }
     }
 }

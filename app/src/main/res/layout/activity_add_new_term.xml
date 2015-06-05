@@ -52,7 +52,7 @@
         android:layout_marginRight="10dp"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <!--<EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/sel_cat_name"
@@ -61,9 +61,19 @@
         android:hint="Category"
         android:layout_below="@+id/sel_topic_name"
         android:layout_alignLeft="@+id/sel_topic_name"
-        android:layout_alignStart="@+id/sel_topic_name" />
+        android:layout_alignStart="@+id/sel_topic_name" />-->
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sel_cat_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/sel_topic_name"
+        android:layout_alignLeft="@+id/sel_topic_name"
+        android:layout_alignStart="@+id/sel_topic_name"
+        android:prompt="@string/Spiner"/>
 
-    <EditText
+   <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/input_term_name"
@@ -124,15 +134,19 @@
         android:layout_height="wrap_content"
         android:text="@string/addDescriptionButtonText"
         android:id="@+id/add_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="false"
         android:background="#3671d0"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/input_term_name"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp" />
+
+
 
 
 </RelativeLayout>
-
-
     <!--  <TextView
           android:layout_width="122dp"
           android:layout_height="29dp"
@@ -151,7 +165,6 @@
           android:layout_marginTop="15dp"
           android:hint="Enter Description"
           android:layout_weight="0.12" />-->
-
 
   <!--  <RelativeLayout
         android:layout_width="match_parent"

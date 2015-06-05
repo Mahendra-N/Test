@@ -182,6 +182,7 @@ public class MainActivity extends Activity {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         menu.findItem(R.id.edit_topic).setVisible(!drawerOpen);
         menu.findItem(R.id.add_topic).setVisible(!drawerOpen);
+        menu.findItem(R.id.share).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -197,6 +198,7 @@ public class MainActivity extends Activity {
                 break;
             case 1:
                 fragment = new DropboxFragment();
+
                 break;
             case 2:
                 fragment = new GoogleDriveFragment();
@@ -219,7 +221,8 @@ public class MainActivity extends Activity {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
-
+            Fragment currentFragment = getFragmentManager().findFragmentById(R.id.frame_container);
+            
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);

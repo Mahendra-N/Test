@@ -11,8 +11,7 @@
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +37,13 @@
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.Category"
-            android:label="@string/title_activity_category" >
+            android:label="@string/title_activity_category"
+            android:parentActivityName="com.ellipsonic.quickee.MainActivity" >
+
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ellipsonic.quickee.MainActivity" />
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.AddNewCat"
@@ -50,7 +55,13 @@
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.Term"
-            android:label="@string/title_activity_term" >
+            android:label="@string/title_activity_term"
+            android:parentActivityName="com.ellipsonic.quickee.Category" >
+
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ellipsonic.quickee.Category" />
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.AddNewTerm"
@@ -62,11 +73,25 @@
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.Description"
-            android:label="@string/title_activity_description" >
+            android:label="@string/title_activity_description"
+            android:parentActivityName="com.ellipsonic.quickee.Term" >
+
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ellipsonic.quickee.Term" />
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.AddDescription"
             android:label="@string/title_activity_description" >
+        </activity>
+        <activity
+            android:name="com.ellipsonic.quickee.EditDescription"
+            android:label="@string/title_activity_edit_description" >
+        </activity>
+        <activity
+            android:name="com.ellipsonic.com.MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

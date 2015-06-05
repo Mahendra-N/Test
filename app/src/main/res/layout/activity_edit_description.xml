@@ -1,0 +1,134 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.ellipsomic.qweekie.EditDescription"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:background="#3671d0" >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:id="@+id/edit_details_save"
+            android:textColor="#fff"
+            android:layout_marginRight="17dp"
+            android:layout_marginEnd="17dp"
+            android:layout_alignTop="@+id/name"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Edit Description"
+            android:layout_marginLeft="84dp"
+            android:layout_marginStart="84dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/edit_details_back_icon"
+            android:layout_toEndOf="@+id/edit_details_back_icon" />
+
+        <ImageView
+            android:id="@+id/edit_details_back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:background="@drawable/counter_bg"
+        android:id="@+id/editdetails"
+        android:padding="10dp" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   >
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_audio"
+        android:text="Delete"
+        android:id="@+id/delete_audio"
+        android:layout_gravity="right"
+        android:layout_marginBottom="99dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_video"
+        android:text="Delete"
+        android:id="@+id/delete_video"
+        android:layout_gravity="right"
+        android:layout_alignBaseline="@+id/delete_audio"
+        android:layout_alignBottom="@+id/delete_audio"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_image"
+        android:text="Delete"
+        android:id="@+id/delete_img"
+        android:layout_gravity="right"
+        android:layout_below="@+id/delete_video"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/Update_img"
+        android:drawableRight="@drawable/ic_image"
+        android:layout_below="@+id/delete_video"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/update_audio"
+        android:drawableRight="@drawable/ic_audio"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_video"
+        android:text="Update"
+        android:id="@+id/Update_video"
+        android:layout_alignTop="@+id/delete_video"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
+
+
+
+</LinearLayout>

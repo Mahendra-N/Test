@@ -6,4 +6,4 @@
         android:showAsAction="ifRoom"
         android:actionProviderClass="android.widget.ShareActionProvider"        
     />    
-</menu><!-- From: file:/H:/Projects/Quickee_native/app/src/main/res/menu/items.xml -->
+</menu><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/menu/items.xml -->

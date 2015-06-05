@@ -41,6 +41,7 @@ public class Term extends Activity {
         super.onPause();
         term_Db = null;
         TermList = null;
+        finish();
     }
     @Override
     public void onResume() {
@@ -71,6 +72,9 @@ public class Term extends Activity {
                 edit_intent.putExtra("selectedCategory",selectedCategory);
                 startActivityForResult(edit_intent, resultone);
                 break;
+            case android.R.id.home:
+                finish();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -95,11 +99,14 @@ public class Term extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
+                    String[] parts = clickedItem.split("\n");
+                    String part1 = parts[0]; // term
+                    String part2 = parts[1]; //description
                     Intent intent = new Intent(Term.this, Description.class);
                     final int result = 1;
                     intent.putExtra("selectedTopic",selectedTopic);
                     intent.putExtra("selectedCategory",selectedCategory);
-                    intent.putExtra("selectedTerm",clickedItem);
+                    intent.putExtra("selectedTerm",part1);
                     startActivityForResult(intent, result);
                 }
 

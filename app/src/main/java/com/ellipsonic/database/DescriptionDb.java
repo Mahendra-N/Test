@@ -33,7 +33,8 @@ public class DescriptionDb {
         String term_name=tableinfo.term_name;
         ContentValues values = new ContentValues();
         String selectQuery =  "SELECT  " +
-                " DISTINCT "+NotesTable.KEY_DESCRIPTION +" ,"+NotesTable.KEY_TERM_NAME+
+                " DISTINCT "+NotesTable.KEY_DESCRIPTION +" ,"+NotesTable.KEY_TERM_NAME
+                +" ,"+NotesTable.KEY_IMAGE+" ,"+NotesTable.KEY_VIDEO+" ,"+NotesTable.KEY_AUDIO+
                 "  FROM  " + NotesTable.TABLE_NOTES+
                 "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +"='"+topic_name+"'"+
                 "  AND  " + NotesTable.KEY_CATEGORY_NAME +"='"+cat_name+"'"+
@@ -41,14 +42,16 @@ public class DescriptionDb {
                 "  AND  " + NotesTable.KEY_DESCRIPTION + "  IS NOT NULL ";
 
         Cursor cursor = db.rawQuery(selectQuery, null);
-String[] details =new String[2];
+String[] details =new String[5];
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
 
                 details[0] = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_DESCRIPTION));
                 details[1] = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TERM_NAME));
-
+                details[2]=cursor.getString(cursor.getColumnIndex(NotesTable.KEY_IMAGE));
+                details[3]=cursor.getString(cursor.getColumnIndex(NotesTable.KEY_VIDEO));
+                 details[4]=cursor.getString(cursor.getColumnIndex(NotesTable.KEY_AUDIO));
             } while (cursor.moveToNext());
         }
 

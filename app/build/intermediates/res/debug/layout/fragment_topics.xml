@@ -14,7 +14,8 @@
         android:hint="Search"
         android:background="@drawable/counter_bg"
         android:drawableLeft="@drawable/ic_search"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+     />
 
 
 
@@ -22,8 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/topic_listView"
-        android:textFilterEnabled="true"/>
+        android:textFilterEnabled="true"
+        />
 
 
 </LinearLayout>
-<!-- From: file:/H:/Projects/Quickee_native/app/src/main/res/layout/fragment_topics.xml -->
+<!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/fragment_topics.xml -->

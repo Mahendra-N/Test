@@ -61,6 +61,9 @@ public class Category extends Activity {
                 edit_intent.putExtra("selectedTopic",selectedTopic);
                 startActivityForResult(edit_intent, resulteditcat);
                 break;
+            case android.R.id.home:
+                finish();
+                break;
                 default:
                 return super.onOptionsItemSelected(item);
         }

@@ -26,6 +26,9 @@ public class TermDb {
         values.put(NotesTable.KEY_CATEGORY_NAME,tableinfo.category_name);
         values.put(NotesTable.KEY_TERM_NAME,tableinfo.term_name);
         values.put(NotesTable.KEY_DESCRIPTION,tableinfo.description);
+          values.put(NotesTable.KEY_IMAGE,tableinfo.image);
+      values.put(NotesTable.KEY_VIDEO,tableinfo.video);
+      values.put(NotesTable.KEY_AUDIO,tableinfo.audio);
         // Inserting Row
         db.insert(NotesTable.TABLE_NOTES, null, values);
         db.close(); // Closing database connection
@@ -37,7 +40,8 @@ public class TermDb {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<String> TermList = new ArrayList<String>();
         String selectQuery =  " SELECT  " +
-                " DISTINCT "+NotesTable.KEY_TERM_NAME +
+                " DISTINCT "+" ( "+NotesTable.KEY_TERM_NAME +" || "+" '\n' "+" || "+" SUBSTR "+"(" +NotesTable.KEY_DESCRIPTION +" , "+" 0, "+" 35 " +")"+" ) "+ " AS "+
+                NotesTable.KEY_TERM_NAME+
                 "  FROM  " + NotesTable.TABLE_NOTES+
                 "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +" = '"+selectedTopic+"'"+
                 "  AND "+ NotesTable.KEY_CATEGORY_NAME+" = '"+selectedCategory+"'"+
@@ -50,8 +54,7 @@ public class TermDb {
             do {
 
                 String termname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TERM_NAME));
-                TermList.add(termname);
-
+                            TermList.add(termname);
             } while (cursor.moveToNext());
         }
 
@@ -77,9 +80,9 @@ public class TermDb {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues val = new ContentValues();
         val.put(NotesTable.KEY_TERM_NAME,tableinfo.term_name);
-        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TERM_NAME + "= '"+tableinfo.old_term_name+"'"
-                +" AND "+NotesTable.KEY_TOPIC_NAME+ "='"+tableinfo.topic_name+"'"
-                +" AND "+NotesTable.KEY_CATEGORY_NAME+ "='"+tableinfo.category_name+"'", null);
+        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TERM_NAME + "= '" + tableinfo.old_term_name + "'"
+                + " AND " + NotesTable.KEY_TOPIC_NAME + "='" + tableinfo.topic_name + "'"
+                + " AND " + NotesTable.KEY_CATEGORY_NAME + "='" + tableinfo.category_name + "'", null);
         db.close(); // Closing database connection*/
 
     }
