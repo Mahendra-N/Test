@@ -1,8 +1,0 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="#f1f1f1" />
-    <stroke android:width="1.5dp"
-        android:color="#939393" />
-    <corners
-        android:radius="5dp"/>
-</shape><!-- From: file:/H:/Projects/Quickee_native/app/src/main/res/drawable/square_text_area.xml -->

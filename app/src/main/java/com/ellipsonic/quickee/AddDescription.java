@@ -87,6 +87,7 @@ public class AddDescription extends Activity {
                         tableinfo.audio = audio_path_to_db.toString();
                     }
                     termDb.insert_term(tableinfo);
+                    Toast.makeText(getApplicationContext(), "Term "+selectedTerm+" is Added to " +selectedCategory +" Category" , Toast.LENGTH_LONG).show();
                     Description_Name.setText("");
                     img_path_to_db="";
                     video_path_to_db="";

@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="com.ellipsomic.qweekie.MainActivity"
     >
 
@@ -15,6 +17,7 @@
         android:background="@drawable/counter_bg"
         android:drawableLeft="@drawable/ic_search"
         android:layout_gravity="center_horizontal"
+        android:focusable="false"
      />
 
 

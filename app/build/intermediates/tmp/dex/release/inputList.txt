@@ -1,2 +1,0 @@
-H:\Projects\Quickee_native\app\build\intermediates\classes\release
-H:\Projects\Quickee_native\app\build\intermediates\pre-dexed\release\support-v4-18.0.0-60c606529c07f4776ce33d445d2568e68b94d687.jar

@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,14 @@ public class Term extends Activity {
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
         myFilter = (EditText) findViewById(R.id.search);
+        myFilter.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
      }
     @Override
     public void onPause() {
@@ -46,6 +55,7 @@ public class Term extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        myFilter.clearFocus();
         TermListView(selectedTopic, selectedCategory);
     }
     @Override

@@ -10,14 +10,15 @@ public class DropboxFragment extends Fragment {
 	
 	public DropboxFragment(){}
 	
-	@Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
+        setHasOptionsMenu(false);
         View rootView = inflater.inflate(R.layout.fragment_dropbox, container, false);
-        setHasOptionsMenu(true);
-        return rootView;
+
+               return rootView;
     }
 
+ o
 
 }

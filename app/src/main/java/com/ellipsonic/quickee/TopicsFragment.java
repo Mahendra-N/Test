@@ -1,15 +1,14 @@
 package com.ellipsonic.quickee;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,7 +40,16 @@ public class TopicsFragment extends Fragment {
         TopicListView(this.context);
         folder=new ExternalFolders();
         folder.Createfolder(this.context);
+        myFilter.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
         return rootView;
+
     }
 
     @Override
@@ -49,11 +57,13 @@ public class TopicsFragment extends Fragment {
         super.onPause();
         topic_Db = null;
         topicList = null;
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        myFilter.clearFocus();
         TopicListView(this.context);
     }
 

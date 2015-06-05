@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,14 @@ public class Category extends Activity {
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         myFilter = (EditText) findViewById(R.id.search);
+         myFilter.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
       //  Toast.makeText(this, selectedTopic, Toast.LENGTH_LONG).show();
        CatListView(selectedTopic);
    }
@@ -74,6 +83,7 @@ public class Category extends Activity {
     @Override
     public void onPause() {
         super.onPause();
+
         cat_Db = null;
         CatList = null;
     }
@@ -81,6 +91,7 @@ public class Category extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        myFilter.clearFocus();
         CatListView(selectedTopic);
     }
 
