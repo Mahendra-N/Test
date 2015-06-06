@@ -57,6 +57,34 @@ public class CategoryDb {
 
     }
 
+    public ArrayList<String> RowsAffetedInCategory( String selectedTopic, String Categoryname) {
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                  NotesTable.KEY_CATEGORY_NAME +
+                "  FROM  " + NotesTable.TABLE_NOTES+
+                "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +"='"+selectedTopic+"'"+
+                "  AND  " + NotesTable.KEY_CATEGORY_NAME +"='"+Categoryname+"'";
+
+        ArrayList<String> CatList = new ArrayList<String>();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+
+                String catname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_CATEGORY_NAME));
+                CatList.add(catname);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return CatList;
+
+    }
+
     public void delete_category( NotesTable tableinfo) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String  topic_name =tableinfo.topic_name;

@@ -1,6 +1,8 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
+import com.ellipsonic.database.TermDb;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,9 +36,12 @@ public class AddNewTerm extends Activity {
    public  String selectedCategory;
    public  String selectedTerm;
     Spinner spinner;
+    public TermDb term_Db=null;
+    public ArrayList<String> TermList=null;
     public CategoryDb cat_Db=null;
     ArrayAdapter<String> Adapter;
     ArrayList<String> CatList=null;
+ public    boolean term_flag =true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,22 +74,30 @@ public class AddNewTerm extends Activity {
                 selectedCategory= String.valueOf(spinner.getSelectedItem());
                 term_name = (EditText) findViewById(R.id.input_term_name);
                 selectedTerm = term_name.getText().toString();
-                if (selectedTerm.length()> 0) {
+                term_Db=new TermDb(getApplicationContext());
+                TermList =  term_Db.RowsAffetedInTerm(selectedTopic,selectedCategory,selectedTerm);
 
-                Intent intent = new Intent(v.getContext(), AddDescription.class);
-                final int result = 1;
-                intent.putExtra("selectedTopic",selectedTopic);
-                intent.putExtra("selectedCategory",selectedCategory);
-                intent.putExtra("selectedTerm",selectedTerm);
-                term_name.setText("");
+     if (selectedTerm.length()> 0) {
+         if(TermList.size()<=0){
+               Intent intent = new Intent(v.getContext(), AddDescription.class);
+                    final int result = 1;
+                    intent.putExtra("selectedTopic",selectedTopic);
+                    intent.putExtra("selectedCategory",selectedCategory);
+                    intent.putExtra("selectedTerm",selectedTerm);
+                    term_name.setText("");
                     startActivityForResult(intent, result);
-                }
-                else{
-                         Toast.makeText(getApplicationContext(), "Enter Term Name",
-                        Toast.LENGTH_LONG).show();
-                }
+         }else{
+             Toast.makeText(getApplicationContext(), "Term "+selectedTerm+" Exists,Please Enter Unique Term Name",
+                     Toast.LENGTH_LONG).show();
+         }
 
-            }
+     } else{
+                    Toast.makeText(getApplicationContext(), "Enter Term Name",
+                            Toast.LENGTH_LONG).show();
+                }
+      }
+
+
         });
     }
 
@@ -127,5 +141,28 @@ public class AddNewTerm extends Activity {
             Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(Adapter);
                    }
+    }
+
+
+    public void AlertWindow(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+         // Setting Dialog Message
+        alertDialog.setMessage("Term Name should be Unique,Please enter new Term Name");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+            dialog.dismiss();
+            }
+        });
+
+
+
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

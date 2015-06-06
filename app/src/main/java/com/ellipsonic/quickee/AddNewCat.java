@@ -14,12 +14,16 @@ import android.widget.Toast;
 import com.ellipsonic.database.CategoryDb;
 import com.ellipsonic.database.NotesTable;
 
+import java.util.ArrayList;
+
 
 public class AddNewCat extends Activity {
     public ImageView backButton_cat = null;
     public TextView cat_save=null;
     public  EditText Category_Name=null;
     String selectedTopic;
+    public CategoryDb cat_Db=null;
+    public ArrayList<String> CatList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,11 @@ public class AddNewCat extends Activity {
         cat_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Category_Name =(EditText)findViewById(R.id.Cat_Name);
-                if(Category_Name.getText().toString().length()>0){
+                String CategoryName=Category_Name.getText().toString();
+                cat_Db=new CategoryDb(getApplicationContext());
+                CatList =  cat_Db.RowsAffetedInCategory(selectedTopic, CategoryName);
+
+               /* if(Category_Name.getText().toString().length()>0){
                     CategoryDb categoryDb = new CategoryDb(getApplicationContext());
                     NotesTable tableinfo = new NotesTable();
                     tableinfo.category_name = Category_Name.getText().toString();
@@ -50,6 +58,24 @@ public class AddNewCat extends Activity {
                     finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Nothing  to Save",
+                            Toast.LENGTH_LONG).show();
+                }*/
+
+                if (CategoryName.length()> 0) {
+                    if(CatList.size()<=0){
+                        CategoryDb categoryDb = new CategoryDb(getApplicationContext());
+                        NotesTable tableinfo = new NotesTable();
+                        tableinfo.category_name = Category_Name.getText().toString();
+                        tableinfo.topic_name = selectedTopic;
+                        categoryDb.insert_category(tableinfo);
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Term " + CategoryName + " Exists,Please Enter Unique Term Name",
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                } else{
+                    Toast.makeText(getApplicationContext(), "Enter Category Name",
                             Toast.LENGTH_LONG).show();
                 }
 

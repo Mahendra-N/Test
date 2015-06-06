@@ -59,6 +59,34 @@ public class TopicDb {
         return topicList;
 
     }
+    public ArrayList<String> RowsAffetedInTopic(String topic_Name) {
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String selectQuery =  "SELECT  " +
+                NotesTable.KEY_TOPIC_NAME  +
+                " FROM  " + NotesTable.TABLE_NOTES+
+               "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +" = '"+topic_Name+"'";
+
+
+        ArrayList<String> topicList = new ArrayList<String>();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                String topicname=cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TOPIC_NAME));
+                topicList.add(topicname);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return topicList;
+
+    }
 
     public void delete_topic( NotesTable tableinfo) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -71,16 +99,7 @@ public class TopicDb {
     public void update_topic( NotesTable tableinfo) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues val = new ContentValues();
-     /*   String  update_topic_name =tableinfo.topic_name;
-         String  old_topic_name=tableinfo.old_topic_name;
-             String updateQuery =  "UPDATE  " +
-             NotesTable.TABLE_NOTES +
-            "  SET  "+ NotesTable.KEY_TOPIC_NAME +" = '"+update_topic_name+"' "+
-            "  WHERE  "+NotesTable.KEY_TOPIC_NAME +" = '"+old_topic_name+"' ";
-        db.rawQuery(updateQuery, null);
-
-      db.close();*/ // Closing database connection*/
-       val.put(NotesTable.KEY_TOPIC_NAME ,tableinfo.topic_name);
+           val.put(NotesTable.KEY_TOPIC_NAME ,tableinfo.topic_name);
         db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TOPIC_NAME + "= '"+tableinfo.old_topic_name+"'", null);
         db.close(); // Closing database connection*/
 

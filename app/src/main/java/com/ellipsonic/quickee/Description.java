@@ -193,9 +193,8 @@ public class Description extends Activity {
             video.setMinimumHeight(height);
             video.setMediaController(mediaController);
             video.setVideoURI(Uri.parse(details[3]));
-            video.setVisibility(View.VISIBLE);
-            video.requestFocus();
             video.seekTo(100);
+            video.setVisibility(View.VISIBLE);
         }else{
             video.setVisibility(View.GONE);
         }

@@ -26,9 +26,9 @@ public class TermDb {
         values.put(NotesTable.KEY_CATEGORY_NAME,tableinfo.category_name);
         values.put(NotesTable.KEY_TERM_NAME,tableinfo.term_name);
         values.put(NotesTable.KEY_DESCRIPTION,tableinfo.description);
-          values.put(NotesTable.KEY_IMAGE,tableinfo.image);
-      values.put(NotesTable.KEY_VIDEO,tableinfo.video);
-      values.put(NotesTable.KEY_AUDIO,tableinfo.audio);
+        values.put(NotesTable.KEY_IMAGE,tableinfo.image);
+        values.put(NotesTable.KEY_VIDEO,tableinfo.video);
+        values.put(NotesTable.KEY_AUDIO,tableinfo.audio);
         // Inserting Row
         db.insert(NotesTable.TABLE_NOTES, null, values);
         db.close(); // Closing database connection
@@ -40,7 +40,8 @@ public class TermDb {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<String> TermList = new ArrayList<String>();
         String selectQuery =  " SELECT  " +
-                " DISTINCT "+" ( "+NotesTable.KEY_TERM_NAME +" || "+" '\n' "+" || "+" SUBSTR "+"(" +NotesTable.KEY_DESCRIPTION +" , "+" 0, "+" 35 " +")"+" ) "+ " AS "+
+                " DISTINCT "+" ( "+NotesTable.KEY_TERM_NAME +" || "+" '\n' "+" || "+" " +
+                "SUBSTR "+"(" +NotesTable.KEY_DESCRIPTION +" , "+" 0, "+" 35 " +")"+" ) "+ " AS "+
                 NotesTable.KEY_TERM_NAME+
                 "  FROM  " + NotesTable.TABLE_NOTES+
                 "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +" = '"+selectedTopic+"'"+
@@ -55,6 +56,57 @@ public class TermDb {
 
                 String termname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TERM_NAME));
                             TermList.add(termname);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return TermList;
+
+    }
+    public ArrayList<String> getEditTermList(String selectedTopic,String selectedCategory) {
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<String> TermList = new ArrayList<String>();
+        String selectQuery =  " SELECT  " +
+                " DISTINCT "+NotesTable.KEY_TERM_NAME +
+                "  FROM  " + NotesTable.TABLE_NOTES+
+                "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +" = '"+selectedTopic+"'"+
+                "  AND "+ NotesTable.KEY_CATEGORY_NAME+" = '"+selectedCategory+"'"+
+                " AND  " +NotesTable.KEY_TERM_NAME + "  IS NOT NULL ";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                String termname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TERM_NAME));
+                TermList.add(termname);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return TermList;
+
+    }
+
+    public ArrayList<String> RowsAffetedInTerm(String selectedTopic,String selectedCategory,String selectedTerm) {
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<String> TermList = new ArrayList<String>();
+        String selectQuery =  " SELECT  " +
+                 NotesTable.KEY_TERM_NAME +
+                "  FROM  " + NotesTable.TABLE_NOTES+
+                "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +" = '"+selectedTopic+"'"+
+                "  AND "+ NotesTable.KEY_CATEGORY_NAME+" = '"+selectedCategory+"'"+
+                " AND  " +NotesTable.KEY_TERM_NAME + "='"+selectedTerm+"'";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                String termname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TERM_NAME));
+                TermList.add(termname);
             } while (cursor.moveToNext());
         }
 
@@ -84,7 +136,6 @@ public class TermDb {
                 + " AND " + NotesTable.KEY_TOPIC_NAME + "='" + tableinfo.topic_name + "'"
                 + " AND " + NotesTable.KEY_CATEGORY_NAME + "='" + tableinfo.category_name + "'", null);
         db.close(); // Closing database connection*/
-
     }
 
 

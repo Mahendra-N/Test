@@ -13,10 +13,14 @@ import android.widget.Toast;
 import com.ellipsonic.database.NotesTable;
 import com.ellipsonic.database.TopicDb;
 
+import java.util.ArrayList;
+
 public class AddNewTopic extends Activity {
     public ImageView backButton = null;
     public TextView  topic_save=null;
     public  EditText Topic_Name=null;
+   public  TopicDb topic_Db=null;
+    ArrayList<String> topicList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +41,10 @@ public class AddNewTopic extends Activity {
 
             public void onClick(View v) {
                   Topic_Name =(EditText)findViewById(R.id.Topic_Name);
-
-                if(Topic_Name.getText().toString().length()>0){
+                topic_Db = new TopicDb(getApplicationContext());
+            String  TopicName = Topic_Name.getText().toString();
+                topicList = topic_Db.RowsAffetedInTopic(TopicName);
+               /* if(Topic_Name.getText().toString().length()>0){
 
                     TopicDb topicDb =new TopicDb(getApplicationContext());
                     NotesTable tableinfo = new NotesTable();
@@ -48,6 +54,23 @@ public class AddNewTopic extends Activity {
                     finish();
                 }else{
                     Toast.makeText(getApplicationContext(), "Nothing  to Save",
+                            Toast.LENGTH_LONG).show();
+                }*/
+                if (TopicName.length()> 0) {
+                    if(topicList.size()<=0){
+                        TopicDb topicDb =new TopicDb(getApplicationContext());
+                        NotesTable tableinfo = new NotesTable();
+                        tableinfo.topic_name = Topic_Name.getText().toString();
+                        topicDb.insert_topic(tableinfo);
+                        Topic_Name.setText("");
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Topic "+TopicName+" Exists,Please Enter Unique Topic Name",
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                } else{
+                    Toast.makeText(getApplicationContext(), "Enter Topic Name",
                             Toast.LENGTH_LONG).show();
                 }
 

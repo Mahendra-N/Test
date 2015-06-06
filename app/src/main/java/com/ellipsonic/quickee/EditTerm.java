@@ -76,7 +76,7 @@ public class EditTerm extends Activity {
     }
     public void EditTermListView( final String selectedTopic,final String selectedCategory){
         term_Db=new TermDb(getApplicationContext());
-        TermList =  term_Db.getTermList(selectedTopic,selectedCategory);
+        TermList =  term_Db.getEditTermList(selectedTopic,selectedCategory);
         TermList.removeAll(Collections.singleton(null));
         if(TermList!=null) {
             ArrayAdapter<String> Adapter = new

@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:text="Topic Name"
-                 android:layout_alignTop="@+id/topic_save"
-                 android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/topic_save"
+            android:layout_centerHorizontal="true"
             android:textSize="16dp"/>
 
         <ImageView
@@ -49,10 +49,16 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="422dp"
         android:id="@+id/Topic_Name"
         android:hint="Enter Topic Name"
-        android:paddingTop="50dp" />
+        android:padding="10dp"
+        android:gravity="top"
+        android:selectAllOnFocus="false"
+        android:focusable="true"
+        android:background="#FFFFFF"
+        android:layout_weight="0.73"/>
+
 
 
 

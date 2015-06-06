@@ -50,7 +50,7 @@ public class Term extends Activity {
         super.onPause();
         term_Db = null;
         TermList = null;
-        finish();
+
     }
     @Override
     public void onResume() {

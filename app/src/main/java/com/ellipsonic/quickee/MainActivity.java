@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
 
+    public boolean currentFragment=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,10 +180,19 @@ public class MainActivity extends Activity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.edit_topic).setVisible(!drawerOpen);
-        menu.findItem(R.id.add_topic).setVisible(!drawerOpen);
-        menu.findItem(R.id.share).setVisible(!drawerOpen);
+
+        if(currentFragment==true) {
+            menu.findItem(R.id.edit_topic).setVisible(false);
+            menu.findItem(R.id.add_topic).setVisible(false);
+            menu.findItem(R.id.share).setVisible(false);
+            currentFragment=false;//do sth
+        } else {
+            boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+            menu.findItem(R.id.edit_topic).setVisible(!drawerOpen);
+            menu.findItem(R.id.add_topic).setVisible(!drawerOpen);
+            menu.findItem(R.id.share).setVisible(!drawerOpen);   //do sth
+        }
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -195,6 +205,7 @@ public class MainActivity extends Activity {
         switch (position) {
             case 0:
                 fragment = new TopicsFragment();
+
                 break;
             case 1:
                 fragment = new DropboxFragment();
@@ -219,9 +230,13 @@ public class MainActivity extends Activity {
 
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
+
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
-            Fragment currentFragment = getFragmentManager().findFragmentById(R.id.frame_container);
+
+            if(navMenuTitles[position].equals("Dropbox Sync.") || navMenuTitles[position].equals( "Google Drive Sync.")){
+                currentFragment=true;
+            }
 
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);

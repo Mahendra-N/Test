@@ -19,6 +19,6 @@ public class DropboxFragment extends Fragment {
                return rootView;
     }
 
- o
+
 
 }

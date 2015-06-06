@@ -304,7 +304,7 @@ public class EditDescription extends Activity {
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Audio/");
                 Random generator = new Random();
-                int n = 10000;
+                int n = 1540;
                 n = generator.nextInt(n);
                 String fname = "Audio"+ n +".mp3";
                 audio_path_to_db =root + "/Quickee/Audio/"+fname;
@@ -359,6 +359,8 @@ public class EditDescription extends Activity {
         }
             tableinfo.old_img_path=selectedImage;
             tableinfo.term_name=selectedTerm;
+            tableinfo.category_name=selectedCategory;
+            tableinfo.topic_name=selectedTopic;
             media_Db.Update_Image(tableinfo);
             img_path_to_db="";
             selectedImage=null;
@@ -371,6 +373,9 @@ public class EditDescription extends Activity {
          tableinfo.video = video_path_to_db.toString();
      }
      tableinfo.old_video_path=selectedVideo;
+     tableinfo.term_name=selectedTerm;
+     tableinfo.category_name=selectedCategory;
+     tableinfo.topic_name=selectedTopic;
      media_Db.Update_Video(tableinfo);
      video_path_to_db="";
      selectedVideo=null;
@@ -383,6 +388,9 @@ public class EditDescription extends Activity {
             tableinfo.audio = audio_path_to_db.toString();
         }
         tableinfo.old_audio_path=selectedAudio;
+        tableinfo.term_name=selectedTerm;
+        tableinfo.category_name=selectedCategory;
+        tableinfo.topic_name=selectedTopic;
         media_Db.Update_Audio(tableinfo);
         audio_path_to_db="";
         selectedAudio=null;

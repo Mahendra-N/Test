@@ -48,15 +48,17 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="422dp"
         android:id="@+id/Cat_Name"
         android:hint="Enter Category Name"
-        android:paddingTop="50dp" />
+        android:padding="10dp"
+        android:gravity="top"
+        android:selectAllOnFocus="false"
+        android:focusable="true"
+        android:background="#FFFFFF"
+        android:layout_weight="0.73"/>
 
-    <ViewStub
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewStub" />
+
 
 </LinearLayout>
 <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/activity_add_new_cat.xml -->
