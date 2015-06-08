@@ -60,8 +60,8 @@ public class EditTopic extends Activity {
       if (topicList != null) {
           ArrayAdapter<String> myAdapter = new
                   ArrayAdapter<String>(this,
-                  android.R.layout.simple_list_item_1,
-                  topicList);
+                  R.layout.customeditlist,
+                  R.id.Editname,topicList);
           ListView myList = (ListView) findViewById(R.id.edit_topic_listView);
           myList.setAdapter(myAdapter);
 

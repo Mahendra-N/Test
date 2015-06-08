@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -149,6 +151,8 @@ public class AddDescription extends Activity {
         alertDialog.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
@@ -203,9 +207,14 @@ public class AddDescription extends Activity {
 
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            SaveImage(imageBitmap);
+           // Bundle extras = data.getExtras();
+           // Bitmap imageBitmap = (Bitmap) extras.get("data");
+            File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
+            Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000, 700);
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            SaveImage(bitmap);
         }
 
         if (requestCode == PICK_VIDEO_REQUEST) {
@@ -282,7 +291,7 @@ public class AddDescription extends Activity {
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
-        String fname = "Image-" + n + ".jpg";
+        String fname = "Image-" + n + ".png";
         img_path_to_db = root + "/Quickee/Images/" + fname;
         File file = new File(myDir, fname);
         if (file.exists()) file.delete();
@@ -315,5 +324,38 @@ public class AddDescription extends Activity {
 
        // Showing Alert Message
         alertDialog.show();
+    }
+    public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight)
+    { // BEST QUALITY MATCH
+
+        //First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+
+        // Calculate inSampleSize, Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        int inSampleSize = 1;
+
+        if (height > reqHeight)
+        {
+            inSampleSize = Math.round((float)height / (float)reqHeight);
+        }
+        int expectedWidth = width / inSampleSize;
+
+        if (expectedWidth > reqWidth)
+        {
+            //if(Math.round((float)width / (float)reqWidth) > inSampleSize) // If bigger SampSize..
+            inSampleSize = Math.round((float)width / (float)reqWidth);
+        }
+
+        options.inSampleSize = inSampleSize;
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+
+        return BitmapFactory.decodeFile(path, options);
     }
 }

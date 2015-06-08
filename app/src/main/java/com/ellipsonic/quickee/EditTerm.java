@@ -81,8 +81,8 @@ public class EditTerm extends Activity {
         if(TermList!=null) {
             ArrayAdapter<String> Adapter = new
                     ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1,
-                    TermList);
+                    R.layout.customeditlist,
+                    R.id.Editname,TermList);
             ListView List = (ListView) this.findViewById(R.id.edit_term_listView);
             List.setAdapter(Adapter);
             List.setOnItemClickListener(new AdapterView.OnItemClickListener() {

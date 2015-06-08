@@ -33,8 +33,12 @@ public class TopicDb {
         //Open connection to read only
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String selectQuery =  "SELECT  " +
-                "DISTINCT  "+NotesTable.KEY_TOPIC_NAME  +
-                " FROM  " + NotesTable.TABLE_NOTES;
+                " DISTINCT  "+ " ( " +NotesTable.KEY_TOPIC_NAME  + " || " +" '\n' "+" || "+
+                " COUNT " + "( "+NotesTable.KEY_CATEGORY_NAME+")"+ " )"+ " AS "+
+                NotesTable.KEY_TOPIC_NAME+
+                " FROM  " + NotesTable.TABLE_NOTES+
+                " GROUP BY "+NotesTable.KEY_TOPIC_NAME;
+
 
 
         ArrayList<String> topicList = new ArrayList<String>();

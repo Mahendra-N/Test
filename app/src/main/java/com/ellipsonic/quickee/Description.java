@@ -2,6 +2,7 @@ package com.ellipsonic.quickee;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -158,27 +159,11 @@ public class Description extends Activity {
      //   header.setText(details[1].toUpperCase());
         if((details[2])!=null) {
          imgpath=details[2];
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeFile(Uri.parse(details[2]).getPath(), options);
-            int imageHeight = options.outHeight;
-            int imageWidth = options.outWidth;
-           /*    if(imageHeight<250){
-                imageHeight=300;
-          img.setMinimumHeight(imageHeight);
-            }else{
-             img.setMinimumHeight(imageHeight);
-            }
-            if(imageWidth<300){
-                imageWidth=400;
-                img.setMinimumWidth(imageWidth);
-            }else{
-                img.setMinimumWidth(imageWidth);
-            }*/
-            img.setMinimumWidth(imageWidth);
-            img.setMinimumHeight(imageHeight);
-            img.setImageURI(Uri.parse(details[2]));
-            img.setVisibility(View.VISIBLE);
+
+
+
+           img.setImageURI(Uri.parse(details[2]));
+           img.setVisibility(View.VISIBLE);
         }else{
             img.setVisibility(View.GONE);
         }

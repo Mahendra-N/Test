@@ -85,8 +85,8 @@ public class EditCategory extends Activity {
         if(CatList!=null) {
             ArrayAdapter<String> Adapter = new
                     ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1,
-                    CatList);
+                    R.layout.customeditlist,
+                    R.id.Editname,CatList);
             ListView List = (ListView) this.findViewById(R.id.edit_cat_listView);
             List.setAdapter(Adapter);
 

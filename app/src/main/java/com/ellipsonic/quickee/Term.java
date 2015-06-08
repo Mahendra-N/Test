@@ -99,8 +99,8 @@ public class Term extends Activity {
         if(TermList!=null) {
             Adapter   = new
                     ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1,
-                    TermList);
+                    R.layout.customlist,
+                    R.id.Itemname,TermList);
             ListView List = (ListView) this.findViewById(R.id.term_listView);
             List.setAdapter(Adapter);
             List.setTextFilterEnabled(true);

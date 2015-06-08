@@ -72,10 +72,10 @@ public class TopicsFragment extends Fragment {
         topicList = topic_Db.getTopicList();
         topicList.removeAll(Collections.singleton(null));
         if (topicList != null) {
-                 myAdapter = new
+               myAdapter = new
                     ArrayAdapter<String>(this.getActivity(),
-                    android.R.layout.simple_list_item_1,
-                    topicList);
+                    R.layout.customlist,
+                    R.id.Itemname,topicList);
             ListView myList = (ListView) rootView.findViewById(R.id.topic_listView);
             myList.setAdapter(myAdapter);
             myList.setTextFilterEnabled(true);
@@ -90,6 +90,7 @@ public class TopicsFragment extends Fragment {
                     startActivityForResult(intent, result);
                 }
             });
+
 
             myFilter.addTextChangedListener(new TextWatcher() {
 

@@ -102,8 +102,8 @@ public class Category extends Activity {
             if(CatList!=null) {
                 Adapter = new
                    ArrayAdapter<String>(this,
-                   android.R.layout.simple_list_item_1,
-                   CatList);
+                        R.layout.customlist,
+                        R.id.Itemname,CatList);
            ListView List = (ListView) this.findViewById(R.id.cat_listView);
                   List.setAdapter(Adapter);
                 List.setTextFilterEnabled(true);
