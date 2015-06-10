@@ -80,7 +80,7 @@ public class EditCategory extends Activity {
 
     public void EDitCatListView( String selectedTopic){
         CategoryDb cat_Db=new CategoryDb(getApplicationContext());
-        ArrayList<String> CatList =  cat_Db.getCatList(selectedTopic);
+        ArrayList<String> CatList =  cat_Db.getEditCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
         if(CatList!=null) {
             ArrayAdapter<String> Adapter = new

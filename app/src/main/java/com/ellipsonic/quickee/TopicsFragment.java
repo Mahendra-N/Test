@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -28,7 +27,8 @@ public class TopicsFragment extends Fragment {
     View rootView;
     public TopicDb topic_Db = null;
     public ArrayList<String> topicList = null;
-    ArrayAdapter<String> myAdapter;
+   // ArrayAdapter<String> myAdapter;
+   CustomTopicListView adapter;
     public Context context = null;
     EditText myFilter;
     ExternalFolders folder=null;
@@ -71,13 +71,21 @@ public class TopicsFragment extends Fragment {
         topic_Db = new TopicDb(this.context);
         topicList = topic_Db.getTopicList();
         topicList.removeAll(Collections.singleton(null));
+        ArrayList<String> topic = new ArrayList<String>();
+        ArrayList<String> no_cat= new ArrayList<String>();
         if (topicList != null) {
-               myAdapter = new
-                    ArrayAdapter<String>(this.getActivity(),
-                    R.layout.customlist,
-                    R.id.Itemname,topicList);
+            //myAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.customlist, R.id.Itemname,topicList);
+
+
+                for (int i=0;i<topicList.size();i++){
+                    String[] parts = topicList.get(i).split("\n");
+                    topic.add(parts[0]); // topic
+                    no_cat.add(parts[1].concat("  category")); //noofcat
+                }
+            Context context1=getActivity();
+            adapter=new CustomTopicListView((android.app.Activity) context1, topic, no_cat);
             ListView myList = (ListView) rootView.findViewById(R.id.topic_listView);
-            myList.setAdapter(myAdapter);
+            myList.setAdapter( adapter);
             myList.setTextFilterEnabled(true);
             myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -94,14 +102,18 @@ public class TopicsFragment extends Fragment {
 
             myFilter.addTextChangedListener(new TextWatcher() {
 
-                public void afterTextChanged(Editable s) {
-                }
-
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
-
+                @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    myAdapter.getFilter().filter(s.toString());
+                    // Call back the Adapter with current character to Filter
+                    adapter.getFilter().filter(s.toString());
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
                 }
             });
         }else{

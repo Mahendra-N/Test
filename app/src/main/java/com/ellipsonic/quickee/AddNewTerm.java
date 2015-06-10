@@ -133,7 +133,7 @@ public class AddNewTerm extends Activity {
     public void CategoryDropDown(String selectedTopic) {
         cat_Db = new CategoryDb(getApplicationContext());
         spinner = (Spinner) findViewById(R.id.sel_cat_name);
-        CatList = cat_Db.getCatList(selectedTopic);
+        CatList = cat_Db.getEditCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
         if (CatList != null) {
             Adapter = new ArrayAdapter<String>(this,

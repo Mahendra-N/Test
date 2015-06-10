@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -26,7 +25,8 @@ public class Category extends Activity {
     public CategoryDb cat_Db=null;
     public ArrayList<String> CatList=null;
     EditText myFilter;
-    ArrayAdapter<String> Adapter;
+ //   ArrayAdapter<String> Adapter;
+    CustomCategoryListView adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,19 +99,27 @@ public class Category extends Activity {
       cat_Db=new CategoryDb(getApplicationContext());
       CatList =  cat_Db.getCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
+       ArrayList<String> catList = new ArrayList<String>();
+       ArrayList<String> no_term = new ArrayList<String>();
             if(CatList!=null) {
-                Adapter = new
-                   ArrayAdapter<String>(this,
-                        R.layout.customlist,
-                        R.id.Itemname,CatList);
+                for (int i=0;i<CatList.size();i++){
+                    String[] parts = CatList.get(i).split("\n");
+                    catList.add(parts[0]); // topic
+                    no_term.add(parts[1].concat(" term")); //noofcat
+                }
+                adapter=new CustomCategoryListView(this, catList, no_term);
+             //   Adapter = new ArrayAdapter<String>(this, R.layout.customlist, R.id.Itemname,CatList);
            ListView List = (ListView) this.findViewById(R.id.cat_listView);
-                  List.setAdapter(Adapter);
+                List.setAdapter(adapter);
                 List.setTextFilterEnabled(true);
            List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                @Override
                public void onItemClick(AdapterView<?> parent, View view, int position,
                                        long id) {
                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
+                 /*  String[] parts = clickedItem.split("\n");
+                   String part1 = parts[0]; // cat
+                   String part2 = parts[1]; //no of term*/
                    Intent intent = new Intent(Category.this, Term.class);
                    final int result = 1;
                    intent.putExtra("selectedTopic",selectedTopic);
@@ -120,6 +128,8 @@ public class Category extends Activity {
                }
 
            });
+
+
                 myFilter.addTextChangedListener(new TextWatcher() {
 
                     public void afterTextChanged(Editable s) {
@@ -129,11 +139,11 @@ public class Category extends Activity {
                     }
 
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        Adapter.getFilter().filter(s.toString());
+                        adapter.getFilter().filter(s.toString());
                     }
                 });
-       }else{
-           Log.d("message","nothing is there in database");
+      }else{
+           Log.d("message", "nothing is there in database");
        }
 
     }

@@ -55,7 +55,7 @@ public class EditTopic extends Activity {
 
       TopicDb topic_Db = new TopicDb(context);
 
-      ArrayList<String> topicList = topic_Db.getTopicList();
+      ArrayList<String> topicList = topic_Db.getEditTopicList();
       topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
       if (topicList != null) {
           ArrayAdapter<String> myAdapter = new

@@ -41,7 +41,7 @@ public class TermDb {
         ArrayList<String> TermList = new ArrayList<String>();
         String selectQuery =  " SELECT  " +
                 " DISTINCT "+" ( "+NotesTable.KEY_TERM_NAME +" || "+" '\n' "+" || "+" " +
-                "SUBSTR "+"(" +NotesTable.KEY_DESCRIPTION +" , "+" 0, "+" 33 " +")"+" ) "+ " AS "+
+                "SUBSTR "+"(" +NotesTable.KEY_DESCRIPTION +" , "+" 0, "+" 38 " +")"+" ) "+ " AS "+
                 NotesTable.KEY_TERM_NAME+
                 "  FROM  " + NotesTable.TABLE_NOTES+
                 "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +" = '"+selectedTopic+"'"+

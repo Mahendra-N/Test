@@ -33,10 +33,41 @@ public class CategoryDb {
         //Open connection to read only
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
-                "DISTINCT "+NotesTable.KEY_CATEGORY_NAME +
-                "  FROM  " + NotesTable.TABLE_NOTES+
+                " DISTINCT  "+ " ( " +NotesTable.KEY_CATEGORY_NAME  + " || " +" '\n' "+" || "+
+                " COUNT " + "( " + " DISTINCT " + " ( " +NotesTable.KEY_TERM_NAME+")"+ " )" + " )"+ " AS "+
+                NotesTable.KEY_CATEGORY_NAME+
+                " FROM  " + NotesTable.TABLE_NOTES +
                 "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +"='"+selectedTopic+"'"+
-                "  AND  " + NotesTable.KEY_CATEGORY_NAME + "  IS NOT NULL ";
+                " AND  " +NotesTable.KEY_CATEGORY_NAME + "  IS NOT NULL "+
+               " GROUP BY "+NotesTable.KEY_CATEGORY_NAME;
+
+        ArrayList<String> CatList = new ArrayList<String>();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+
+                String catname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_CATEGORY_NAME));
+                CatList.add(catname);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return CatList;
+
+    }
+    public ArrayList<String> getEditCatList(String selectedTopic) {
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery =  "SELECT  " +
+                " DISTINCT  " +NotesTable.KEY_CATEGORY_NAME  +
+                " FROM  " + NotesTable.TABLE_NOTES +
+                "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +"='"+selectedTopic+"'"+
+                " AND  " +NotesTable.KEY_CATEGORY_NAME + "  IS NOT NULL ";
+
 
         ArrayList<String> CatList = new ArrayList<String>();
         Cursor cursor = db.rawQuery(selectQuery, null);
