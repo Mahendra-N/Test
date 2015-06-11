@@ -2,7 +2,6 @@ package com.ellipsonic.quickee;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -20,6 +18,7 @@ import com.ellipsonic.database.TopicDb;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class TopicsFragment extends Fragment {
 	
@@ -71,7 +70,7 @@ public class TopicsFragment extends Fragment {
         topic_Db = new TopicDb(this.context);
         topicList = topic_Db.getTopicList();
         topicList.removeAll(Collections.singleton(null));
-        ArrayList<String> topic = new ArrayList<String>();
+        ArrayList<TopicPopulating> topic = new ArrayList<TopicPopulating>();
         ArrayList<String> no_cat= new ArrayList<String>();
         if (topicList != null) {
             //myAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.customlist, R.id.Itemname,topicList);
@@ -79,15 +78,35 @@ public class TopicsFragment extends Fragment {
 
                 for (int i=0;i<topicList.size();i++){
                     String[] parts = topicList.get(i).split("\n");
-                    topic.add(parts[0]); // topic
-                    no_cat.add(parts[1].concat("  category")); //noofcat
+                 //   topic.add(parts[0]); // topic
+                  //  no_cat.add(parts[1].concat("  category")); //noofcat
+                String topicname =parts[0];
+                String no_of_cat =(parts[1].concat("  category"));
+                TopicPopulating wp = new TopicPopulating(topicname, no_of_cat);
+                    topic.add(wp);
                 }
             Context context1=getActivity();
-            adapter=new CustomTopicListView((android.app.Activity) context1, topic, no_cat);
+
+            adapter=new CustomTopicListView((android.app.Activity) context1, topic);
             ListView myList = (ListView) rootView.findViewById(R.id.topic_listView);
-            myList.setAdapter( adapter);
+            myList.setAdapter(adapter);
             myList.setTextFilterEnabled(true);
-            myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // Listen for ListView Item Click
+
+      /*      myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+
+                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
+                    Intent intent = new Intent(getActivity(),Category.class);
+                            final int result = 1;
+                    intent.putExtra("selectedTopic",clickedItem);
+                    startActivityForResult(intent, result);
+                }
+            });
+
+         /*   myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
@@ -97,7 +116,7 @@ public class TopicsFragment extends Fragment {
                     intent.putExtra("selectedTopic",clickedItem);
                     startActivityForResult(intent, result);
                 }
-            });
+            });*/
 
 
             myFilter.addTextChangedListener(new TextWatcher() {
@@ -105,7 +124,9 @@ public class TopicsFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     // Call back the Adapter with current character to Filter
-                    adapter.getFilter().filter(s.toString());
+                    //adapter.getFilter().filter(s.toString());
+                    String text = myFilter.getText().toString().toLowerCase(Locale.getDefault());
+                    adapter.filter(text);
                 }
 
                 @Override

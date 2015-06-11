@@ -52,6 +52,7 @@
         android:layout_height="422dp"
         android:id="@+id/Topic_Name"
         android:hint="Enter Topic Name"
+        android:singleLine="true"
         android:padding="10dp"
         android:gravity="top"
         android:selectAllOnFocus="false"

@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -18,6 +17,7 @@ import com.ellipsonic.database.TermDb;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 
 public class Term extends Activity {
@@ -96,27 +96,31 @@ public class Term extends Activity {
         term_Db=new TermDb(getApplicationContext());
         TermList =  term_Db.getTermList(selectedTopic,selectedCategory);
         TermList.removeAll(Collections.singleton(null));
-        ArrayList<String> termList = new ArrayList<String>();
+        ArrayList<TermPopulating> termList = new ArrayList<TermPopulating>();
         ArrayList<String> desc = new ArrayList<String>();
         if(TermList!=null) {
             for (int i=0;i<TermList.size();i++){
                 String[] parts = TermList.get(i).split("\n");
-                termList.add(parts[0]); // topic
-                desc.add(parts[1].concat("....")); //noofcat
+             //   termList.add(parts[0]); // topic
+              //  desc.add(parts[1].concat("....")); //noofcat
+                String termname =parts[0];
+                String description =(parts[1].concat("...."));
+                TermPopulating wp = new TermPopulating(termname, description);
+                termList.add(wp);
             }
-            adapter=new CustomTermListView(this, termList, desc);
+            adapter=new CustomTermListView(this, termList, selectedTopic,selectedCategory);
           //  Adapter   = new ArrayAdapter<String>(this,R.layout.customlist,R.id.Itemname,TermList);
             ListView List = (ListView) this.findViewById(R.id.term_listView);
             List.setAdapter(adapter);
             List.setTextFilterEnabled(true);
-            List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /*     List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
                  /*   String[] parts = clickedItem.split("\n");
                     String part1 = parts[0]; // term
-                    String part2 = parts[1]; //description*/
+                    String part2 = parts[1]; //description
                     Intent intent = new Intent(Term.this, Description.class);
                     final int result = 1;
                     intent.putExtra("selectedTopic",selectedTopic);
@@ -125,7 +129,7 @@ public class Term extends Activity {
                     startActivityForResult(intent, result);
                 }
 
-            });
+            });*/
             myFilter.addTextChangedListener(new TextWatcher() {
 
                 public void afterTextChanged(Editable s) {
@@ -135,7 +139,8 @@ public class Term extends Activity {
                 }
 
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    adapter.getFilter().filter(s.toString());
+                    String text = myFilter.getText().toString().toLowerCase(Locale.getDefault());
+                    adapter.filter(text);
                 }
             });
         }else{

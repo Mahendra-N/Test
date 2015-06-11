@@ -80,6 +80,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:hint="Enter Term"
+        android:singleLine="true"
         android:layout_below="@+id/sel_cat_name"
         android:layout_alignLeft="@+id/sel_cat_name"
         android:layout_alignStart="@+id/sel_cat_name"

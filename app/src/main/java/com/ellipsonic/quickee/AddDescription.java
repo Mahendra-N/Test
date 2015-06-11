@@ -212,7 +212,7 @@ public class AddDescription extends Activity {
             File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
             Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000, 700);
             Matrix matrix = new Matrix();
-            matrix.postRotate(90);
+            matrix.postRotate(00);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
             SaveImage(bitmap);
         }
