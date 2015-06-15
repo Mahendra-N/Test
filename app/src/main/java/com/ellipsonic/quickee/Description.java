@@ -1,9 +1,9 @@
 package com.ellipsonic.quickee;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -43,7 +43,6 @@ public class Description extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-       // getActionBar().hide();
         final ScrollView main = (ScrollView) findViewById(R.id.ScrollView01);
         main.post(new Runnable() {
             public void run() {
@@ -56,45 +55,12 @@ public class Description extends Activity {
         selectedTerm =activityThatCalled.getExtras().getString("selectedTerm");
         setTitle(selectedTerm.toUpperCase());
         article = (TextView) findViewById(R.id.content);
-     //   header=(TextView) findViewById(R.id.details_header);
         img  = (ImageView) findViewById(R.id.img);
         video=(VideoView)findViewById(R.id.videoView);
         audio=(VideoView)findViewById(R.id.audioView);
         audio_name=(TextView)findViewById(R.id.audio_name);
         speaker=(ImageView)findViewById(R.id.speaker);
         Description(selectedTopic,selectedCategory,selectedTerm);
-        /* ImageView back_button =(ImageView) findViewById(R.id.desc_back_icon);
-       delete =(ImageView) findViewById(R.id.desc_delete);
-        edit =(ImageView) findViewById(R.id.edit_desc);
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteDescription(selectedTopic,selectedCategory,selectedTerm);
-
-            }
-        });
-
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Description.this,EditDescription.class);
-                intent.putExtra("content",content);
-                intent.putExtra("selectedTopic",selectedTopic);
-                intent.putExtra("selectedCategory",selectedCategory);
-                intent.putExtra("selectedTerm",selectedTerm);
-                intent.putExtra("selectedImage",imgpath);
-                intent.putExtra("selectedVideo",videopath);
-                intent.putExtra("selectedAudio",audiopath);
-                startActivityForResult(intent,1);
-            }
-        });*/
 
      }
     @Override
@@ -137,7 +103,8 @@ public class Description extends Activity {
                 startActivityForResult(intent,1);
                  break;
             case R.id.delete:
-                DeleteDescription(selectedTopic,selectedCategory,selectedTerm);
+                AlertWindow();
+
                 break;
                 default:
                 return super.onOptionsItemSelected(item);
@@ -210,5 +177,28 @@ public class Description extends Activity {
      desc_Db.delete_description(tableinfo);
      finish();
  }
+    public void AlertWindow() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
 
+        alertDialog.setMessage("Are Sure you want to Delete?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                DeleteDescription(selectedTopic,selectedCategory,selectedTerm);
+            }
+        });
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+    }
 }

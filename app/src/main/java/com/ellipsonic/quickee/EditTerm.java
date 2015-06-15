@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ellipsonic.database.NotesTable;
 import com.ellipsonic.database.TermDb;
@@ -116,7 +117,12 @@ public class EditTerm extends Activity {
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 String updateTextValue = String.valueOf(input.getText());
-                UpdateTerm(defaultTextValue, updateTextValue, selectedTopic, selectedCategory);
+
+                if(updateTextValue.length()>0) {
+                    UpdateTerm(defaultTextValue, updateTextValue, selectedTopic, selectedCategory);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Enter value to update", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -149,18 +155,30 @@ public class EditTerm extends Activity {
     }
 
     public void UpdateTerm(String defaultTextValue, String updateTextValue,String selectedTopic,String selectedCategory){
-        //   Toast.makeText(getApplicationContext(), updateTextValue, Toast.LENGTH_SHORT).show();
-        term_Db=new TermDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.old_term_name=defaultTextValue;
-        tableinfo.term_name=updateTextValue;
-        tableinfo.topic_name=selectedTopic;
-        tableinfo.category_name=selectedCategory;
-        term_Db.update_term(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
 
+
+       String selectedTerm = updateTextValue;
+        term_Db=new TermDb(getApplicationContext());
+        TermList =  term_Db.RowsAffetedInTerm(selectedTopic,selectedCategory,selectedTerm);
+        if (selectedTerm.length()> 0) {
+
+            if(TermList.size()<=0){
+                term_Db=new TermDb(getApplicationContext());
+                NotesTable tableinfo = new NotesTable();
+                tableinfo.old_term_name=defaultTextValue;
+                tableinfo.term_name=updateTextValue;
+                tableinfo.topic_name=selectedTopic;
+                tableinfo.category_name=selectedCategory;
+                term_Db.update_term(tableinfo);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(), "Term " + selectedTerm + " Exists,Enter Unique Term to Update",
+                        Toast.LENGTH_LONG).show();
+            }
+
+        }
     }
 
 }

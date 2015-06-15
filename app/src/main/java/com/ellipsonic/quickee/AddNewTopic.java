@@ -44,19 +44,8 @@ public class AddNewTopic extends Activity {
                 topic_Db = new TopicDb(getApplicationContext());
             String  TopicName = Topic_Name.getText().toString();
                 topicList = topic_Db.RowsAffetedInTopic(TopicName);
-               /* if(Topic_Name.getText().toString().length()>0){
+                             if (TopicName.length()> 0) {
 
-                    TopicDb topicDb =new TopicDb(getApplicationContext());
-                    NotesTable tableinfo = new NotesTable();
-                    tableinfo.topic_name = Topic_Name.getText().toString();
-                    topicDb.insert_topic(tableinfo);
-                    Topic_Name.setText("");
-                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Nothing  to Save",
-                            Toast.LENGTH_LONG).show();
-                }*/
-                if (TopicName.length()> 0) {
                     if(topicList.size()<=0){
                         TopicDb topicDb =new TopicDb(getApplicationContext());
                         NotesTable tableinfo = new NotesTable();

@@ -76,12 +76,12 @@ public class EditDescription extends Activity {
         updateTextValue=(EditText)findViewById(R.id.editdetails);
 
 
-        backbutton=(ImageView)findViewById(R.id.edit_details_back_icon);
+      /*  backbutton=(ImageView)findViewById(R.id.edit_details_back_icon);
         backbutton.setOnClickListener(new View.OnClickListener() {
             public  void onClick(View view){
                 finish();
             }
-        });
+        });*/
 
         delete_img=(Button)findViewById(R.id.delete_img);
         delete_img.setOnClickListener(new View.OnClickListener(){
@@ -155,7 +155,11 @@ public class EditDescription extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateDescription(updateTextValue.getText().toString(),selectedTopic,selectedCategory,selectedTerm);
+                if(updateTextValue.getText().length()>0) {
+                    UpdateDescription(updateTextValue.getText().toString(), selectedTopic, selectedCategory, selectedTerm);
+                }else{
+                    AlertDescWindow();
+                }
             }
         });
     }
@@ -481,5 +485,25 @@ public class EditDescription extends Activity {
         options.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeFile(path, options);
+    }
+
+    public void AlertDescWindow() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+
+        alertDialog.setMessage("Defination cannot be Blank");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+               dialog.dismiss();
+
+            }
+        });
+
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

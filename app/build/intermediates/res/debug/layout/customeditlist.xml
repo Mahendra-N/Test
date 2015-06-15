@@ -6,20 +6,24 @@
         android:id="@+id/icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="260dp"
         android:paddingBottom="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_edit_black" />
+       android:paddingRight="10dp"
+        android:src="@drawable/ic_edit_black"
+        android:layout_alignTop="@+id/Editname"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
     <TextView
         android:id="@+id/Editname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="Edit Text"
         android:textSize="18dp"
         android:textColor="#000000"
         android:layout_marginBottom="10dp"
         android:paddingLeft="10dp"
         android:layout_marginTop="10dp"
-        />
+        android:layout_toLeftOf="@+id/icon"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/customeditlist.xml -->

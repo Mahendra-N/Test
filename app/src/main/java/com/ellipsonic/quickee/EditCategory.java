@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
 import com.ellipsonic.database.NotesTable;
@@ -25,6 +26,8 @@ import java.util.Collections;
 
 public class EditCategory extends Activity {
     String selectedTopic;
+    public CategoryDb cat_Db=null;
+    public ArrayList<String> CatList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +124,13 @@ public class EditCategory extends Activity {
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                  String updateTextValue = String.valueOf(input.getText());
-                UpdateCategory(defaultTextValue, updateTextValue,selectedTopic);
-                //Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_SHORT).show();
+
+                if(updateTextValue.length()>0) {
+                    UpdateCategory(defaultTextValue, updateTextValue,selectedTopic);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Enter value to update", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -154,17 +162,30 @@ public class EditCategory extends Activity {
 
     }
     public void UpdateCategory(String defaultTextValue, String updateTextValue,String selectedTopic){
-        //   Toast.makeText(getApplicationContext(), updateTextValue, Toast.LENGTH_SHORT).show();
-        CategoryDb catDB =new CategoryDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.old_cat_name=defaultTextValue;
-        tableinfo.category_name =updateTextValue;
-        tableinfo.topic_name=selectedTopic;
 
-        catDB.update_category(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+
+
+        String CategoryName=updateTextValue;
+        cat_Db=new CategoryDb(getApplicationContext());
+        CatList =  cat_Db.RowsAffetedInCategory(selectedTopic, CategoryName);
+
+        if (CategoryName.length()> 0) {
+            if(CatList.size()<=0){
+                CategoryDb catDB =new CategoryDb(getApplicationContext());
+                NotesTable tableinfo = new NotesTable();
+                tableinfo.old_cat_name=defaultTextValue;
+                tableinfo.category_name =updateTextValue;
+                tableinfo.topic_name=selectedTopic;
+                catDB.update_category(tableinfo);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(), "Term " + CategoryName + " Exists, Enter Unique Term Name to Update",
+                        Toast.LENGTH_LONG).show();
+            }
+
+        }
 
     }
 

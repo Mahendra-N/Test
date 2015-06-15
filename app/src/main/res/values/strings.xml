@@ -19,7 +19,7 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item>Home</item>
+        <item>TOPICS</item>
         <item>Dropbox Sync.</item>
         <item>Google Drive Sync.</item>
     </string-array>
@@ -39,7 +39,7 @@
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="title_activity_add_description">AddDescription</string>
     <string name="backImgAttribute">backImage</string>
-    <string name="AddDescriptionPlaceholder">Add Description</string>
+    <string name="AddDescriptionPlaceholder">Defination</string>
     <string name="saveDescription">SAVE</string>
     <string name="addDesPlaceholder">Type in the description, accepts paragraph texts</string>
     <string name="share">Share</string>

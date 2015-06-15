@@ -35,6 +35,7 @@ public class TopicsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_topics, container, false);
         this.context = container.getContext();
+
         myFilter = (EditText) rootView.findViewById(R.id.search);
         TopicListView(this.context);
         folder=new ExternalFolders();
@@ -91,33 +92,6 @@ public class TopicsFragment extends Fragment {
             ListView myList = (ListView) rootView.findViewById(R.id.topic_listView);
             myList.setAdapter(adapter);
             myList.setTextFilterEnabled(true);
-            // Listen for ListView Item Click
-
-      /*      myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                        long id) {
-
-                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                    Intent intent = new Intent(getActivity(),Category.class);
-                            final int result = 1;
-                    intent.putExtra("selectedTopic",clickedItem);
-                    startActivityForResult(intent, result);
-                }
-            });
-
-         /*   myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                        long id) {
-                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                    Intent intent = new Intent(getActivity(),Category.class);
-                    final int result = 1;
-                    intent.putExtra("selectedTopic",clickedItem);
-                    startActivityForResult(intent, result);
-                }
-            });*/
-
 
             myFilter.addTextChangedListener(new TextWatcher() {
 

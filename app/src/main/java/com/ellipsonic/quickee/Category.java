@@ -33,6 +33,7 @@ public class Category extends Activity {
         setContentView(R.layout.activity_category);
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
+        setTitle(selectedTopic.toUpperCase());
         myFilter = (EditText) findViewById(R.id.search);
          myFilter.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -107,7 +108,7 @@ public class Category extends Activity {
                 //    catList.add(parts[0]); // topic
                  //   no_term.add(parts[1].concat(" term")); //noofcat
                     String catname =parts[0];
-                    String no_of_term =(parts[1].concat("  term"));
+                    String no_of_term =parts[1];
                     CategoryPopulating wp = new CategoryPopulating(catname, no_of_term);
                     catList.add(wp);
                 }
@@ -116,25 +117,8 @@ public class Category extends Activity {
            ListView List = (ListView) this.findViewById(R.id.cat_listView);
                 List.setAdapter(adapter);
                 List.setTextFilterEnabled(true);
-          /*     List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-               @Override
-               public void onItemClick(AdapterView<?> parent, View view, int position,
-                                       long id) {
-                   String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                 /*  String[] parts = clickedItem.split("\n");
-                   String part1 = parts[0]; // cat
-                   String part2 = parts[1]; //no of term
-                  Intent intent = new Intent(Category.this, Term.class);
-                   final int result = 1;
-                   intent.putExtra("selectedTopic",selectedTopic);
-                   intent.putExtra("selectedCategory",clickedItem);
-                   startActivityForResult(intent, result);
-               }
 
-           });*/
-
-
-                myFilter.addTextChangedListener(new TextWatcher() {
+                    myFilter.addTextChangedListener(new TextWatcher() {
 
                     public void afterTextChanged(Editable s) {
                     }

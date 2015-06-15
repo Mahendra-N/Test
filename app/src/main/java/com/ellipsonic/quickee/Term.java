@@ -35,6 +35,7 @@ public class Term extends Activity {
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
+        setTitle(selectedCategory.toUpperCase());
         myFilter = (EditText) findViewById(R.id.search);
         myFilter.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -113,23 +114,7 @@ public class Term extends Activity {
             ListView List = (ListView) this.findViewById(R.id.term_listView);
             List.setAdapter(adapter);
             List.setTextFilterEnabled(true);
-       /*     List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                        long id) {
-                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                 /*   String[] parts = clickedItem.split("\n");
-                    String part1 = parts[0]; // term
-                    String part2 = parts[1]; //description
-                    Intent intent = new Intent(Term.this, Description.class);
-                    final int result = 1;
-                    intent.putExtra("selectedTopic",selectedTopic);
-                    intent.putExtra("selectedCategory",selectedCategory);
-                    intent.putExtra("selectedTerm",clickedItem);
-                    startActivityForResult(intent, result);
-                }
 
-            });*/
             myFilter.addTextChangedListener(new TextWatcher() {
 
                 public void afterTextChanged(Editable s) {

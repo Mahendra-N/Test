@@ -1,23 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context="com.ellipsomic.qweekie.EditDescription"
-    android:weightSum="1">
+    android:layout_height="match_parent" >
 
+    <!-- Header aligned to top -->
     <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:background="#3671d0" >
+        android:background="#3671d0"
+        android:layout_alignParentTop="true"
+        android:layout_height="50dp"
+        android:gravity="center" >
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DONE"
+            android:text="Done"
             android:id="@+id/edit_details_save"
             android:textColor="#fff"
+            android:textSize="16dp"
             android:layout_marginRight="17dp"
             android:layout_marginEnd="17dp"
             android:layout_alignTop="@+id/name"
@@ -29,14 +32,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
+            android:textSize="16dp"
             android:text="Edit Description"
-            android:layout_marginLeft="84dp"
-            android:layout_marginStart="84dp"
+            android:layout_marginLeft="71dp"
+            android:layout_marginStart="71dp"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/edit_details_back_icon"
-            android:layout_toEndOf="@+id/edit_details_back_icon" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+            <!--android:layout_toRightOf="@+id/edit_details_back_icon"
+            android:layout_toEndOf="@+id/edit_details_back_icon" -->/>
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/edit_details_back_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,92 +50,108 @@
             android:src="@drawable/ic_back_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />-->
+
+    </RelativeLayout>
+
+    <!-- Footer aligned to bottom -->
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:gravity="center" >
+
+         <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_image"
+            android:text="Delete"
+            android:id="@+id/delete_img"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_video"
+            android:text="Delete"
+            android:id="@+id/delete_video"
+            android:layout_gravity="right"
+            android:layout_below="@+id/delete_img"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_audio"
+            android:text="Delete"
+            android:id="@+id/delete_audio"
+            android:layout_gravity="right"
+            android:layout_below="@+id/delete_video"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/Update_img"
+            android:drawableRight="@drawable/ic_image"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/update_audio"
+            android:drawableRight="@drawable/ic_audio"
+            android:layout_below="@+id/Update_video"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_video"
+            android:text="Update"
+            android:id="@+id/Update_video"
+            android:layout_below="@+id/Update_img"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
-
-    <EditText
-        android:layout_width="match_parent"
+    <!-- Scrollable Content below header and above footer -->
+    <ScrollView
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="25dp"
-        android:textSize="18sp"
-        android:background="@drawable/counter_bg"
-        android:id="@+id/editdetails"
-        android:padding="10dp" />
+        android:layout_above="@id/footer"
+        android:layout_below="@id/header" >
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-   >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_audio"
-        android:text="Delete"
-        android:id="@+id/delete_audio"
-        android:layout_gravity="right"
-        android:layout_marginBottom="99dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:textSize="18sp"
+                android:id="@+id/editdetails"
+                android:background="@android:color/transparent"
+                android:padding="10dp" />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_video"
-        android:text="Delete"
-        android:id="@+id/delete_video"
-        android:layout_gravity="right"
-        android:layout_alignBaseline="@+id/delete_audio"
-        android:layout_alignBottom="@+id/delete_audio"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+       </LinearLayout>
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_image"
-        android:text="Delete"
-        android:id="@+id/delete_img"
-        android:layout_gravity="right"
-        android:layout_below="@+id/delete_video"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:id="@+id/Update_img"
-        android:drawableRight="@drawable/ic_image"
-        android:layout_below="@+id/delete_video"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:id="@+id/update_audio"
-        android:drawableRight="@drawable/ic_audio"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_video"
-        android:text="Update"
-        android:id="@+id/Update_video"
-        android:layout_alignTop="@+id/delete_video"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
+    </ScrollView>
 
 
 
-</LinearLayout>
-<!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/activity_edit_description.xml -->
+</RelativeLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/activity_edit_description.xml -->

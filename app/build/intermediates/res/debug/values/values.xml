@@ -11,7 +11,7 @@
         <item>@drawable/ic_mail</item>
     </array>
     <string-array name="nav_drawer_items">
-        <item>Home</item>
+        <item>TOPICS</item>
         <item>Dropbox Sync.</item>
         <item>Google Drive Sync.</item>
     </string-array>
@@ -31,7 +31,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="AddDescriptionPlaceholder">Add Description</string>
+    <string name="AddDescriptionPlaceholder">Defination</string>
     <string name="Spiner">Choose Category</string>
     <string name="action_settings">Settings</string>
     <string name="addDesPlaceholder">Type in the description, accepts paragraph texts</string>
@@ -77,6 +77,6 @@
     </style>
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/actionbar_background</item>
-        <item name="android:icon">@android:color/transparent</item>
+        <!--<item name="android:icon">@android:color/transparent</item>-->
     </style>
 </resources>

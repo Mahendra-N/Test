@@ -99,7 +99,7 @@ public class CustomTermListView extends BaseAdapter {
         {
             for (TermPopulating wp : arraylist)
             {
-                if (wp.getTerm().toLowerCase(Locale.getDefault()).contains(charText))
+                if (wp.getTerm().toLowerCase(Locale.getDefault()).contains(charText)||wp.getDesc().toLowerCase(Locale.getDefault()).contains(charText))
                 {
                     worldpopulationlist.add(wp);
                 }

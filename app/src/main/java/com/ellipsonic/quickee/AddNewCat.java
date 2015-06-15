@@ -49,19 +49,7 @@ public class AddNewCat extends Activity {
                 cat_Db=new CategoryDb(getApplicationContext());
                 CatList =  cat_Db.RowsAffetedInCategory(selectedTopic, CategoryName);
 
-               /* if(Category_Name.getText().toString().length()>0){
-                    CategoryDb categoryDb = new CategoryDb(getApplicationContext());
-                    NotesTable tableinfo = new NotesTable();
-                    tableinfo.category_name = Category_Name.getText().toString();
-                    tableinfo.topic_name = selectedTopic;
-                    categoryDb.insert_category(tableinfo);
-                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Nothing  to Save",
-                            Toast.LENGTH_LONG).show();
-                }*/
-
-                if (CategoryName.length()> 0) {
+                             if (CategoryName.length()> 0) {
                     if(CatList.size()<=0){
                         CategoryDb categoryDb = new CategoryDb(getApplicationContext());
                         NotesTable tableinfo = new NotesTable();
@@ -70,7 +58,7 @@ public class AddNewCat extends Activity {
                         categoryDb.insert_category(tableinfo);
                         finish();
                     }else{
-                        Toast.makeText(getApplicationContext(), "Term " + CategoryName + " Exists,Please Enter Unique Term Name",
+                        Toast.makeText(getApplicationContext(), "Category " + CategoryName + " Exists,Please Enter Unique Category Name",
                                 Toast.LENGTH_LONG).show();
                     }
 

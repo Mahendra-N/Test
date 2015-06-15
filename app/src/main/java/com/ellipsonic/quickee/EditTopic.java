@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ellipsonic.database.NotesTable;
 import com.ellipsonic.database.TopicDb;
@@ -25,7 +26,8 @@ import java.util.Collections;
 
 
 public class EditTopic extends Activity {
-
+    ArrayList<String> topicList;
+    public  TopicDb topic_Db=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,8 +119,11 @@ public class EditTopic extends Activity {
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String updateTextValue = String.valueOf(input.getText());
-                UpdateTopic(defaultTextValue, updateTextValue);
-                //  Toast.makeText(getApplicationContext(), EditTextValue, Toast.LENGTH_SHORT).show();
+                if(updateTextValue.length()>0) {
+                    UpdateTopic(defaultTextValue, updateTextValue);
+                }else {
+                     Toast.makeText(getApplicationContext(), "Enter value to update", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -138,15 +143,27 @@ public class EditTopic extends Activity {
     }
 
     public void UpdateTopic(String defaultTextValue, String updateTextValue){
-     //   Toast.makeText(getApplicationContext(), updateTextValue, Toast.LENGTH_SHORT).show();
-        TopicDb topicDb =new TopicDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.old_topic_name=defaultTextValue;
-        tableinfo.topic_name =updateTextValue;
-        topicDb.update_topic(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+
+        String  TopicName = updateTextValue;
+        topic_Db = new TopicDb(getApplicationContext());
+        topicList = topic_Db.RowsAffetedInTopic(TopicName);
+        if (TopicName.length()> 0) {
+
+            if(topicList.size()<=0){
+                TopicDb topicDb =new TopicDb(getApplicationContext());
+                NotesTable tableinfo = new NotesTable();
+                tableinfo.old_topic_name=defaultTextValue;
+                tableinfo.topic_name =updateTextValue;
+                topicDb.update_topic(tableinfo);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(), "Topic " + TopicName + " Exists,Enter Unique Topic Name to Update",
+                        Toast.LENGTH_LONG).show();
+            }
+
+        }
 
     }
 

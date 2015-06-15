@@ -4,20 +4,21 @@
     android:orientation="vertical" >
     <ImageView
         android:id="@+id/folder"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:paddingBottom="5dp"
         android:src="@drawable/ic_folder"
-        android:layout_toLeftOf="@+id/cat"
-        android:layout_toStartOf="@+id/cat" />
+        android:layout_marginTop="9dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:src="@drawable/ic_right_arrow_gray"
+        android:layout_marginTop="5dp"
         android:layout_alignTop="@+id/topic"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -29,13 +30,13 @@
         android:textColor="#000000"
         android:paddingRight="0dp"
         android:hint="topic"
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:paddingLeft="5dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_alignTop="@+id/folder"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/folder"
+        android:layout_toLeftOf="@+id/cat"
+        android:layout_toStartOf="@+id/cat" />
     <TextView
         android:id="@+id/cat"
         android:layout_width="wrap_content"
@@ -45,13 +46,11 @@
         android:textColor="#545454"
         android:paddingRight="5dp"
         android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:layout_alignLeft="@+id/topic"
-        android:layout_alignStart="@+id/topic"
-        android:layout_marginLeft="160dp"
-        android:layout_marginStart="160dp"
-        android:layout_alignBottom="@+id/icon"
-        android:layout_alignTop="@+id/icon" />
+        android:layout_marginTop="10dp"
+        android:paddingLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/icon"
+        android:layout_toStartOf="@+id/icon" />
 
 
 </RelativeLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/custom_topic_adapter_view.xml -->
