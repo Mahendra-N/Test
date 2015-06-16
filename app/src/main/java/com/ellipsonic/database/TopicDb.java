@@ -30,7 +30,7 @@ public class TopicDb {
     }
 
     public ArrayList<String> getTopicList() {
-        try {       //Open connection to read only
+            //Open connection to read only
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             String selectQuery = "SELECT  " +
                     " DISTINCT  " + " ( " + NotesTable.KEY_TOPIC_NAME + " || " + " '\n' " + " || " +
@@ -52,8 +52,6 @@ public class TopicDb {
                 do {
 
                     String topicname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TOPIC_NAME));
-                    // HashMap<String, String> topicname = new HashMap<String, String>();
-                    //topicname.put("topic_name", cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TOPIC_NAME)));
                     topicList.add(topicname);
 
                 } while (cursor.moveToNext());
@@ -65,10 +63,7 @@ public class TopicDb {
             return topicList;
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
 
 
 }
