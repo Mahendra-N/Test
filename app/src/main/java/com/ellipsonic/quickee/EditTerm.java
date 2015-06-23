@@ -14,9 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ellipsonic.database.CategoryDb;
 import com.ellipsonic.database.NotesTable;
 import com.ellipsonic.database.TermDb;
 
@@ -27,8 +29,11 @@ import java.util.Collections;
 public class EditTerm extends Activity {
     String selectedTopic;
     String selectedCategory;
+    Spinner spinner;
     public TermDb term_Db=null;
     public ArrayList<String> TermList=null;
+    public CategoryDb cat_Db=null;
+    public ArrayList<String> CatList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,7 @@ public class EditTerm extends Activity {
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
         EditTermListView(selectedTopic, selectedCategory);
+       // CategoryDropDown();
         ImageView back_button =(ImageView) findViewById(R.id.edit_term_back_icon);
         TextView editclose=(TextView)findViewById(R.id.edit_term_save);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +157,7 @@ public class EditTerm extends Activity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
-
+      //  EditTermListView(selectedTopic, selectedCategory);
     }
 
     public void UpdateTerm(String defaultTextValue, String updateTextValue,String selectedTopic,String selectedCategory){
@@ -170,9 +176,10 @@ public class EditTerm extends Activity {
                 tableinfo.topic_name=selectedTopic;
                 tableinfo.category_name=selectedCategory;
                 term_Db.update_term(tableinfo);
-                Intent intent = getIntent();
+               Intent intent = getIntent();
                 finish();
                 startActivity(intent);
+             //   EditTermListView(selectedTopic, selectedCategory);
             }else{
                 Toast.makeText(getApplicationContext(), "Term " + selectedTerm + " Exists,Enter Unique Term to Update",
                         Toast.LENGTH_LONG).show();
@@ -180,5 +187,31 @@ public class EditTerm extends Activity {
 
         }
     }
+ /*   public void CategoryDropDown() {
+        cat_Db=new CategoryDb(getApplicationContext());
+        CatList =  cat_Db.getEditCatList(selectedTopic);
+        CatList.removeAll(Collections.singleton(null));
+        spinner = (Spinner) findViewById(R.id.sel_cat_name);
+            if (CatList != null) {
+
+            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
+            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(myAdapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    String sel_cat = (String) parentView.getItemAtPosition(position);
+                    selectedCategory=sel_cat;
+                    EditTermListView(selectedTopic, selectedCategory);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+        }
+    }*/
 
 }

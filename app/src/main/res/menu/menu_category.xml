@@ -13,4 +13,10 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="Edit Category"/>
+
+    <item
+        android:id="@+id/Move_category"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Move Category"/>
 </menu>

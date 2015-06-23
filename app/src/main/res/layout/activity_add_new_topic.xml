@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context="com.ellipsomic.qweekie.AddNewTopic"
     >
@@ -48,8 +48,8 @@
     </RelativeLayout>
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="422dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/Topic_Name"
         android:hint="Enter Topic Name"
         android:singleLine="true"
@@ -57,7 +57,7 @@
         android:gravity="top"
         android:selectAllOnFocus="false"
         android:focusable="true"
-        android:background="#FFFFFF"
+        android:background="@android:color/transparent"
         android:layout_weight="0.73"/>
 
 

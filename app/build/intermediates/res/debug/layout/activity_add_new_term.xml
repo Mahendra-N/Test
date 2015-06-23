@@ -56,9 +56,12 @@
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
-        android:gravity="center" >
+        android:gravity="center"
+        android:layout_marginBottom="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,8 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_above="@+id/footer">
+            android:orientation="vertical">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

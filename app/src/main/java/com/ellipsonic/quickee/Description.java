@@ -39,6 +39,7 @@ public class Description extends Activity {
     String imgpath;
     String videopath;
     String audiopath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,10 +127,7 @@ public class Description extends Activity {
      //   header.setText(details[1].toUpperCase());
         if((details[2])!=null) {
          imgpath=details[2];
-
-
-
-           img.setImageURI(Uri.parse(details[2]));
+          img.setImageURI(Uri.parse(details[2]));
            img.setVisibility(View.VISIBLE);
         }else{
             img.setVisibility(View.GONE);

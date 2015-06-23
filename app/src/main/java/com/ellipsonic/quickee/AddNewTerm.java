@@ -41,6 +41,7 @@ public class AddNewTerm extends Activity {
     private int REQUEST_IMAGE_CAPTURE = 2;
     private int PICK_VIDEO_REQUEST = 3;
     private int PICK_AUDIO_REQUEST = 4;
+    private int REQUEST_Video_CAPTURE = 6;
     public ImageView backButton_term;
     public TextView term_save;
     public EditText term_name;
@@ -98,8 +99,7 @@ public class AddNewTerm extends Activity {
                 term_name = (EditText) findViewById(R.id.input_term_name);
                 selectedTerm = term_name.getText().toString();
 
-
-                if (selectedTerm.length()> 0 && button.getText().length()>0) {
+                           if (selectedTerm.length()> 0 && button.getText().length()>0) {
 
                  TermList =  term_Db.RowsAffetedInTerm(selectedTopic,selectedCategory,selectedTerm);
                     if(TermList.size()<=0){
@@ -146,6 +146,7 @@ public class AddNewTerm extends Activity {
 
                 Intent intent = new Intent(v.getContext(), AddDescription.class);
                 final int result = 5;
+                intent.putExtra("Description",desc);
                 startActivityForResult(intent, result);
                 button.setText("");
               }
@@ -163,7 +164,8 @@ public class AddNewTerm extends Activity {
 
             @Override
             public void onClick(View v) {
-                CallVideoActivity();
+                //CallVideoActivity();
+                AlertVideoWindow();
             }
         });
 
@@ -267,12 +269,41 @@ public class AddNewTerm extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
+    public void AlertVideoWindow() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+
+        alertDialog.setMessage("You want select picture from gallery or take a pic?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent photoPickerIntent= new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                startActivityForResult(Intent.createChooser(photoPickerIntent,"Take Video"),REQUEST_Video_CAPTURE);
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setType("video/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);
+
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
     public void CallVideoActivity(){
 
-        Intent intent = new Intent();
+    /*    Intent intent = new Intent();
         intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);*/
 
     }
     public void CallAudioActivity(){
@@ -384,6 +415,39 @@ public class AddNewTerm extends Activity {
                 }
 
             }
+        }
+        if (requestCode == REQUEST_Video_CAPTURE) {
+
+            try
+            {
+                AssetFileDescriptor videoAsset = getContentResolver().openAssetFileDescriptor(data.getData(), "r");
+                FileInputStream fis = videoAsset.createInputStream();
+
+                String root = Environment.getExternalStorageDirectory().toString();
+                File myDir = new File(root + "/Quickee/Video/");
+                Random generator = new Random();
+                int n = 10000;
+                n = generator.nextInt(n);
+                String fname = "Video"+ n +".mp4";
+                video_path_to_db =root + "/Quickee/Video/"+fname;
+                File   file=new File(myDir,fname );
+
+                FileOutputStream fos = new FileOutputStream(file);
+
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = fis.read(buf)) > 0) {
+                    fos.write(buf, 0, len);
+                }
+                fis.close();
+                fos.close();
+                ConfirmWindow("Video");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
     private void SaveImage(Bitmap finalBitmap) {

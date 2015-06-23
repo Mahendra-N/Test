@@ -28,6 +28,7 @@ import java.util.Collections;
 public class EditTopic extends Activity {
     ArrayList<String> topicList;
     public  TopicDb topic_Db=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

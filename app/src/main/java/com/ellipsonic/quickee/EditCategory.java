@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,19 +26,21 @@ import java.util.Collections;
 
 
 public class EditCategory extends Activity {
-    String selectedTopic;
+    String SelectedTopic;
+    Spinner spinner;
     public CategoryDb cat_Db=null;
     public ArrayList<String> CatList=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_category);
         getActionBar().hide();
-
         Intent activityThatCalled = getIntent();
-        selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
-
-        EDitCatListView(selectedTopic);
+        SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
+        EDitCatListView( SelectedTopic);
+       // TopicsDropDown();
         ImageView back_button =(ImageView) findViewById(R.id.edit_cat_back_icon);
         TextView editclose=(TextView)findViewById(R.id.edit_cat_save);
 
@@ -57,7 +60,6 @@ public class EditCategory extends Activity {
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,6 +84,7 @@ public class EditCategory extends Activity {
     }
 
     public void EDitCatListView( String selectedTopic){
+
         CategoryDb cat_Db=new CategoryDb(getApplicationContext());
         ArrayList<String> CatList =  cat_Db.getEditCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
@@ -126,7 +129,7 @@ public class EditCategory extends Activity {
                  String updateTextValue = String.valueOf(input.getText());
 
                 if(updateTextValue.length()>0) {
-                    UpdateCategory(defaultTextValue, updateTextValue,selectedTopic);
+                    UpdateCategory(defaultTextValue, updateTextValue,SelectedTopic);
                 }else {
                     Toast.makeText(getApplicationContext(), "Enter value to update", Toast.LENGTH_SHORT).show();
                 }
@@ -139,7 +142,8 @@ public class EditCategory extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
                 String deleteTextValue = String.valueOf(input.getText());
-                Delete_Category(deleteTextValue, selectedTopic);
+                Delete_Category(deleteTextValue, SelectedTopic);
+                EDitCatListView( SelectedTopic);
                // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
                 //dialog.cancel();
             }
@@ -159,12 +163,9 @@ public class EditCategory extends Activity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
-
+        //    EDitCatListView( selectedTopic);
     }
     public void UpdateCategory(String defaultTextValue, String updateTextValue,String selectedTopic){
-
-
-
         String CategoryName=updateTextValue;
         cat_Db=new CategoryDb(getApplicationContext());
         CatList =  cat_Db.RowsAffetedInCategory(selectedTopic, CategoryName);
@@ -180,6 +181,7 @@ public class EditCategory extends Activity {
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
+            //    EDitCatListView( selectedTopic);
             }else{
                 Toast.makeText(getApplicationContext(), "Term " + CategoryName + " Exists, Enter Unique Term Name to Update",
                         Toast.LENGTH_LONG).show();
@@ -188,5 +190,35 @@ public class EditCategory extends Activity {
         }
 
     }
+  /*  public void TopicsDropDown() {
+        TopicDb topic_Db = new TopicDb(getApplicationContext());
+        ArrayList<String> topicList = topic_Db.getEditTopicList();
+        spinner = (Spinner) findViewById(R.id.sel_cat_name);
+        topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
+        if (topicList != null) {
+
+            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   topicList);
+            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(myAdapter);
+
+            spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    String sel_topic = (String) parentView.getItemAtPosition(position);
+                    SelectedTopic=sel_cat;
+                    EDitCatListView(sel_cat);
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+        }
+    }*/
+
+
 
 }

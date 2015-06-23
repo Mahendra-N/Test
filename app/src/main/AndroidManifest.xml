@@ -93,6 +93,14 @@
             android:name="com.ellipsonic.com.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity
+            android:name=".MoveCategory"
+            android:label="@string/title_activity_move__category" >
+        </activity>
+        <activity
+            android:name=".MoveTerm"
+            android:label="@string/title_activity_move_term" >
+        </activity>
     </application>
 
 </manifest>

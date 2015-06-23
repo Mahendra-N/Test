@@ -55,6 +55,8 @@
     <string name="title_activity_edit_term">EditTerm</string>
     <string name="title_activity_edit_topic">EditTopic</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_move__category">Move_Category</string>
+    <string name="title_activity_move_term">MoveTerm</string>
     <string name="title_activity_term">Term</string>
     <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/styles.xml -->
     <eat-comment/>

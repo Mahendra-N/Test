@@ -136,4 +136,13 @@ public class CategoryDb {
         db.close(); // Closing database connection*/
 
     }
+    public void move_category( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put(NotesTable.KEY_TOPIC_NAME,tableinfo.old_topic_name);
+        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TOPIC_NAME + "= '"+tableinfo.topic_name+"'"
+                +" AND "+NotesTable.KEY_CATEGORY_NAME+ "='"+tableinfo.category_name+"'", null);
+        db.close(); // Closing database connection*/
+
+    }
 }

@@ -22,6 +22,7 @@ import java.util.Locale;
 
 public class Category extends Activity {
     String selectedTopic;
+
     public CategoryDb cat_Db=null;
     public ArrayList<String> CatList=null;
     EditText myFilter;
@@ -31,6 +32,7 @@ public class Category extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         setTitle(selectedTopic.toUpperCase());
@@ -45,6 +47,7 @@ public class Category extends Activity {
         });
       //  Toast.makeText(this, selectedTopic, Toast.LENGTH_LONG).show();
        CatListView(selectedTopic);
+
    }
 
     @Override
@@ -59,7 +62,6 @@ public class Category extends Activity {
         switch(item.getItemId()) {
                case R.id.add_category:
                Intent intent = new Intent(this, AddNewCat.class);
-            //   this.startActivity(intent);
                final int result = 1;
                intent.putExtra("selectedTopic",selectedTopic);
                startActivityForResult(intent, result);
@@ -70,6 +72,11 @@ public class Category extends Activity {
                 final int resulteditcat = 1;
                 edit_intent.putExtra("selectedTopic",selectedTopic);
                 startActivityForResult(edit_intent, resulteditcat);
+                break;
+            case R.id.Move_category:
+                Intent move_intent = new Intent(this, MoveCategory.class);
+                move_intent.putExtra("selectedTopic",selectedTopic);
+                startActivity(move_intent);
                 break;
             case android.R.id.home:
                 finish();
@@ -98,8 +105,8 @@ public class Category extends Activity {
 
    public void CatListView( final String selectedTopic){
       cat_Db=new CategoryDb(getApplicationContext());
-      CatList =  cat_Db.getCatList(selectedTopic);
-        CatList.removeAll(Collections.singleton(null));
+       CatList =  cat_Db.getCatList(selectedTopic);
+       CatList.removeAll(Collections.singleton(null));
        ArrayList<CategoryPopulating> catList = new ArrayList<CategoryPopulating>();
        ArrayList<String> no_term = new ArrayList<String>();
             if(CatList!=null) {

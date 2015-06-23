@@ -137,6 +137,15 @@ public class TermDb {
                 + " AND " + NotesTable.KEY_CATEGORY_NAME + "='" + tableinfo.category_name + "'", null);
         db.close(); // Closing database connection*/
     }
+    public void move_term( NotesTable tableinfo) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put(NotesTable.KEY_CATEGORY_NAME,tableinfo.old_cat_name);
+        db.update(NotesTable.TABLE_NOTES, val, NotesTable.KEY_TOPIC_NAME + "= '"+tableinfo.topic_name+"'"
+                +" AND "+NotesTable.KEY_CATEGORY_NAME+ "='"+tableinfo.category_name+"'"
+                +" AND "+NotesTable.KEY_TERM_NAME+ "='"+tableinfo.term_name+"'", null);
+        db.close(); // Closing database connection*/
 
+    }
 
 }

@@ -37,6 +37,7 @@ public class EditDescription extends Activity {
     private int REQUEST_IMAGE_CAPTURE = 2;
     private int PICK_VIDEO_REQUEST = 3;
     private int PICK_AUDIO_REQUEST = 4;
+    private int REQUEST_Video_CAPTURE = 5;
     String img_path_to_db;
     String video_path_to_db;
     String audio_path_to_db;
@@ -141,7 +142,8 @@ public class EditDescription extends Activity {
         Update_video=(Button)findViewById(R.id.Update_video);
         Update_video.setOnClickListener(new View.OnClickListener(){
             public void onClick(View View){
-                CallVideoActivity();
+               // CallVideoActivity();
+                AlertVideoWindow();
             }
         });
 
@@ -234,12 +236,42 @@ public class EditDescription extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
+
+    public void AlertVideoWindow() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+
+        alertDialog.setMessage("You want select picture from gallery or take a pic?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent photoPickerIntent= new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                startActivityForResult(Intent.createChooser(photoPickerIntent,"Take Video"),REQUEST_Video_CAPTURE);
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setType("video/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);
+
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
     public void CallVideoActivity(){
 
-        Intent intent = new Intent();
+    /*    Intent intent = new Intent();
         intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);*/
 
     }
     public void CallAudioActivity(){
@@ -276,6 +308,40 @@ public class EditDescription extends Activity {
         }
 
         if (requestCode == PICK_VIDEO_REQUEST) {
+
+            try
+            {
+                AssetFileDescriptor videoAsset = getContentResolver().openAssetFileDescriptor(data.getData(), "r");
+                FileInputStream fis = videoAsset.createInputStream();
+
+                String root = Environment.getExternalStorageDirectory().toString();
+                File myDir = new File(root + "/Quickee/Video/");
+                Random generator = new Random();
+                int n = 10000;
+                n = generator.nextInt(n);
+                String fname = "Video"+ n +".mp4";
+                video_path_to_db =root + "/Quickee/Video/"+fname;
+                File   file=new File(myDir,fname );
+
+                FileOutputStream fos = new FileOutputStream(file);
+
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = fis.read(buf)) > 0) {
+                    fos.write(buf, 0, len);
+                }
+                fis.close();
+                fos.close();
+                UpdateVideo();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+
+        if (requestCode == REQUEST_Video_CAPTURE) {
 
             try
             {

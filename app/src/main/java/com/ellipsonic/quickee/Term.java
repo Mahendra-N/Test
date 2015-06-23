@@ -83,6 +83,12 @@ public class Term extends Activity {
                 edit_intent.putExtra("selectedCategory",selectedCategory);
                 startActivityForResult(edit_intent, resultone);
                 break;
+            case R.id.move_term:
+                Intent move_intent = new Intent(this, MoveTerm.class);
+                move_intent.putExtra("selectedTopic",selectedTopic);
+                move_intent.putExtra("selectedCategory",selectedCategory);
+                startActivity(move_intent);
+                break;
             case android.R.id.home:
                 finish();
                 break;

@@ -46,6 +46,14 @@
 
     </RelativeLayout>
 
+    <!--<Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sel_cat_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:prompt="@string/Spiner"/>-->
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

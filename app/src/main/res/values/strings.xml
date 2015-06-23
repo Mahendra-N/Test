@@ -46,5 +46,7 @@
     <string name="addDescriptionButtonText">Add Description</string>
     <string name="title_activity_edit_description">EditDescription</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_move__category">Move_Category</string>
+    <string name="title_activity_move_term">MoveTerm</string>
 
 </resources>

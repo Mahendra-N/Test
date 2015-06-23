@@ -2,6 +2,7 @@ package com.ellipsonic.quickee;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.ellipsonic.database.ExternalFolders;
+import com.ellipsonic.database.FirstTimeDataInsertion;
 import com.ellipsonic.database.TopicDb;
 
 import java.util.ArrayList;
@@ -39,7 +41,8 @@ public class TopicsFragment extends Fragment {
         myFilter = (EditText) rootView.findViewById(R.id.search);
         TopicListView(this.context);
         folder=new ExternalFolders();
-        folder.Createfolder(this.context);
+
+        FirstTimeInstalliation();
         myFilter.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -115,5 +118,22 @@ public class TopicsFragment extends Fragment {
             Log.d("message", "nothing is there in database");
                 }
     }
+public void FirstTimeInstalliation(){
+    final String PREFS_NAME = "MyPrefsFile";
 
+    SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+
+    if (settings.getBoolean("my_first_time", true)) {
+        //the app is being launched for first time, do something
+        Log.d("Comments", "First time");
+        folder.Createfolder(this.context);
+        // first time task
+        FirstTimeDataInsertion FirstTimeData = new FirstTimeDataInsertion();
+        FirstTimeData.InstallationTopic(this.context);
+        FirstTimeData.InstallationCategory(this.context);
+        FirstTimeData.InstallationTermDefination(this.context);
+        // record the fact that the app has been started at least once
+        settings.edit().putBoolean("my_first_time", false).commit();
+    }
+}
 }
