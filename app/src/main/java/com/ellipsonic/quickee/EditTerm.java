@@ -113,6 +113,7 @@ public class EditTerm extends Activity {
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
         final EditText input = new EditText(this);
+        input.setSingleLine();
         final String defaultTextValue  =clickedItem;
         input.setText(clickedItem);
         alertDialog.setView(input);
@@ -179,7 +180,7 @@ public class EditTerm extends Activity {
                Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-             //   EditTermListView(selectedTopic, selectedCategory);
+
             }else{
                 Toast.makeText(getApplicationContext(), "Term " + selectedTerm + " Exists,Enter Unique Term to Update",
                         Toast.LENGTH_LONG).show();
@@ -187,31 +188,5 @@ public class EditTerm extends Activity {
 
         }
     }
- /*   public void CategoryDropDown() {
-        cat_Db=new CategoryDb(getApplicationContext());
-        CatList =  cat_Db.getEditCatList(selectedTopic);
-        CatList.removeAll(Collections.singleton(null));
-        spinner = (Spinner) findViewById(R.id.sel_cat_name);
-            if (CatList != null) {
-
-            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
-            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(myAdapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    String sel_cat = (String) parentView.getItemAtPosition(position);
-                    selectedCategory=sel_cat;
-                    EditTermListView(selectedTopic, selectedCategory);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-        }
-    }*/
 
 }

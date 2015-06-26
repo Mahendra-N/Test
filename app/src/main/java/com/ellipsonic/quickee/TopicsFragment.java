@@ -29,7 +29,7 @@ public class TopicsFragment extends Fragment {
     public TopicDb topic_Db = null;
     public ArrayList<String> topicList = null;
    // ArrayAdapter<String> myAdapter;
-   CustomTopicListView adapter;
+     CustomTopicListView adapter;
     public Context context = null;
     EditText myFilter;
     ExternalFolders folder=null;
@@ -39,10 +39,10 @@ public class TopicsFragment extends Fragment {
         this.context = container.getContext();
 
         myFilter = (EditText) rootView.findViewById(R.id.search);
-        TopicListView(this.context);
         folder=new ExternalFolders();
-
         FirstTimeInstalliation();
+        TopicListView(this.context);
+
         myFilter.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

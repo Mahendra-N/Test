@@ -35,7 +35,7 @@ public class CategoryDb {
         String selectQuery =  "SELECT  " +
                 " DISTINCT  "+ " ( " +NotesTable.KEY_CATEGORY_NAME  + " || " +" '\n' "+" || "+
                 " COUNT " + "( " + " DISTINCT " + " ( " +NotesTable.KEY_TERM_NAME+")"+ " )" + " )"+ " AS "+
-                NotesTable.KEY_CATEGORY_NAME+
+                NotesTable.KEY_TERM_NAME+
                 " FROM  " + NotesTable.TABLE_NOTES +
                 "  WHERE  "+ NotesTable.KEY_TOPIC_NAME +"='"+selectedTopic+"'"+
                 " AND  " +NotesTable.KEY_CATEGORY_NAME + "  IS NOT NULL "+
@@ -47,7 +47,7 @@ public class CategoryDb {
         if (cursor.moveToFirst()) {
             do {
 
-                String catname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_CATEGORY_NAME));
+                String catname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TERM_NAME));
                 CatList.add(catname);
 
             } while (cursor.moveToNext());

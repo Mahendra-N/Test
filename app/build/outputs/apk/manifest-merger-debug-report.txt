@@ -39,6 +39,10 @@ uses-permission#android.permission.READ_PHONE_STATE
 ADDED from AndroidManifest.xml:14:5
 	android:name
 		ADDED from AndroidManifest.xml:14:22
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from AndroidManifest.xml:15:5
+	android:name
+		ADDED from AndroidManifest.xml:15:22
 application
 ADDED from AndroidManifest.xml:16:5
 	android:label
@@ -161,3 +165,9 @@ ADDED from AndroidManifest.xml:100:9
 		ADDED from AndroidManifest.xml:102:13
 	android:name
 		ADDED from AndroidManifest.xml:101:13
+activity#com.ellipsonic.quickee.AudioRecorder
+ADDED from AndroidManifest.xml:104:9
+	android:label
+		ADDED from AndroidManifest.xml:106:13
+	android:name
+		ADDED from AndroidManifest.xml:105:13

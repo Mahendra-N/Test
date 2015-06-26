@@ -20,7 +20,7 @@
             android:text="Done"
             android:id="@+id/edit_details_save"
             android:textColor="#fff"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:layout_marginRight="17dp"
             android:layout_marginEnd="17dp"
             android:layout_alignTop="@+id/name"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:text="Edit Description"
             android:layout_marginLeft="71dp"
             android:layout_marginStart="71dp"
@@ -64,30 +64,36 @@
         android:gravity="center" >
 
          <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_image"
             android:text="Delete"
+            android:background="#e8e7e3"
+            android:layout_marginBottom="2dp"
             android:id="@+id/delete_img"
             android:layout_gravity="right"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_video"
             android:text="Delete"
+            android:background="#e8e7e3"
             android:id="@+id/delete_video"
             android:layout_gravity="right"
+            android:layout_marginBottom="2dp"
             android:layout_below="@+id/delete_img"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_audio"
             android:text="Delete"
+            android:layout_marginBottom="2dp"
+            android:background="#e8e7e3"
             android:id="@+id/delete_audio"
             android:layout_gravity="right"
             android:layout_below="@+id/delete_video"
@@ -95,29 +101,35 @@
             android:layout_alignParentEnd="true" />
 
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="Update"
+            android:layout_marginBottom="2dp"
+            android:background="#e8e7e3"
             android:id="@+id/Update_img"
             android:drawableRight="@drawable/ic_image"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:text="Update"
             android:id="@+id/update_audio"
+            android:layout_marginBottom="2dp"
+            android:background="#e8e7e3"
             android:drawableRight="@drawable/ic_audio"
             android:layout_below="@+id/Update_video"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <Button
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_video"
             android:text="Update"
+            android:layout_marginBottom="2dp"
             android:id="@+id/Update_video"
+            android:background="#e8e7e3"
             android:layout_below="@+id/Update_img"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

@@ -42,7 +42,7 @@ public class AddNewTopic extends Activity {
             public void onClick(View v) {
                   Topic_Name =(EditText)findViewById(R.id.Topic_Name);
                 topic_Db = new TopicDb(getApplicationContext());
-            String  TopicName = Topic_Name.getText().toString();
+            String  TopicName = Topic_Name.getText().toString().trim();
                 topicList = topic_Db.RowsAffetedInTopic(TopicName);
                              if (TopicName.length()> 0) {
 
@@ -71,12 +71,6 @@ public class AddNewTopic extends Activity {
     public void onBackPressed(){
         super.onBackPressed();
         finish();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-              finish();
     }
 
     @Override

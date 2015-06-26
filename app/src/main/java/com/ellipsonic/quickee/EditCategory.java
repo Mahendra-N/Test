@@ -117,6 +117,7 @@ public class EditCategory extends Activity {
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
         final EditText input = new EditText(this);
+        input.setSingleLine();
         final String defaultTextValue  =clickedItem;
         input.setText(clickedItem);
         alertDialog.setView(input);
@@ -181,43 +182,15 @@ public class EditCategory extends Activity {
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-            //    EDitCatListView( selectedTopic);
+
             }else{
-                Toast.makeText(getApplicationContext(), "Term " + CategoryName + " Exists, Enter Unique Term Name to Update",
+                Toast.makeText(getApplicationContext(), "Category " + CategoryName + " Exists, Enter Unique Category Name to Update",
                         Toast.LENGTH_LONG).show();
             }
 
         }
 
     }
-  /*  public void TopicsDropDown() {
-        TopicDb topic_Db = new TopicDb(getApplicationContext());
-        ArrayList<String> topicList = topic_Db.getEditTopicList();
-        spinner = (Spinner) findViewById(R.id.sel_cat_name);
-        topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-        if (topicList != null) {
-
-            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   topicList);
-            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(myAdapter);
-
-            spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    String sel_topic = (String) parentView.getItemAtPosition(position);
-                    SelectedTopic=sel_cat;
-                    EDitCatListView(sel_cat);
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-        }
-    }*/
 
 
 

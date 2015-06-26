@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launch"
@@ -100,6 +100,10 @@
         <activity
             android:name=".MoveTerm"
             android:label="@string/title_activity_move_term" >
+        </activity>
+        <activity
+            android:name=".AudioRecorder"
+            android:label="@string/title_activity_audio_recorder" >
         </activity>
     </application>
 

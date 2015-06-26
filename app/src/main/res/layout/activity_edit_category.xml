@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40sp"
+        android:layout_height="50sp"
         android:background="#3671d0" >
 
 
@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:text="DONE"
             android:id="@+id/edit_cat_save"
+            android:textSize="18dp"
             android:textColor="#fff"
             android:layout_alignTop="@+id/cat_name"
             android:layout_alignParentRight="true"
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:text="Edit Category"
+             android:textSize="18dp"
              android:layout_centerVertical="true"
              android:layout_centerHorizontal="true" />
 

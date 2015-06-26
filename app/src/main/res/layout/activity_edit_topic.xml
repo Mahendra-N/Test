@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40sp"
+        android:layout_height="50sp"
         android:background="#3671d0" >
 
 
@@ -19,6 +19,7 @@
             android:text="DONE"
             android:id="@+id/edit_topic_save"
             android:textColor="#fff"
+            android:textSize="18dp"
             android:layout_alignTop="@+id/cat_name"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -30,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
+            android:textSize="18dp"
             android:text="Edit Topic"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />

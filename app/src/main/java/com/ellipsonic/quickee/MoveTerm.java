@@ -32,6 +32,7 @@ import java.util.Collections;
         String old_category;
         ListView List;
         ArrayAdapter<String> Adapter;
+        public ArrayList<String> TermList=null;
         Spinner fromterm;
         Boolean flag=false;
         @Override
@@ -46,10 +47,7 @@ import java.util.Collections;
             ImageView back=(ImageView) findViewById(R.id.back_icon);
             cancel=(Button)findViewById(R.id.cancel);
             save=(Button)findViewById(R.id.savechanges);
-         /*   EditText from=(EditText)findViewById(R.id.from_topic);
-            from.setText(old_category);
-            from.setTextColor(Color.parseColor("#000000"));
-            from.setEnabled(false);*/
+
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -145,18 +143,7 @@ import java.util.Collections;
                 List.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                 List.setAdapter(Adapter);
                 save.setOnClickListener(this);
-         /*       List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position,
-                                            long id) {
-                        String clickedItem = String.valueOf(parent.getItemAtPosition(position));
-                        AlertWindow(clickedItem);
 
-                    }
-                });
-            } else {
-                Log.d("message", "nothing is there in database");
-            }*/
         }
         }
         public void onClick(View v) {
@@ -187,8 +174,14 @@ import java.util.Collections;
                                 Toast.LENGTH_SHORT).show();
                         flag=false;
                     }else {
-                        termDb.move_term(tableinfo);
-                           flag=true;
+                        TermList =  termDb.RowsAffetedInTerm(SelectedTopic,SelectedCategory,term);
+                        if(TermList.size()<=0) {
+                            termDb.move_term(tableinfo);
+                            flag = true;
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Selected Term already Exists In Selected Category, CANNOT MOVE",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }else{

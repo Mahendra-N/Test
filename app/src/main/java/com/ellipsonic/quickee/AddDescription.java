@@ -39,9 +39,9 @@ public class AddDescription extends Activity {
 
         des_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               desc =description.getText().toString();
+               desc =description.getText().toString().trim();
                 temp_desc =desc;
-                if (description.getText().length() > 0) {
+                if (desc.length() > 0) {
 
                     Intent intent = new Intent();
                     intent.putExtra("Description",desc);

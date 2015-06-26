@@ -109,6 +109,7 @@ public class EditTopic extends Activity {
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
         final EditText input = new EditText(this);
+        input.setSingleLine();
         input.setText(clickedItem);
        final String defaultTextValue  =clickedItem;
 

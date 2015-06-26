@@ -45,7 +45,7 @@ public class AddNewCat extends Activity {
         cat_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Category_Name =(EditText)findViewById(R.id.Cat_Name);
-                String CategoryName=Category_Name.getText().toString();
+                String CategoryName=Category_Name.getText().toString().trim();
                 cat_Db=new CategoryDb(getApplicationContext());
                 CatList =  cat_Db.RowsAffetedInCategory(selectedTopic, CategoryName);
 
@@ -76,11 +76,7 @@ public class AddNewCat extends Activity {
         super.onBackPressed();
               finish();
     }
-    @Override
-    public void onPause() {
-        super.onPause();
-             finish();
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

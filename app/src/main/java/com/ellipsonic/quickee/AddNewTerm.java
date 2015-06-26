@@ -47,10 +47,7 @@ public class AddNewTerm extends Activity {
     public EditText term_name;
     public EditText sel_topic;
     public EditText button;
-    public EditText sel_cat;
-    public EditText description;
-    EditText desc_text;
-    public TextView add_desc;
+     public EditText description;
     public  String selectedTopic;
     public  String selectedCategory;
     public  String selectedTerm;
@@ -60,7 +57,7 @@ public class AddNewTerm extends Activity {
     public CategoryDb cat_Db=null;
     ArrayAdapter<String> Adapter;
     ArrayList<String> CatList=null;
-     public    boolean term_flag =true;
+
     ImageView image;
     ImageView video;
     ImageView audio;
@@ -71,7 +68,7 @@ public class AddNewTerm extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_term);
+        setContentView(R.layout.add_term);
         getActionBar().hide();
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
@@ -97,7 +94,7 @@ public class AddNewTerm extends Activity {
                 term_Db=new TermDb(getApplicationContext());
                 selectedCategory= String.valueOf(spinner.getSelectedItem());
                 term_name = (EditText) findViewById(R.id.input_term_name);
-                selectedTerm = term_name.getText().toString();
+                selectedTerm = term_name.getText().toString().trim();
 
                            if (selectedTerm.length()> 0 && button.getText().length()>0) {
 
@@ -172,7 +169,8 @@ public class AddNewTerm extends Activity {
         audio=(ImageView)findViewById(R.id.audio);
         audio.setOnClickListener(new View.OnClickListener(){
             public  void onClick(View v){
-                CallAudioActivity();
+               // CallAudioActivity();
+                AlertAudioWindow();
             }
         });
     }
@@ -274,7 +272,7 @@ public class AddNewTerm extends Activity {
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
 
-        alertDialog.setMessage("You want select picture from gallery or take a pic?");
+        alertDialog.setMessage("You want select video from gallery or record?");
 
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
@@ -298,6 +296,37 @@ public class AddNewTerm extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
+    public void AlertAudioWindow() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+
+        alertDialog.setMessage("You want to select audio from gallery or record?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), AudioRecorder.class);
+                final int result = 7;
+                startActivityForResult(intent, result);
+
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setType("audio/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);
+
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
     public void CallVideoActivity(){
 
     /*    Intent intent = new Intent();
@@ -307,10 +336,10 @@ public class AddNewTerm extends Activity {
 
     }
     public void CallAudioActivity(){
-        Intent intent = new Intent();
+       /* Intent intent = new Intent();
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);*/
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -364,6 +393,7 @@ public class AddNewTerm extends Activity {
                 fis.close();
                 fos.close();
                 ConfirmWindow("Video");
+                video.setImageResource(R.drawable.ic_video_red);
             }
             catch (Exception e)
             {
@@ -397,6 +427,7 @@ public class AddNewTerm extends Activity {
                 fis.close();
                 fos.close();
                 ConfirmWindow("Audio");
+                audio.setImageResource(R.drawable.ic_audio_red);
             }
             catch (Exception e)
             {
@@ -414,6 +445,14 @@ public class AddNewTerm extends Activity {
                     button.setText(description.concat("..."));
                 }
 
+            }
+        }
+        if (requestCode == 7) {
+            audio_path_to_db=data.getStringExtra("ImgPath");
+            if (audio_path_to_db.length() > 0) {
+
+                ConfirmWindow("Audio");
+                audio.setImageResource(R.drawable.ic_audio_red);
             }
         }
         if (requestCode == REQUEST_Video_CAPTURE) {
@@ -442,6 +481,7 @@ public class AddNewTerm extends Activity {
                 fis.close();
                 fos.close();
                 ConfirmWindow("Video");
+                video.setImageResource(R.drawable.ic_video_red);
             }
             catch (Exception e)
             {
@@ -467,6 +507,7 @@ public class AddNewTerm extends Activity {
             out.flush();
             out.close();
             ConfirmWindow("Image");
+            image.setImageResource(R.drawable.ic_img_red);
         } catch (Exception e) {
             e.printStackTrace();
         }

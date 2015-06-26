@@ -150,7 +150,8 @@ public class EditDescription extends Activity {
        Update_audio=(Button)findViewById(R.id.update_audio);
         Update_audio.setOnClickListener(new View.OnClickListener(){
             public void onClick(View View){
-               CallAudioActivity();
+           //    CallAudioActivity();
+                AlertAudioWindow();
             }
         });
 
@@ -236,13 +237,43 @@ public class EditDescription extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
+    public void AlertAudioWindow() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
 
+        alertDialog.setMessage("You want to select audio from gallery or record?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), AudioRecorder.class);
+                final int result = 7;
+                startActivityForResult(intent, result);
+
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setType("audio/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);
+
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
     public void AlertVideoWindow() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
 
-        alertDialog.setMessage("You want select picture from gallery or take a pic?");
+        alertDialog.setMessage("You want select Video from gallery or Record Video?");
 
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
@@ -275,10 +306,10 @@ public class EditDescription extends Activity {
 
     }
     public void CallAudioActivity(){
-        Intent intent = new Intent();
+      /*  Intent intent = new Intent();
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);*/
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -373,6 +404,12 @@ public class EditDescription extends Activity {
                 e.printStackTrace();
             }
 
+        }
+        if (requestCode == 7) {
+            audio_path_to_db=data.getStringExtra("ImgPath");
+            if (audio_path_to_db.length() > 0) {
+                UpdateAudio();
+            }
         }
         if(requestCode==PICK_AUDIO_REQUEST){
 

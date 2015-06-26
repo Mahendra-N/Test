@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:background="#3671d0"
         android:layout_alignParentTop="true"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center" >
 
 
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:text="Add New Term"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/new_term_back_icon"
             android:layout_toEndOf="@+id/new_term_back_icon"
@@ -43,6 +43,7 @@
             android:text="SAVE"
             android:id="@+id/Save_term"
             android:textColor="#fff"
+            android:textSize="18dp"
             android:layout_alignBottom="@+id/term_name"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -185,7 +186,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Defination"
+                android:text="Definition"
                 android:id="@+id/textView6"
                 android:paddingTop="8dp"
                 android:layout_alignBottom="@+id/desc_next_page"
@@ -200,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:id="@+id/desc_next_page"
-                android:hint="Enter New Defination"
+                android:hint="Enter New Definition"
                 android:clickable="true"
                 android:editable="false"
                 android:src="@drawable/ic_right_arrow_gray"

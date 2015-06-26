@@ -32,6 +32,7 @@ Button save;
 String old_topic;
 ListView List;
 ArrayAdapter<String> Adapter;
+public ArrayList<String> CatList=null;
     Boolean flag=false;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,7 @@ ArrayAdapter<String> Adapter;
         ImageView back=(ImageView) findViewById(R.id.back_icon);
         cancel=(Button)findViewById(R.id.cancel);
         save=(Button)findViewById(R.id.savechanges);
-   /*     EditText  from=(EditText)findViewById(R.id.from_topic);
-            from.setText(old_topic);
-            from.setTextColor(Color.parseColor("#000000"));
-            from.setEnabled(false);*/
-        back.setOnClickListener(new View.OnClickListener() {
+          back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -146,18 +143,7 @@ ArrayAdapter<String> Adapter;
             List.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             List.setAdapter(Adapter);
             save.setOnClickListener(this);
-          /*  List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                        long id) {
-                    String clickedItem  = String.valueOf(parent.getItemAtPosition(position));
-                 //   AlertWindow(clickedItem);
 
-                }
-            });
-        }else{
-            Log.d("message", "nothing is there in database");
-        }*/
         }
     }
     public void onClick(View v) {
@@ -172,8 +158,7 @@ ArrayAdapter<String> Adapter;
                 selectedItems.add(Adapter.getItem(position));
         }
 if(selectedItems.size()>0){
-        String[] outputStrArr = new String[selectedItems.size()];
-      CategoryDb catDB =new CategoryDb(getApplicationContext());
+             CategoryDb catDB =new CategoryDb(getApplicationContext());
       NotesTable tableinfo = new NotesTable();
         for (int i = 0; i < selectedItems.size(); i++) {
         //    outputStrArr[i] = selectedItems.get(i);
@@ -183,16 +168,24 @@ if(selectedItems.size()>0){
             tableinfo.category_name =category;
             tableinfo.topic_name=SelectedTopic;
             if(old_topic.equals(SelectedTopic)){
+
+
                 Toast.makeText(getApplicationContext(), "Selected Category is Under Same Topic",
                         Toast.LENGTH_SHORT).show();
                 flag=false;
             }else {
+                CatList =  catDB.RowsAffetedInCategory(SelectedTopic, category);
+                if(CatList.size()<=0){
                 catDB.move_category(tableinfo);
-flag=true;
+                    flag=true;}
+                else{
+                    Toast.makeText(getApplicationContext(), "Selected Category already Exists In Selected Topic, CANNOT MOVE",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }else{
-            Toast.makeText(getApplicationContext(), "Select Atleast one Value to Move",
+            Toast.makeText(getApplicationContext(), "Select Atleast one Category to Move",
                     Toast.LENGTH_SHORT).show();
     flag=false;
         }

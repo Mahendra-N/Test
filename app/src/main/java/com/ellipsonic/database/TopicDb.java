@@ -35,7 +35,7 @@ public class TopicDb {
             String selectQuery = "SELECT  " +
                     " DISTINCT  " + " ( " + NotesTable.KEY_TOPIC_NAME + " || " + " '\n' " + " || " +
                     " COUNT " + "( " + " DISTINCT " + " ( " + NotesTable.KEY_CATEGORY_NAME + ")" + " )" + " )" + " AS " +
-                    NotesTable.KEY_TOPIC_NAME +
+                    NotesTable.KEY_CATEGORY_NAME+
                     " FROM  " + NotesTable.TABLE_NOTES +
                     "  WHERE  " + NotesTable.KEY_TOPIC_NAME + " = " + NotesTable.KEY_TOPIC_NAME +
                     " AND  " + NotesTable.KEY_TOPIC_NAME + "  IS NOT NULL " +
@@ -51,7 +51,7 @@ public class TopicDb {
             if (cursor.moveToFirst()) {
                 do {
 
-                    String topicname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_TOPIC_NAME));
+                    String topicname = cursor.getString(cursor.getColumnIndex(NotesTable.KEY_CATEGORY_NAME));
                     topicList.add(topicname);
 
                 } while (cursor.moveToNext());
