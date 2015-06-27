@@ -24,9 +24,6 @@ public class Description extends Activity {
     public DescriptionDb desc_Db=null;
     MediaController mediaController;
     TextView article;
-    TextView header;
-    ImageView delete;
-    ImageView edit;
     ImageView img;
     VideoView video;
     VideoView audio;
@@ -39,11 +36,12 @@ public class Description extends Activity {
     String imgpath;
     String videopath;
     String audiopath;
-
+    String[] details;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
+     //   setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         final ScrollView main = (ScrollView) findViewById(R.id.ScrollView01);
         main.post(new Runnable() {
             public void run() {
@@ -62,6 +60,20 @@ public class Description extends Activity {
         audio_name=(TextView)findViewById(R.id.audio_name);
         speaker=(ImageView)findViewById(R.id.speaker);
         Description(selectedTopic,selectedCategory,selectedTerm);
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((details[2])!=null) {
+                    imgpath=details[2];
+                    Intent move_intent = new Intent(Description.this, ZoomActivity.class);
+                    move_intent.putExtra("ImgPath", imgpath);
+                    startActivity(move_intent);
+
+                }
+            }
+        });
+
 
      }
     @Override
@@ -121,7 +133,7 @@ public class Description extends Activity {
         tableinfo.topic_name=selectedTopic;
         tableinfo.category_name=selectedCategory;
         tableinfo.term_name=selectedTerm;
-        String[] details=desc_Db.getDetails(tableinfo);
+         details=desc_Db.getDetails(tableinfo);
         content=details[0];
         article.setText(content);
      //   header.setText(details[1].toUpperCase());
@@ -144,7 +156,7 @@ public class Description extends Activity {
             video.setMediaController(mediaController);
             video.setVideoURI(Uri.parse(details[3]));
             video.seekTo(100);
-            video.setVisibility(View.VISIBLE);
+              video.setVisibility(View.VISIBLE);
         }else{
             video.setVisibility(View.GONE);
         }

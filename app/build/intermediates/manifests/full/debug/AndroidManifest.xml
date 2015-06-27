@@ -8,6 +8,11 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="17" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -88,6 +93,7 @@
         </activity>
         <activity
             android:name="com.ellipsonic.quickee.EditDescription"
+            android:configChanges="orientation"
             android:label="@string/title_activity_edit_description" >
         </activity>
         <activity
@@ -105,6 +111,18 @@
         <activity
             android:name="com.ellipsonic.quickee.AudioRecorder"
             android:label="@string/title_activity_audio_recorder" >
+        </activity>
+        <activity
+            android:name="com.ellipsonic.quickee.ZoomActivity"
+            android:label="@string/title_activity_zoom" >
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
         </activity>
     </application>
 

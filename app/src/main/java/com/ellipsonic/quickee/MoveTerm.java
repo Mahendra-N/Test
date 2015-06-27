@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
     public class MoveTerm extends Activity implements View.OnClickListener {
-        Spinner spinner;
+        Spinner from_cat;
         String SelectedTopic;
         String SelectedCategory;
         Button cancel;
@@ -33,7 +33,7 @@ import java.util.Collections;
         ListView List;
         ArrayAdapter<String> Adapter;
         public ArrayList<String> TermList=null;
-        Spinner fromterm;
+        Spinner move_to_cat;
         Boolean flag=false;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -97,13 +97,27 @@ import java.util.Collections;
         public void CategoryDropDown() {
             CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
             ArrayList<String>   CatList =  cat_Db.getEditCatList(SelectedTopic);
-            spinner = (Spinner) findViewById(R.id.sel_topic_name);
+            from_cat = (Spinner) findViewById(R.id.from_to_cat);
             CatList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
             if (CatList != null) {
                 ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
                 myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(myAdapter);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                from_cat.setAdapter(myAdapter);
+
+            }
+        }
+
+        public void CategoryDropDownFrom() {
+            CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
+            ArrayList<String>   CatList =  cat_Db.getEditCatList(SelectedTopic);
+            move_to_cat = (Spinner) findViewById(R.id.move_to_cat);
+            CatList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
+            if (CatList != null) {
+                ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
+                myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                move_to_cat.setAdapter(myAdapter);
+
+                move_to_cat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         String sel_cat = (String) parentView.getItemAtPosition(position);
                         SelectedCategory=sel_cat;
@@ -116,20 +130,6 @@ import java.util.Collections;
 
                     }
                 });
-
-            }
-        }
-
-        public void CategoryDropDownFrom() {
-            CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
-            ArrayList<String>   CatList =  cat_Db.getEditCatList(SelectedTopic);
-            fromterm = (Spinner) findViewById(R.id.from_term);
-            CatList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-            if (CatList != null) {
-                ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
-                myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                fromterm.setAdapter(myAdapter);
-
             }
         }
         public void EditTermListView( final String selectedTopic,final String selectedCategory) {
@@ -163,7 +163,7 @@ import java.util.Collections;
                 NotesTable tableinfo = new NotesTable();
                 for (int i = 0; i < selectedItems.size(); i++) {
                     //    outputStrArr[i] = selectedItems.get(i);
-                    old_category= String.valueOf(fromterm.getSelectedItem());
+                    old_category= String.valueOf(from_cat.getSelectedItem());
                     String term =selectedItems.get(i);
                     tableinfo.old_cat_name=old_category;
                     tableinfo.category_name =SelectedCategory;
@@ -174,7 +174,7 @@ import java.util.Collections;
                                 Toast.LENGTH_SHORT).show();
                         flag=false;
                     }else {
-                        TermList =  termDb.RowsAffetedInTerm(SelectedTopic,SelectedCategory,term);
+                        TermList =  termDb.RowsAffetedInTerm(SelectedTopic,old_category,term);
                         if(TermList.size()<=0) {
                             termDb.move_term(tableinfo);
                             flag = true;

@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -70,6 +73,7 @@ public class AddNewTerm extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_term);
         getActionBar().hide();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent activityThatCalled = getIntent();
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
@@ -176,8 +180,7 @@ public class AddNewTerm extends Activity {
     }
 
 
-
-    @Override
+      @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_new_term, menu);
@@ -241,13 +244,18 @@ public class AddNewTerm extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                PackageManager packageManager=getApplicationContext().getPackageManager();
+                if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File file = new File(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Need Camera to use this Feature ", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
-
             }
         });
 
@@ -277,8 +285,14 @@ public class AddNewTerm extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                Intent photoPickerIntent= new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                startActivityForResult(Intent.createChooser(photoPickerIntent,"Take Video"),REQUEST_Video_CAPTURE);
+                PackageManager packageManager=getApplicationContext().getPackageManager();
+                if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                    Intent photoPickerIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    startActivityForResult(Intent.createChooser(photoPickerIntent, "Take Video"), REQUEST_Video_CAPTURE);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Need Camera to use this Feature ", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
 
@@ -354,15 +368,37 @@ public class AddNewTerm extends Activity {
                 e.printStackTrace();
             }
         }
-
+        int orientation=00;
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // Bundle extras = data.getExtras();
-            // Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //    Bundle extras = data.getExtras();
+            //    Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //Get our saved file into a bitmap object:
             File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
-            Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000, 700);
+            Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000,700);
             Matrix matrix = new Matrix();
-            matrix.postRotate(00);
+            ExifInterface ei = null;
+            try {
+                ei = new ExifInterface(file.getAbsolutePath());
+                orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            switch(orientation) {
+                case ExifInterface.ORIENTATION_NORMAL:
+                    matrix.postRotate(00);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    matrix.postRotate(90);
+                    break;
+               /* case ExifInterface.ORIENTATION_ROTATE_180:
+                    matrix.postRotate(180);
+                    break;*/
+                // etc.
+            }
+
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
             SaveImage(bitmap);
         }

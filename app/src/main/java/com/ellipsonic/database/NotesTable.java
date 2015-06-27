@@ -18,7 +18,7 @@ public class NotesTable {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_AUDIO = "audio";
     public static final String KEY_VIDEO = "video";
-    public static  String KEY_TOPIC_CAT="topic_cat";
+
 
 
     public int id;

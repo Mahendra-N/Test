@@ -8,20 +8,26 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launch"
         android:label="@string/app_name"
         android:theme="@style/CustomActionBarTheme" >
-        <activity
+       <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -65,7 +71,8 @@
         </activity>
         <activity
             android:name=".AddNewTerm"
-            android:label="@string/title_activity_add_term" >
+            android:label="@string/title_activity_add_term"
+          >
         </activity>
         <activity
             android:name=".EditTerm"
@@ -87,7 +94,8 @@
         </activity>
         <activity
             android:name=".EditDescription"
-            android:label="@string/title_activity_edit_description" >
+            android:label="@string/title_activity_edit_description"
+            android:configChanges="orientation">
         </activity>
         <activity
             android:name="com.ellipsonic.com.MainActivity"
@@ -104,6 +112,15 @@
         <activity
             android:name=".AudioRecorder"
             android:label="@string/title_activity_audio_recorder" >
+        </activity>
+        <activity
+            android:name=".ZoomActivity"
+            android:label="@string/title_activity_zoom" >
+         <!--   <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
     </application>
 

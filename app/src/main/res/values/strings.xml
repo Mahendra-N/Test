@@ -51,4 +51,5 @@
     <string name="title_activity_move__category">Move_Category</string>
     <string name="title_activity_move_term">MoveTerm</string>
     <string name="title_activity_audio_recorder">AudioRecorder</string>
+    <string name="title_activity_zoom">ZoomActivity</string>
 </resources>

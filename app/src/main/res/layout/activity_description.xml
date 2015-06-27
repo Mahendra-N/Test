@@ -26,26 +26,44 @@
         android:padding="16dp"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:background="#000"
+            android:layout_gravity="center"
+            android:weightSum="1"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="center"
+            android:layout_height="fill_parent">
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
+            android:scaleType="center"
             android:id="@+id/img"
-            android:layout_marginRight="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp"/>
+            android:layout_gravity="center"
+         />
+            </LinearLayout>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:background="#000"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_marginRight="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginBottom="8dp"
+    android:scaleType="center"
+    android:layout_height="fill_parent">
 
             <VideoView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:id="@+id/videoView"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"/>
+               />
+</LinearLayout>
 
 <FrameLayout
     android:layout_width="fill_parent"

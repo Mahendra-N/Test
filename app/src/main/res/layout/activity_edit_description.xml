@@ -58,13 +58,13 @@
     <RelativeLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="155dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
         android:gravity="center" >
 
          <Button
-            android:layout_width="175dp"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_image"
             android:text="Delete"
@@ -75,7 +75,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
         <Button
-            android:layout_width="175dp"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_video"
             android:text="Delete"
@@ -88,7 +88,7 @@
             android:layout_alignParentEnd="true" />
 
         <Button
-            android:layout_width="175dp"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_audio"
             android:text="Delete"
@@ -101,7 +101,7 @@
             android:layout_alignParentEnd="true" />
 
         <Button
-            android:layout_width="175dp"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:text="Update"
             android:layout_marginBottom="2dp"
@@ -111,7 +111,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <Button
-            android:layout_width="175dp"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:text="Update"
             android:id="@+id/update_audio"
@@ -123,7 +123,7 @@
             android:layout_alignParentStart="true" />
 
         <Button
-            android:layout_width="175dp"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_video"
             android:text="Update"
@@ -133,6 +133,7 @@
             android:layout_below="@+id/Update_img"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
 
     </RelativeLayout>
 

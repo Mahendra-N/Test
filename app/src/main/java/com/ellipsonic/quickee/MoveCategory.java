@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MoveCategory extends Activity implements View.OnClickListener {
-Spinner spinner;
-Spinner from_spinner;
+Spinner move_to_topic;
+Spinner from_topic;
 String SelectedTopic;
 Button cancel;
 Button save;
-String old_topic;
+String move_to_topic_spinner_selected_val;
 ListView List;
 ArrayAdapter<String> Adapter;
 public ArrayList<String> CatList=null;
@@ -41,7 +41,7 @@ public ArrayList<String> CatList=null;
         getActionBar().hide();
         Intent activityThatCalled = getIntent();
         SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
-        old_topic = SelectedTopic;
+        move_to_topic_spinner_selected_val = SelectedTopic;
         ImageView back=(ImageView) findViewById(R.id.back_icon);
         cancel=(Button)findViewById(R.id.cancel);
         save=(Button)findViewById(R.id.savechanges);
@@ -63,8 +63,8 @@ public ArrayList<String> CatList=null;
                     finish();
                 }
             });
-        TopicsDropDownFrom();
-        TopicsDropDown();
+        TopicsDropDownFromTopic();
+        TopicsDropDownToTopic();
         EDitCatListView( SelectedTopic);
 
     }
@@ -91,21 +91,36 @@ public ArrayList<String> CatList=null;
         return super.onOptionsItemSelected(item);
     }
 
-    public void TopicsDropDown() {
+    public void TopicsDropDownToTopic() {
         TopicDb topic_Db = new TopicDb(getApplicationContext());
         ArrayList<String> topicList = topic_Db.getEditTopicList();
-        spinner = (Spinner) findViewById(R.id.sel_topic_name);
+        move_to_topic = (Spinner) findViewById(R.id.move_to_topic);
         topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
         if (topicList != null) {
 
             ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   topicList);
             myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(myAdapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            move_to_topic.setAdapter(myAdapter);
+
+        }
+    }
+
+    public void TopicsDropDownFromTopic() {
+        TopicDb topic_Db = new TopicDb(getApplicationContext());
+        ArrayList<String> topicList = topic_Db.getEditTopicList();
+        from_topic = (Spinner) findViewById(R.id.from_topic);
+        topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
+
+        if (topicList != null) {
+
+            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   topicList);
+            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            from_topic.setAdapter(myAdapter);
+            from_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                   String sel_topic = (String) parentView.getItemAtPosition(position);
+                    String sel_topic = (String) parentView.getItemAtPosition(position);
                     SelectedTopic=sel_topic;
-                  EDitCatListView(SelectedTopic);
+                    EDitCatListView(SelectedTopic);
 
                 }
 
@@ -114,21 +129,6 @@ public ArrayList<String> CatList=null;
 
                 }
             });
-
-        }
-    }
-
-    public void TopicsDropDownFrom() {
-        TopicDb topic_Db = new TopicDb(getApplicationContext());
-        ArrayList<String> topicList = topic_Db.getEditTopicList();
-        from_spinner = (Spinner) findViewById(R.id.from_topic);
-        topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-        if (topicList != null) {
-
-            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   topicList);
-            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            from_spinner.setAdapter(myAdapter);
-
              }
     }
     public void EDitCatListView( String selectedTopic){
@@ -162,19 +162,19 @@ if(selectedItems.size()>0){
       NotesTable tableinfo = new NotesTable();
         for (int i = 0; i < selectedItems.size(); i++) {
         //    outputStrArr[i] = selectedItems.get(i);
-            old_topic= String.valueOf(from_spinner.getSelectedItem());
+            move_to_topic_spinner_selected_val= String.valueOf(move_to_topic.getSelectedItem());
             String category =selectedItems.get(i);
-            tableinfo.old_topic_name=old_topic;
+            tableinfo.old_topic_name=move_to_topic_spinner_selected_val;
             tableinfo.category_name =category;
             tableinfo.topic_name=SelectedTopic;
-            if(old_topic.equals(SelectedTopic)){
+            if(move_to_topic_spinner_selected_val.equals(SelectedTopic)){
 
 
                 Toast.makeText(getApplicationContext(), "Selected Category is Under Same Topic",
                         Toast.LENGTH_SHORT).show();
                 flag=false;
             }else {
-                CatList =  catDB.RowsAffetedInCategory(SelectedTopic, category);
+                CatList =  catDB.RowsAffetedInCategory(move_to_topic_spinner_selected_val, category);
                 if(CatList.size()<=0){
                 catDB.move_category(tableinfo);
                     flag=true;}
