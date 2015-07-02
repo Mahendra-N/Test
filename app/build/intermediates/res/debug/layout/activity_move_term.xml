@@ -100,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Move To "
+                android:text="From "
                 android:id="@+id/from"
                 android:textSize="17dp"
                 android:paddingTop="7dp"
@@ -120,7 +120,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true" />
 
-            <Spinner
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/from_to_cat"
@@ -138,7 +138,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From "
+                android:text="Move To "
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
                 android:textSize="17dp"

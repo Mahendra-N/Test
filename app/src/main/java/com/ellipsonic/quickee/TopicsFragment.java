@@ -17,6 +17,8 @@ import android.widget.ListView;
 import com.ellipsonic.database.ExternalFolders;
 import com.ellipsonic.database.FirstTimeDataInsertion;
 import com.ellipsonic.database.TopicDb;
+import com.ellipsonic.quickee.model.TopicPopulating;
+import com.ellipsonic.quickee.model.adapter.CustomTopicListView;
 
 import java.util.ArrayList;
 import java.util.Collections;

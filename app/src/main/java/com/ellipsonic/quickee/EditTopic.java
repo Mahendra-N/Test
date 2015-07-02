@@ -115,16 +115,16 @@ public class EditTopic extends Activity {
 
         alertDialog.setView(input);
         // Setting Dialog Message
-        alertDialog.setMessage("you want Update or Delete?");
+        alertDialog.setMessage("you want to Update or Delete?");
 
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                String updateTextValue = String.valueOf(input.getText());
+                String updateTextValue = String.valueOf(input.getText()).trim();
                 if(updateTextValue.length()>0) {
                     UpdateTopic(defaultTextValue, updateTextValue);
                 }else {
-                     Toast.makeText(getApplicationContext(), "Enter value to update", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getApplicationContext(), "Enter topic name to update", Toast.LENGTH_SHORT).show();
                 }
             }
         });

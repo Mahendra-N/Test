@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,7 +25,7 @@ public class Description extends Activity {
     public DescriptionDb desc_Db=null;
     MediaController mediaController;
     TextView article;
-    ImageView img;
+   ImageView img;
     VideoView video;
     VideoView audio;
     TextView audio_name;
@@ -37,11 +38,12 @@ public class Description extends Activity {
     String videopath;
     String audiopath;
     String[] details;
+   // TouchImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-     //   setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         final ScrollView main = (ScrollView) findViewById(R.id.ScrollView01);
         main.post(new Runnable() {
             public void run() {
@@ -60,7 +62,7 @@ public class Description extends Activity {
         audio_name=(TextView)findViewById(R.id.audio_name);
         speaker=(ImageView)findViewById(R.id.speaker);
         Description(selectedTopic,selectedCategory,selectedTerm);
-
+//        img = (TouchImageView) findViewById(R.id.img);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,8 +141,13 @@ public class Description extends Activity {
      //   header.setText(details[1].toUpperCase());
         if((details[2])!=null) {
          imgpath=details[2];
-          img.setImageURI(Uri.parse(details[2]));
+            try{
+          img.setImageURI(Uri.parse(imgpath));
            img.setVisibility(View.VISIBLE);
+            }
+            catch(Throwable e){
+                e.printStackTrace();
+            }
         }else{
             img.setVisibility(View.GONE);
         }

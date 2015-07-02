@@ -81,6 +81,7 @@ public class EditDescription extends Activity {
         updateTextValue=(EditText)findViewById(R.id.editdetails);
 
 
+
       /*  backbutton=(ImageView)findViewById(R.id.edit_details_back_icon);
         backbutton.setOnClickListener(new View.OnClickListener() {
             public  void onClick(View view){
@@ -91,15 +92,16 @@ public class EditDescription extends Activity {
         delete_img=(Button)findViewById(R.id.delete_img);
         delete_img.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                if(selectedImage!=null){
+                if(selectedImage==null || selectedImage.isEmpty() ){
+                    AlertWindow("Delete");
+
+                }else {
                     media_Db =new MediaDb(getApplicationContext());
                     NotesTable tableinfo = new NotesTable();
                     tableinfo.image=selectedImage;
                     media_Db.delete_image(tableinfo);
                     selectedImage=null;
                     ConfirmWindow("Image");
-                }else if(selectedImage==null || selectedImage.isEmpty()){
-                    AlertWindow("Delete");
                 }
             }
         });
@@ -107,15 +109,16 @@ public class EditDescription extends Activity {
         delete_video=(Button)findViewById(R.id.delete_video);
         delete_video.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                if(selectedVideo!=null ){
+                if(selectedVideo==null || selectedVideo.isEmpty()){
+                    AlertWindow("Delete");
+
+                }else {
                     media_Db =new MediaDb(getApplicationContext());
                     NotesTable tableinfo = new NotesTable();
                     tableinfo.video=selectedVideo;
                     media_Db.delete_video(tableinfo);
                     selectedVideo=null;
                     ConfirmWindow("Video");
-                }else if(selectedVideo==null || selectedVideo.isEmpty()){
-                    AlertWindow("Delete");
                 }
             }
         });
@@ -123,15 +126,16 @@ public class EditDescription extends Activity {
         delete_audio=(Button) findViewById(R.id.delete_audio);
         delete_audio.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                if(selectedAudio!=null ){
+                if(selectedAudio==null || selectedAudio.isEmpty()){
+                    AlertWindow("Delete");
+                }else {
+
                     media_Db =new MediaDb(getApplicationContext());
                     NotesTable tableinfo = new NotesTable();
                     tableinfo.audio=selectedAudio;
                     media_Db.delete_audio(tableinfo);
                     selectedAudio=null;
                     ConfirmWindow("Audio");
-                }else if(selectedAudio==null || selectedAudio.isEmpty()){
-                    AlertWindow("Delete");
                 }
             }
         });
@@ -162,8 +166,9 @@ public class EditDescription extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(updateTextValue.getText().length()>0) {
-                    UpdateDescription(updateTextValue.getText().toString(), selectedTopic, selectedCategory, selectedTerm);
+                String UpdateTextValue= updateTextValue.getText().toString().trim();
+                if(UpdateTextValue.length()>0) {
+                    UpdateDescription(UpdateTextValue, selectedTopic, selectedCategory, selectedTerm);
                 }else{
                     AlertDescWindow();
                 }
@@ -218,11 +223,12 @@ public class EditDescription extends Activity {
                 PackageManager packageManager=getApplicationContext().getPackageManager();
                 if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
                     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = new File(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                   File file = new File(Environment.getExternalStorageDirectory() + File.separator + "image.jpg");
+                    takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                   takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                   if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    }
+                   }
                 }else{
                     Toast.makeText(getApplicationContext(), "Need Camera to use this Feature ", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -287,14 +293,14 @@ public class EditDescription extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Record", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-               PackageManager packageManager=getApplicationContext().getPackageManager();
+                PackageManager packageManager = getApplicationContext().getPackageManager();
                 if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-                Intent photoPickerIntent= new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                    photoPickerIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    Intent photoPickerIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    photoPickerIntent.putExtra(android.provider.MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     photoPickerIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-                startActivityForResult(Intent.createChooser(photoPickerIntent,"Take Video"),REQUEST_Video_CAPTURE);
+                    startActivityForResult(Intent.createChooser(photoPickerIntent, "Take Video"), REQUEST_Video_CAPTURE);
 
-            }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Need Camera to use this Feature ", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
@@ -316,20 +322,7 @@ public class EditDescription extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
-    public void CallVideoActivity(){
 
-    /*    Intent intent = new Intent();
-        intent.setType("video/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);*/
-
-    }
-    public void CallAudioActivity(){
-      /*  Intent intent = new Intent();
-        intent.setType("audio/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);*/
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -346,11 +339,11 @@ public class EditDescription extends Activity {
 
         int orientation=00;
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-        //    Bundle extras = data.getExtras();
-        //    Bitmap imageBitmap = (Bitmap) extras.get("data");
+         //  Bundle extras = data.getExtras();
+         //   Bitmap imageBitmap = (Bitmap) extras.get("data");
             //Get our saved file into a bitmap object:
             File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
-            Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 1000,700);
+              Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 800,700);
             Matrix matrix = new Matrix();
             ExifInterface ei = null;
             try {
@@ -370,11 +363,11 @@ public class EditDescription extends Activity {
                     break;
                /* case ExifInterface.ORIENTATION_ROTATE_180:
                     matrix.postRotate(180);
-                    break;*/
-                // etc.
+                    break;
+                // etc.*/
             }
 
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+           bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
             SaveImage(bitmap);
         }
 
@@ -392,7 +385,7 @@ public class EditDescription extends Activity {
                 n = generator.nextInt(n);
                 String fname = "Video"+ n +".mp4";
                 video_path_to_db =root + "/Quickee/Video/"+fname;
-                File   file=new File(myDir,fname );
+                File   file =new File(myDir,fname );
 
                 FileOutputStream fos = new FileOutputStream(file);
 
@@ -523,7 +516,8 @@ public class EditDescription extends Activity {
             img_path_to_db="";
             selectedImage=null;
             UpdateConfirmWindow("Image");
-    }
+
+           }
  public  void UpdateVideo(){
      NotesTable tableinfo = new NotesTable();
      media_Db = new MediaDb(getApplicationContext());
@@ -608,9 +602,9 @@ public class EditDescription extends Activity {
         final int height = options.outHeight;
         final int width = options.outWidth;
         options.inPreferredConfig = Bitmap.Config.RGB_565;
-        int inSampleSize = 1;
+         int inSampleSize = 1;
 
-        if (height> reqHeight)
+      if (height> reqHeight)
         {
             inSampleSize = Math.round((float)height / (float)reqHeight);
         }
@@ -618,8 +612,8 @@ public class EditDescription extends Activity {
 
         if (expectedWidth > reqWidth)
         {
-            if(Math.round((float)width / (float)reqWidth) > inSampleSize); // If bigger SampSize..
-            //inSampleSize = Math.round((float)width / (float)reqWidth);
+          //  if(Math.round((float)width / (float)reqWidth) > inSampleSize); // If bigger SampSize..
+            inSampleSize = Math.round((float)width / (float)reqWidth);
         }
 
         options.inSampleSize = inSampleSize;
@@ -649,4 +643,16 @@ public class EditDescription extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
+  public void  DisableButton(){
+      if(selectedImage==null || selectedImage.isEmpty() ){
+          delete_img.setEnabled(false);
+      }
+      if(selectedAudio==null || selectedAudio.isEmpty() ){
+          delete_audio.setEnabled(false);
+      }
+      if(selectedVideo==null || selectedVideo.isEmpty() ){
+          delete_video.setEnabled(false);
+      }
+    }
+
 }

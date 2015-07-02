@@ -2,6 +2,7 @@ package com.ellipsonic.quickee;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MoveCategory extends Activity implements View.OnClickListener {
-Spinner move_to_topic;
+EditText move_to_topic;
 Spinner from_topic;
 String SelectedTopic;
 Button cancel;
@@ -41,8 +43,9 @@ public ArrayList<String> CatList=null;
         getActionBar().hide();
         Intent activityThatCalled = getIntent();
         SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
-        move_to_topic_spinner_selected_val = SelectedTopic;
+     //   move_to_topic_spinner_selected_val = SelectedTopic;
         ImageView back=(ImageView) findViewById(R.id.back_icon);
+        move_to_topic = (EditText) findViewById(R.id.move_to_topic);
         cancel=(Button)findViewById(R.id.cancel);
         save=(Button)findViewById(R.id.savechanges);
           back.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +69,9 @@ public ArrayList<String> CatList=null;
         TopicsDropDownFromTopic();
         TopicsDropDownToTopic();
         EDitCatListView( SelectedTopic);
-
+            move_to_topic.setText(SelectedTopic);
+            move_to_topic.setTextColor(Color.parseColor("#000000"));
+            move_to_topic.setEnabled(false);
     }
 
     @Override
@@ -92,9 +97,9 @@ public ArrayList<String> CatList=null;
     }
 
     public void TopicsDropDownToTopic() {
-        TopicDb topic_Db = new TopicDb(getApplicationContext());
+      /*  TopicDb topic_Db = new TopicDb(getApplicationContext());
         ArrayList<String> topicList = topic_Db.getEditTopicList();
-        move_to_topic = (Spinner) findViewById(R.id.move_to_topic);
+        move_to_topic = (EditText) findViewById(R.id.move_to_topic);
         topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
         if (topicList != null) {
 
@@ -102,7 +107,7 @@ public ArrayList<String> CatList=null;
             myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             move_to_topic.setAdapter(myAdapter);
 
-        }
+        }*/
     }
 
     public void TopicsDropDownFromTopic() {
@@ -119,8 +124,8 @@ public ArrayList<String> CatList=null;
             from_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     String sel_topic = (String) parentView.getItemAtPosition(position);
-                    SelectedTopic=sel_topic;
-                    EDitCatListView(SelectedTopic);
+                    move_to_topic_spinner_selected_val=sel_topic;
+                 //   EDitCatListView(SelectedTopic);
 
                 }
 
@@ -162,7 +167,7 @@ if(selectedItems.size()>0){
       NotesTable tableinfo = new NotesTable();
         for (int i = 0; i < selectedItems.size(); i++) {
         //    outputStrArr[i] = selectedItems.get(i);
-            move_to_topic_spinner_selected_val= String.valueOf(move_to_topic.getSelectedItem());
+        //    move_to_topic_spinner_selected_val= String.valueOf(move_to_topic.getSelectedItem());
             String category =selectedItems.get(i);
             tableinfo.old_topic_name=move_to_topic_spinner_selected_val;
             tableinfo.category_name =category;
@@ -170,7 +175,7 @@ if(selectedItems.size()>0){
             if(move_to_topic_spinner_selected_val.equals(SelectedTopic)){
 
 
-                Toast.makeText(getApplicationContext(), "Selected Category is Under Same Topic",
+                Toast.makeText(getApplicationContext(), "Selected category is under Same Topic",
                         Toast.LENGTH_SHORT).show();
                 flag=false;
             }else {
@@ -179,13 +184,13 @@ if(selectedItems.size()>0){
                 catDB.move_category(tableinfo);
                     flag=true;}
                 else{
-                    Toast.makeText(getApplicationContext(), "Selected Category already Exists In Selected Topic, CANNOT MOVE",
+                    Toast.makeText(getApplicationContext(), "Selected category already exists in Selected Topic, CANNOT MOVE",
                             Toast.LENGTH_SHORT).show();
                 }
             }
         }
     }else{
-            Toast.makeText(getApplicationContext(), "Select Atleast one Category to Move",
+            Toast.makeText(getApplicationContext(), "Select atleast one Category to Move",
                     Toast.LENGTH_SHORT).show();
     flag=false;
         }

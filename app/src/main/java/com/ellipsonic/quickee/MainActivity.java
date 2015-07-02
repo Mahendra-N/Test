@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 
 import com.ellipsonic.database.DatabaseHandler;
-import com.ellipsonic.quickee.adapter.NavDrawerListAdapter;
+import com.ellipsonic.quickee.model.adapter.NavDrawerListAdapter;
 import com.ellipsonic.quickee.model.NavDrawerItem;
 
 import java.util.ArrayList;

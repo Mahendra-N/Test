@@ -2,6 +2,7 @@ package com.ellipsonic.quickee;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
     public class MoveTerm extends Activity implements View.OnClickListener {
-        Spinner from_cat;
+        EditText from_cat;
         String SelectedTopic;
         String SelectedCategory;
         Button cancel;
@@ -47,7 +49,10 @@ import java.util.Collections;
             ImageView back=(ImageView) findViewById(R.id.back_icon);
             cancel=(Button)findViewById(R.id.cancel);
             save=(Button)findViewById(R.id.savechanges);
-
+            from_cat = (EditText) findViewById(R.id.from_to_cat);
+            from_cat.setText(SelectedCategory);
+            from_cat.setTextColor(Color.parseColor("#000000"));
+            from_cat.setEnabled(false);
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -95,7 +100,7 @@ import java.util.Collections;
         }
 
         public void CategoryDropDown() {
-            CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
+          /*  CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
             ArrayList<String>   CatList =  cat_Db.getEditCatList(SelectedTopic);
             from_cat = (Spinner) findViewById(R.id.from_to_cat);
             CatList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
@@ -104,7 +109,7 @@ import java.util.Collections;
                 myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 from_cat.setAdapter(myAdapter);
 
-            }
+            }*/
         }
 
         public void CategoryDropDownFrom() {
@@ -120,8 +125,8 @@ import java.util.Collections;
                 move_to_cat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         String sel_cat = (String) parentView.getItemAtPosition(position);
-                        SelectedCategory=sel_cat;
-                        EditTermListView(SelectedTopic,SelectedCategory);
+                        old_category=sel_cat;
+                       // EditTermListView(SelectedTopic,SelectedCategory);
 
                     }
 
@@ -163,7 +168,7 @@ import java.util.Collections;
                 NotesTable tableinfo = new NotesTable();
                 for (int i = 0; i < selectedItems.size(); i++) {
                     //    outputStrArr[i] = selectedItems.get(i);
-                    old_category= String.valueOf(from_cat.getSelectedItem());
+                 //   old_category= String.valueOf(from_cat.getSelectedItem());
                     String term =selectedItems.get(i);
                     tableinfo.old_cat_name=old_category;
                     tableinfo.category_name =SelectedCategory;
@@ -179,13 +184,13 @@ import java.util.Collections;
                             termDb.move_term(tableinfo);
                             flag = true;
                         }else{
-                            Toast.makeText(getApplicationContext(), "Selected Term already Exists In Selected Category, CANNOT MOVE",
+                            Toast.makeText(getApplicationContext(), "Selected Term already exists in selected Category, CANNOT MOVE",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
             }else{
-                Toast.makeText(getApplicationContext(), "Select Atleast one Value to Move",
+                Toast.makeText(getApplicationContext(), "Select atleast Term to Move",
                         Toast.LENGTH_SHORT).show();
                 flag=false;
             }

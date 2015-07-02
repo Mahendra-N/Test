@@ -123,12 +123,12 @@ public class EditTerm extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                String updateTextValue = String.valueOf(input.getText());
+                String updateTextValue = String.valueOf(input.getText()).trim();;
 
                 if(updateTextValue.length()>0) {
                     UpdateTerm(defaultTextValue, updateTextValue, selectedTopic, selectedCategory);
                 }else {
-                    Toast.makeText(getApplicationContext(), "Enter value to update", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Term name to update", Toast.LENGTH_SHORT).show();
                 }
             }
         });

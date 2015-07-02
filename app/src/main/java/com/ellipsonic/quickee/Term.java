@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.ellipsonic.database.TermDb;
+import com.ellipsonic.quickee.model.TermPopulating;
+import com.ellipsonic.quickee.model.adapter.CustomTermListView;
 
 import java.util.ArrayList;
 import java.util.Collections;

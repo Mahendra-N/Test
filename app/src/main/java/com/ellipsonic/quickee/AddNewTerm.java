@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,8 @@ public class AddNewTerm extends Activity {
         getActionBar().hide();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent activityThatCalled = getIntent();
+        ScrollView scrollView= (ScrollView)findViewById(R.id.container);
+
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         selectedCategory =activityThatCalled.getExtras().getString("selectedCategory");
         sel_topic=(EditText)findViewById(R.id.sel_topic_name);
@@ -341,20 +344,7 @@ public class AddNewTerm extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
-    public void CallVideoActivity(){
 
-    /*    Intent intent = new Intent();
-        intent.setType("video/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select video"), PICK_VIDEO_REQUEST);*/
-
-    }
-    public void CallAudioActivity(){
-       /* Intent intent = new Intent();
-        intent.setType("audio/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select audio"), PICK_AUDIO_REQUEST);*/
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
