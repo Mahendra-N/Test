@@ -23,29 +23,30 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:text="Move Category"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/back_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:background="#3671d0"
             android:src="@drawable/ic_back_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DONE"
+            android:background="#3671d0"
             android:id="@+id/done"
+            android:textSize="18dp"
             android:textColor="#fff"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_alignBottom="@+id/move_cat"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

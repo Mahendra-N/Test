@@ -12,10 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
@@ -44,7 +43,7 @@ public ArrayList<String> CatList=null;
         Intent activityThatCalled = getIntent();
         SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
      //   move_to_topic_spinner_selected_val = SelectedTopic;
-        ImageView back=(ImageView) findViewById(R.id.back_icon);
+            ImageButton back=(ImageButton) findViewById(R.id.back_icon);
         move_to_topic = (EditText) findViewById(R.id.move_to_topic);
         cancel=(Button)findViewById(R.id.cancel);
         save=(Button)findViewById(R.id.savechanges);
@@ -60,14 +59,14 @@ public ArrayList<String> CatList=null;
                     finish();
                 }
             });
-            TextView done =(TextView)findViewById(R.id.done);
+            Button done =(Button)findViewById(R.id.done);
             done.setOnClickListener(new View.OnClickListener(){
                 public  void onClick(View v){
                     finish();
                 }
             });
         TopicsDropDownFromTopic();
-        TopicsDropDownToTopic();
+
         EDitCatListView( SelectedTopic);
             move_to_topic.setText(SelectedTopic);
             move_to_topic.setTextColor(Color.parseColor("#000000"));
@@ -96,19 +95,7 @@ public ArrayList<String> CatList=null;
         return super.onOptionsItemSelected(item);
     }
 
-    public void TopicsDropDownToTopic() {
-      /*  TopicDb topic_Db = new TopicDb(getApplicationContext());
-        ArrayList<String> topicList = topic_Db.getEditTopicList();
-        move_to_topic = (EditText) findViewById(R.id.move_to_topic);
-        topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-        if (topicList != null) {
 
-            ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   topicList);
-            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            move_to_topic.setAdapter(myAdapter);
-
-        }*/
-    }
 
     public void TopicsDropDownFromTopic() {
         TopicDb topic_Db = new TopicDb(getApplicationContext());

@@ -12,10 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellipsonic.database.NotesTable;
@@ -36,8 +36,8 @@ public class EditTopic extends Activity {
         getActionBar().hide();
 
         EditTopicListView(getApplicationContext());
-        ImageView back_button =(ImageView) findViewById(R.id.edit_topic_back_icon);
-        TextView editclose=(TextView) findViewById(R.id.edit_topic_save);
+        ImageButton back_button =(ImageButton) findViewById(R.id.edit_topic_back_icon);
+        Button editclose=(Button) findViewById(R.id.edit_topic_save);
 
         editclose.setOnClickListener(new View.OnClickListener() {
             @Override

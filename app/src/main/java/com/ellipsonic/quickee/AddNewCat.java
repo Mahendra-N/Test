@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 public class AddNewCat extends Activity {
-    public ImageView backButton_cat = null;
+    public ImageButton backButton_cat = null;
     public TextView cat_save=null;
     public  EditText Category_Name=null;
     String selectedTopic;
@@ -33,7 +33,7 @@ public class AddNewCat extends Activity {
         selectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
     //    Toast.makeText(this, selectedTopic, Toast.LENGTH_LONG).show();
 
-        backButton_cat = (ImageView) findViewById(R.id.new_cat_back_icon);
+        backButton_cat = (ImageButton) findViewById(R.id.new_cat_back_icon);
         backButton_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

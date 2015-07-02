@@ -20,8 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.ellipsonic.database.DescriptionDb;
@@ -47,9 +46,9 @@ public class EditDescription extends Activity {
     String audio_path_to_db;
     String selecteddetails;
     EditText details;
-    TextView save;
+    Button save;
     EditText updateTextValue;
-    ImageView backbutton;
+    ImageButton backbutton;
     String selectedTopic;
     String selectedCategory;
     String selectedTerm;
@@ -77,17 +76,17 @@ public class EditDescription extends Activity {
         selectedAudio =activityThatCalled.getExtras().getString("selectedAudio");
         details= (EditText)findViewById(R.id.editdetails);
         details.setText(selecteddetails);
-        save=(TextView) findViewById(R.id.edit_details_save);
+        save=(Button) findViewById(R.id.edit_details_save);
         updateTextValue=(EditText)findViewById(R.id.editdetails);
 
 
 
-      /*  backbutton=(ImageView)findViewById(R.id.edit_details_back_icon);
+        backbutton=(ImageButton)findViewById(R.id.edit_details_back_icon);
         backbutton.setOnClickListener(new View.OnClickListener() {
             public  void onClick(View view){
                 finish();
             }
-        });*/
+        });
 
         delete_img=(Button)findViewById(R.id.delete_img);
         delete_img.setOnClickListener(new View.OnClickListener(){

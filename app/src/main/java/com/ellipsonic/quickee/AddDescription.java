@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -18,9 +18,9 @@ import android.widget.Toast;
 
 public class AddDescription extends Activity {
     String selecteddesc;
-    public ImageView backButton = null;
+    public ImageButton backButton = null;
     public EditText description = null;
-    public TextView des_save = null;
+    public Button des_save = null;
     String temp_desc;
     String desc;
     @Override
@@ -32,8 +32,8 @@ public class AddDescription extends Activity {
         selecteddesc= activityThatCalled.getExtras().getString("Description");
         description = (EditText) findViewById(R.id.add_des);
         description.setText(selecteddesc);
-        des_save = (TextView) findViewById(R.id.textView4);
-        backButton = (ImageView) findViewById(R.id.backButton);
+        des_save = (Button) findViewById(R.id.textView4);
+        backButton = (ImageButton) findViewById(R.id.backButton);
 
 
 

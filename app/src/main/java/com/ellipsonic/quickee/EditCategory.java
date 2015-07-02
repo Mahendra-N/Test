@@ -11,11 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
@@ -41,8 +41,8 @@ public class EditCategory extends Activity {
         SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         EDitCatListView( SelectedTopic);
        // TopicsDropDown();
-        ImageView back_button =(ImageView) findViewById(R.id.edit_cat_back_icon);
-        TextView editclose=(TextView)findViewById(R.id.edit_cat_save);
+        ImageButton back_button =(ImageButton) findViewById(R.id.edit_cat_back_icon);
+        Button editclose=(Button)findViewById(R.id.edit_cat_save);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override

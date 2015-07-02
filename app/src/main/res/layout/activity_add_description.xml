@@ -18,33 +18,35 @@
             android:textColor="#fff"
             android:text="@string/AddDescriptionPlaceholder"
             android:textSize="18dp"
-            android:layout_alignTop="@+id/textView4"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView4"
+            android:layout_toStartOf="@+id/textView4"
+            android:layout_marginRight="87dp"
+            android:layout_marginEnd="87dp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:background="#3671d0"
             android:src="@drawable/ic_back_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:contentDescription="@string/backImgAttribute"/>
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DONE"
             android:id="@+id/textView4"
+            android:background="#3671d0"
             android:textColor="#fff"
             android:textSize="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_centerVertical="true"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            />
+            android:layout_alignParentEnd="true" />
 
 
     </RelativeLayout>

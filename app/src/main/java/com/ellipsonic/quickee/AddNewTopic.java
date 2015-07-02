@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.ellipsonic.database.NotesTable;
@@ -16,8 +16,8 @@ import com.ellipsonic.database.TopicDb;
 import java.util.ArrayList;
 
 public class AddNewTopic extends Activity {
-    public ImageView backButton = null;
-    public TextView  topic_save=null;
+    public ImageButton backButton = null;
+    public Button  topic_save=null;
     public  EditText Topic_Name=null;
    public  TopicDb topic_Db=null;
     ArrayList<String> topicList;
@@ -27,7 +27,7 @@ public class AddNewTopic extends Activity {
 
         setContentView(R.layout.activity_add_new_topic);
         getActionBar().hide();
-        backButton = (ImageView) findViewById(R.id.back_icon);
+        backButton = (ImageButton) findViewById(R.id.back_icon);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +36,7 @@ public class AddNewTopic extends Activity {
 
             }
         });
-        topic_save=(TextView)findViewById(R.id.topic_save);
+        topic_save=(Button)findViewById(R.id.topic_save);
         topic_save.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {

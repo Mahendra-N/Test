@@ -13,18 +13,17 @@
         android:background="#3671d0" >
 
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DONE"
+            android:background="#3671d0"
             android:id="@+id/edit_cat_save"
             android:textSize="18dp"
             android:textColor="#fff"
-            android:layout_alignTop="@+id/cat_name"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="18dp"
-            android:layout_marginEnd="18dp" />
+            android:layout_alignParentEnd="true" />
 
          <TextView
             android:id="@+id/cat_name"
@@ -36,11 +35,12 @@
              android:layout_centerVertical="true"
              android:layout_centerHorizontal="true" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/edit_cat_back_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:background="#3671d0"
             android:src="@drawable/ic_back_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"

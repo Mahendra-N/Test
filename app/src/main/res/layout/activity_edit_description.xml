@@ -14,16 +14,15 @@
         android:gravity="center" >
 
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Done"
+            android:background="#3671d0"
             android:id="@+id/edit_details_save"
             android:textColor="#fff"
             android:textSize="18dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginEnd="17dp"
-            android:layout_alignTop="@+id/name"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -34,23 +33,19 @@
             android:textColor="#fff"
             android:textSize="18dp"
             android:text="Edit Description"
-            android:layout_marginLeft="71dp"
-            android:layout_marginStart="71dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-            <!--android:layout_toRightOf="@+id/edit_details_back_icon"
-            android:layout_toEndOf="@+id/edit_details_back_icon" -->/>
+            android:layout_centerHorizontal="true" />
 
-       <!-- <ImageView
+        <ImageButton
             android:id="@+id/edit_details_back_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:background="#3671d0"
             android:src="@drawable/ic_back_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />-->
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

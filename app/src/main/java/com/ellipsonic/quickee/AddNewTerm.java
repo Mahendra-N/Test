@@ -20,11 +20,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
@@ -46,8 +47,8 @@ public class AddNewTerm extends Activity {
     private int PICK_VIDEO_REQUEST = 3;
     private int PICK_AUDIO_REQUEST = 4;
     private int REQUEST_Video_CAPTURE = 6;
-    public ImageView backButton_term;
-    public TextView term_save;
+    public ImageButton backButton_term;
+    public Button term_save;
     public EditText term_name;
     public EditText sel_topic;
     public EditText button;
@@ -85,14 +86,14 @@ public class AddNewTerm extends Activity {
         sel_topic.setTextColor(Color.parseColor("#000000"));
         sel_topic.setEnabled(false);
         CategoryDropDown(selectedTopic);
-        backButton_term = (ImageView) findViewById(R.id.new_term_back_icon);
+        backButton_term = (ImageButton) findViewById(R.id.new_term_back_icon);
         backButton_term.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-      term_save = (TextView) findViewById(R.id.Save_term);
+      term_save = (Button) findViewById(R.id.Save_term);
 
         term_save.setOnClickListener(new View.OnClickListener() {
 

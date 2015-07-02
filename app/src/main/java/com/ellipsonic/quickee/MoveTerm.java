@@ -12,10 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ellipsonic.database.CategoryDb;
@@ -46,7 +45,7 @@ import java.util.Collections;
             SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
             SelectedCategory = activityThatCalled.getExtras().getString("selectedCategory");
             old_category = SelectedCategory;
-            ImageView back=(ImageView) findViewById(R.id.back_icon);
+            ImageButton back=(ImageButton) findViewById(R.id.back_icon);
             cancel=(Button)findViewById(R.id.cancel);
             save=(Button)findViewById(R.id.savechanges);
             from_cat = (EditText) findViewById(R.id.from_to_cat);
@@ -65,13 +64,12 @@ import java.util.Collections;
                     finish();
                 }
             });
-            TextView done =(TextView)findViewById(R.id.done);
+            Button done =(Button)findViewById(R.id.done);
             done.setOnClickListener(new View.OnClickListener(){
                 public  void onClick(View v){
                     finish();
                 }
             });
-            CategoryDropDown();
             CategoryDropDownFrom();
             EditTermListView(SelectedTopic,SelectedCategory);
 
@@ -99,18 +97,6 @@ import java.util.Collections;
             return super.onOptionsItemSelected(item);
         }
 
-        public void CategoryDropDown() {
-          /*  CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
-            ArrayList<String>   CatList =  cat_Db.getEditCatList(SelectedTopic);
-            from_cat = (Spinner) findViewById(R.id.from_to_cat);
-            CatList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-            if (CatList != null) {
-                ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
-                myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                from_cat.setAdapter(myAdapter);
-
-            }*/
-        }
 
         public void CategoryDropDownFrom() {
             CategoryDb  cat_Db = new CategoryDb(getApplicationContext());
