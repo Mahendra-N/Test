@@ -17,7 +17,24 @@
         android:src="@drawable/ic_dropbox"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
-    
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Files"
+        android:id="@+id/createFile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
 <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/fragment_dropbox.xml -->

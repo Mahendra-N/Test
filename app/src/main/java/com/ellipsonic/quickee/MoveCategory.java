@@ -59,13 +59,7 @@ public ArrayList<String> CatList=null;
                     finish();
                 }
             });
-            Button done =(Button)findViewById(R.id.done);
-            done.setOnClickListener(new View.OnClickListener(){
-                public  void onClick(View v){
-                    finish();
-                }
-            });
-        TopicsDropDownFromTopic();
+             TopicsDropDownFromTopic();
 
         EDitCatListView( SelectedTopic);
             move_to_topic.setText(SelectedTopic);

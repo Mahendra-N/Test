@@ -1,2 +1,0 @@
-C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\classes\debug
-C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-17d6dd0d5c4949c30fe2135bc9464e85c4f1de53.jar

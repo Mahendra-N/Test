@@ -37,17 +37,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DONE"
-            android:background="#3671d0"
-            android:textSize="18dp"
-            android:id="@+id/done"
-            android:textColor="#fff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+
 
     </RelativeLayout>
 

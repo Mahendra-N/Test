@@ -62,7 +62,6 @@ public class AddNewTerm extends Activity {
     public CategoryDb cat_Db=null;
     ArrayAdapter<String> Adapter;
     ArrayList<String> CatList=null;
-
     ImageView image;
     ImageView video;
     ImageView audio;
@@ -217,7 +216,15 @@ public class AddNewTerm extends Activity {
                     android.R.layout.simple_spinner_item, CatList);
             Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(Adapter);
+
+            for(int i=0;i<CatList.size();i++){
+                if(CatList.get(i).equals(selectedCategory)){
+                   spinner.setSelection(i);
+                      }
+            }
+
                    }
+
     }
 
 

@@ -24,13 +24,14 @@ public class ExternalFolders {
             File img_folder = new File(Environment.getExternalStorageDirectory()+"/Quickee/Images");
             File  audio_folder= new File(Environment.getExternalStorageDirectory()+"/Quickee/Audio");
             File  video_folder= new File(Environment.getExternalStorageDirectory()+"/Quickee/Video");
+            File  database_folder= new File(Environment.getExternalStorageDirectory()+"/Quickee/Database");
             boolean success = true;
             if (!root_folder.exists()) {
                 success= root_folder.mkdir();
                 video_folder.mkdirs();
                 img_folder.mkdirs();
                 audio_folder.mkdirs();
-
+                database_folder.mkdir();
             }
             if (success) {
                 Log.i("folder","Folders created");
