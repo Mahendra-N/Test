@@ -1,0 +1,4 @@
+C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\classes\debug
+C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\json_simple-1.1-73a0af3d8b7126e1fb7c60f6ee7edfde2b1f81f0.jar
+C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\dropbox-android-sdk-1.6.3-eb614076b939c4451a3779c94e5e68f8f504ea1d.jar
+C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-17d6dd0d5c4949c30fe2135bc9464e85c4f1de53.jar

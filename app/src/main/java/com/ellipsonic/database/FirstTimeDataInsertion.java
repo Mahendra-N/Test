@@ -40,7 +40,7 @@ public class FirstTimeDataInsertion {
             tableinfo.category_name = "Category 1";
             tableinfo.term_name = termname[i];
             tableinfo.description = description[i];
-            term_Db.insert_term(tableinfo);
+             term_Db.insert_term(tableinfo);
         }
     }
 }

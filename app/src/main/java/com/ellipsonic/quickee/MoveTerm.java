@@ -175,6 +175,8 @@ import java.util.Collections;
                 flag=false;
             }
 if(flag==true) {
+    Toast.makeText(getApplicationContext(), "selected term is moved to "+ old_category +" Category",
+            Toast.LENGTH_LONG).show();
     Intent intent = getIntent();
     finish();
     startActivity(intent);

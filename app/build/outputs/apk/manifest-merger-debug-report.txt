@@ -53,6 +53,10 @@ uses-permission#android.permission.RECORD_AUDIO
 ADDED from AndroidManifest.xml:20:5
 	android:name
 		ADDED from AndroidManifest.xml:20:22
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:21:5
+	android:name
+		ADDED from AndroidManifest.xml:21:22
 application
 ADDED from AndroidManifest.xml:22:5
 	android:label
@@ -189,3 +193,29 @@ ADDED from AndroidManifest.xml:116:9
 		ADDED from AndroidManifest.xml:118:13
 	android:name
 		ADDED from AndroidManifest.xml:117:13
+activity#com.dropbox.client2.android.AuthActivity
+ADDED from AndroidManifest.xml:122:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:124:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:125:13
+	android:name
+		ADDED from AndroidManifest.xml:123:13
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:126:13
+data
+ADDED from AndroidManifest.xml:128:17
+	android:scheme
+		ADDED from AndroidManifest.xml:128:23
+action#android.intent.action.VIEW
+ADDED from AndroidManifest.xml:129:17
+	android:name
+		ADDED from AndroidManifest.xml:129:25
+category#android.intent.category.BROWSABLE
+ADDED from AndroidManifest.xml:130:17
+	android:name
+		ADDED from AndroidManifest.xml:130:27
+category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:131:17
+	android:name
+		ADDED from AndroidManifest.xml:131:27

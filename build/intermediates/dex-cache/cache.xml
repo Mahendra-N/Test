@@ -2,6 +2,20 @@
 <items version="2" >
 
     <item
+        jar="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\libs\json_simple-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\json_simple-1.1-73a0af3d8b7126e1fb7c60f6ee7edfde2b1f81f0.jar" />
+    </item>
+    <item
+        jar="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\libs\dropbox-android-sdk-1.6.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="986e7a58e925c6f91b88ae8d3224a0550b65acc7">
+        <dex dex="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\dropbox-android-sdk-1.6.3-eb614076b939c4451a3779c94e5e68f8f504ea1d.jar" />
+    </item>
+    <item
         jar="C:\Users\Ellip sonic\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
         jumboMode="false"
         revision="21.1.2"

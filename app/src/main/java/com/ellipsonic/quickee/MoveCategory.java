@@ -176,6 +176,8 @@ if(selectedItems.size()>0){
     flag=false;
         }
         if(flag==true) {
+            Toast.makeText(getApplicationContext(), "selected category is  moved to "+move_to_topic_spinner_selected_val+" Topic",
+                    Toast.LENGTH_LONG).show();
             Intent intent = getIntent();
             finish();
             startActivity(intent);

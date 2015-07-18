@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Environment;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -56,7 +55,7 @@ public class CsvFiles  {
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
         // Setting Dialog Message
-        alertDialog.setMessage("Folder Doesnt not Exists to create  file, reinstall the App");
+        alertDialog.setMessage("Unable to Export");
 
         // Setting Positive "Yes" Button
         alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -76,8 +75,7 @@ public class CsvFiles  {
         File myfile = new File(root + "/Quickee/Database/" + topic_name + ".csv");
         if (myfile.exists()) {
             myfile.delete();
-            Toast.makeText(context, "File Already Exists,deleting ", Toast.LENGTH_SHORT).show();
-        }  if(!myfile.exists()) {
+              }  if(!myfile.exists()) {
             try {
                 myfile.createNewFile();
                 LoadData(topic_name,myfile);
@@ -120,28 +118,8 @@ public class CsvFiles  {
                        }
                    }
                }
-               ReadyToExport();
 
            }
     }
-    public void ReadyToExport() {
-        AlertDialog.Builder alertDialog;
-        alertDialog = new AlertDialog.Builder(context);
 
-        // Setting Dialog Title
-        alertDialog.setTitle("Quickee");
-        // Setting Dialog Message
-        alertDialog.setMessage("Uploading to Dropbox");
-
-        // Setting Positive "Yes" Button
-        alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-
-        });
-
-        // Showing Alert Message
-        alertDialog.show();
-    }
 }
