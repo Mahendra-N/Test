@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Environment;
-import android.widget.ProgressBar;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +21,7 @@ public class CsvFiles  {
     public TopicDb topic_db = null;
     public ArrayList<ArrayList<String>> topic_list = null;
     Context context;
-    ProgressBar progressBar;
+
     int i;
 
     public void CreateFile(Context Context) {
@@ -73,11 +72,11 @@ public class CsvFiles  {
 
         String root = Environment.getExternalStorageDirectory().toString();
         File myfile = new File(root + "/Quickee/Database/" + topic_name + ".csv");
-        if (myfile.exists()) {
-            myfile.delete();
-              }  if(!myfile.exists()) {
-            try {
-                myfile.createNewFile();
+                if (myfile.exists()) {
+                    myfile.delete();
+                }  if(!myfile.exists()) {
+                    try {
+                        myfile.createNewFile();
                 LoadData(topic_name,myfile);
             } catch (IOException e) {
                 e.printStackTrace();
