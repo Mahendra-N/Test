@@ -38,7 +38,7 @@ public ArrayList<String> CatList=null;
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_move__category);
+        setContentView(R.layout.activity_move_category);
         getActionBar().hide();
         Intent activityThatCalled = getIntent();
         SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
@@ -106,30 +106,35 @@ public ArrayList<String> CatList=null;
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     String sel_topic = (String) parentView.getItemAtPosition(position);
                     move_to_topic_spinner_selected_val=sel_topic;
-                 //   EDitCatListView(SelectedTopic);
-
-                }
+                     }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
             });
-             }
+        }
     }
     public void EDitCatListView( String selectedTopic){
 
         CategoryDb cat_Db=new CategoryDb(getApplicationContext());
         ArrayList<String> CatList =  cat_Db.getEditCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
-        if(CatList!=null) {
+        if(CatList.size()>0) {
+            findViewById(R.id.alert).setVisibility(View.GONE);
+            findViewById(R.id.blank_msg).setVisibility(View.GONE);
           Adapter = new
                     ArrayAdapter<String>(this,  android.R.layout.simple_list_item_multiple_choice, CatList);
             List = (ListView) this.findViewById(R.id.move_cat_list);
             List.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             List.setAdapter(Adapter);
+            save.setEnabled(true);
             save.setOnClickListener(this);
-
+        }
+        if(CatList.size()==0){
+            findViewById(R.id.alert).setVisibility(View.VISIBLE);
+            findViewById(R.id.blank_msg).setVisibility(View.VISIBLE);
+            save.setEnabled(false);
         }
     }
     public void onClick(View v) {
@@ -143,8 +148,9 @@ public ArrayList<String> CatList=null;
             if (checked_val.valueAt(i))
                 selectedItems.add(Adapter.getItem(position));
         }
+
 if(selectedItems.size()>0){
-             CategoryDb catDB =new CategoryDb(getApplicationContext());
+        CategoryDb catDB =new CategoryDb(getApplicationContext());
       NotesTable tableinfo = new NotesTable();
         for (int i = 0; i < selectedItems.size(); i++) {
         //    outputStrArr[i] = selectedItems.get(i);
@@ -154,8 +160,6 @@ if(selectedItems.size()>0){
             tableinfo.category_name =category;
             tableinfo.topic_name=SelectedTopic;
             if(move_to_topic_spinner_selected_val.equals(SelectedTopic)){
-
-
                 Toast.makeText(getApplicationContext(), "Selected category is under Same Topic",
                         Toast.LENGTH_SHORT).show();
                 flag=false;

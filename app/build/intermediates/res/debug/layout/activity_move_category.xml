@@ -144,6 +144,22 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="#e8e7e3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Empty, Nothing to Move"
+                android:textSize="20dp"
+                android:paddingTop="15dp"
+                android:id="@+id/blank_msg"
+                android:layout_gravity="center_horizontal" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nothing to Edit"
+                android:src="@drawable/ic_empty"
+                android:id="@+id/alert"
+                android:layout_gravity="center_horizontal" />
             <ListView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -154,4 +170,4 @@
 
         </LinearLayout>
 
-</RelativeLayout>
+</RelativeLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/activity_move_category.xml -->

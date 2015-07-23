@@ -29,6 +29,12 @@ public class CsvFiles  {
        context = Context;
         File database_folder = new File(Environment.getExternalStorageDirectory() + "/Quickee/Database");
         if (database_folder.exists()) {
+            String dir = Environment.getExternalStorageDirectory()+"/Quickee/Database";
+            File dirObj = new File(dir);
+            File[] files = dirObj.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                files[i].delete();
+            }
             topic_Db = new TopicDb(this.context);
             topicList = topic_Db.getTopicList();
             topicList.removeAll(Collections.singleton(null));
@@ -99,7 +105,7 @@ public class CsvFiles  {
                    rowdata= rowdata.replaceAll(",\n,", "\n");
                    rowdata=rowdata.replaceAll("--,", "\"");
                    rowdata=rowdata.replaceAll(",-", "\"");
-                  rowdata=rowdata.substring(0,rowdata.length()-2);
+                   rowdata=rowdata.substring(0,rowdata.length()-2);
                    // now pass the String wherever You want
                    String text = rowdata;
                    BufferedWriter output = null;

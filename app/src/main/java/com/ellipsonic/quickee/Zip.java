@@ -28,7 +28,7 @@ public class Zip extends Thread{
             }
         }
 
-       String dir = Environment.getExternalStorageDirectory()+"/Quickee/Database";
+       String dir = Environment.getExternalStorageDirectory()+"/Quickee/";
 
         String zipFileName= String.valueOf(myfile);
         try {

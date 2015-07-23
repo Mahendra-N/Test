@@ -15,13 +15,12 @@ import java.io.IOException;
  */
 public class UnzipThread extends  Thread {
     private DropboxAPI<?> dropbox;
-    Boolean flag;
     public UnzipThread( DropboxAPI<?> dropbox) {
         this.dropbox = dropbox;
     }
     public void run(){
 
-         String root = Environment.getExternalStorageDirectory().toString();
+        String root = Environment.getExternalStorageDirectory().toString();
         File myfile = new File(root + "/quickee.zip");
          if (myfile.exists())
             myfile.delete();

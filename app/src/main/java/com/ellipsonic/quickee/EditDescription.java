@@ -342,7 +342,7 @@ public class EditDescription extends Activity {
          //   Bitmap imageBitmap = (Bitmap) extras.get("data");
             //Get our saved file into a bitmap object:
             File file = new File(Environment.getExternalStorageDirectory()+File.separator + "image.jpg");
-              Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 800,700);
+            Bitmap bitmap = decodeSampledBitmapFromFile(file.getAbsolutePath(), 800,700);
             Matrix matrix = new Matrix();
             ExifInterface ei = null;
             try {
@@ -367,7 +367,7 @@ public class EditDescription extends Activity {
             }
 
            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-            SaveImage(bitmap);
+           SaveImage(bitmap);
         }
 
         if (requestCode == PICK_VIDEO_REQUEST) {
@@ -379,23 +379,28 @@ public class EditDescription extends Activity {
 
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Video/");
-                Random generator = new Random();
-                int n = 10000;
-                n = generator.nextInt(n);
-                String fname = "Video"+ n +".mp4";
-                video_path_to_db =root + "/Quickee/Video/"+fname;
-                File   file =new File(myDir,fname );
+                if(myDir.exists()) {
+                    Random generator = new Random();
+                    int n = 10000;
+                    n = generator.nextInt(n);
+                    String fname = "Video" + n + ".mp4";
+                    video_path_to_db = root + "/Quickee/Video/" + fname;
+                    File file = new File(myDir, fname);
 
-                FileOutputStream fos = new FileOutputStream(file);
+                 FileOutputStream fos = new FileOutputStream(file);
 
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = fis.read(buf)) > 0) {
-                    fos.write(buf, 0, len);
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = fis.read(buf)) > 0) {
+                        fos.write(buf, 0, len);
+                    }
+                    fis.close();
+                    fos.close();
+                    UpdateVideo();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Unable to add Video, storage directory not found",Toast.LENGTH_LONG
+                    ).show();
                 }
-                fis.close();
-                fos.close();
-                UpdateVideo();
             }
             catch (Exception e)
             {
@@ -413,23 +418,28 @@ public class EditDescription extends Activity {
 
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Video/");
-                Random generator = new Random();
-                int n = 10000;
-                n = generator.nextInt(n);
-                String fname = "Video"+ n +".mp4";
-                video_path_to_db =root + "/Quickee/Video/"+fname;
-                File   file=new File(myDir,fname );
+                if(myDir.exists()) {
+                    Random generator = new Random();
+                    int n = 10000;
+                    n = generator.nextInt(n);
+                    String fname = "Video" + n + ".mp4";
+                    video_path_to_db = root + "/Quickee/Video/" + fname;
+                    File file = new File(myDir, fname);
 
-                FileOutputStream fos = new FileOutputStream(file);
+                    FileOutputStream fos = new FileOutputStream(file);
 
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = fis.read(buf)) > 0) {
-                    fos.write(buf, 0, len);
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = fis.read(buf)) > 0) {
+                        fos.write(buf, 0, len);
+                    }
+                    fis.close();
+                    fos.close();
+                    UpdateVideo();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Unable to add Video, storage directory not found",Toast.LENGTH_LONG
+                    ).show();
                 }
-                fis.close();
-                fos.close();
-                UpdateVideo();
             }
             catch (Exception e)
             {
@@ -452,23 +462,28 @@ public class EditDescription extends Activity {
 
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Audio/");
-                Random generator = new Random();
-                int n = 1540;
-                n = generator.nextInt(n);
-                String fname = "Audio"+ n +".mp3";
-                audio_path_to_db =root + "/Quickee/Audio/"+fname;
-                File   file=new File(myDir,fname );
+                if(myDir.exists()) {
+                    Random generator = new Random();
+                    int n = 1540;
+                    n = generator.nextInt(n);
+                    String fname = "Audio" + n + ".mp3";
+                    audio_path_to_db = root + "/Quickee/Audio/" + fname;
+                    File file = new File(myDir, fname);
 
-                FileOutputStream fos = new FileOutputStream(file);
+                    FileOutputStream fos = new FileOutputStream(file);
 
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = fis.read(buf)) > 0) {
-                    fos.write(buf, 0, len);
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = fis.read(buf)) > 0) {
+                        fos.write(buf, 0, len);
+                    }
+                    fis.close();
+                    fos.close();
+                    UpdateAudio();
+                }else {
+                    Toast.makeText(getApplicationContext(),"Unable to add Audio, storage directory not found",Toast.LENGTH_LONG
+                    ).show();
                 }
-                fis.close();
-                fos.close();
-                UpdateAudio();
             }
             catch (Exception e)
             {
@@ -481,25 +496,29 @@ public class EditDescription extends Activity {
 
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/Quickee/Images/");
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "Image-" + n + ".png";
-        img_path_to_db = root + "/Quickee/Images/" + fname;
-
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-            out.flush();
-            out.close();
-            UpdateImage();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(myDir.exists()) {
+            Random generator = new Random();
+            int n = 10000;
+            n = generator.nextInt(n);
+            String fname = "Image-" + n + ".png";
+            img_path_to_db = root + "/Quickee/Images/" + fname;
+            File file = new File(myDir, fname);
+            if (file.exists()) file.delete();
+            try {
+                FileOutputStream out = new FileOutputStream(file);
+                finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.flush();
+                out.close();
+                UpdateImage();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Unable to add Image, storage directory not found",Toast.LENGTH_LONG
+            ).show();
         }
 
-    }
+         }
     public void UpdateImage(){
 
       NotesTable tableinfo = new NotesTable();

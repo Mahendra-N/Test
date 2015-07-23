@@ -30,6 +30,7 @@ public class EditCategory extends Activity {
     Spinner spinner;
     public CategoryDb cat_Db=null;
     public ArrayList<String> CatList=null;
+    ImageButton back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,9 @@ public class EditCategory extends Activity {
         SelectedTopic = activityThatCalled.getExtras().getString("selectedTopic");
         EDitCatListView( SelectedTopic);
        // TopicsDropDown();
-        ImageButton back_button =(ImageButton) findViewById(R.id.edit_cat_back_icon);
+         back_button =(ImageButton) findViewById(R.id.edit_cat_back_icon);
+
+
         Button editclose=(Button)findViewById(R.id.edit_cat_save);
 
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +91,9 @@ public class EditCategory extends Activity {
         CategoryDb cat_Db=new CategoryDb(getApplicationContext());
         ArrayList<String> CatList =  cat_Db.getEditCatList(selectedTopic);
         CatList.removeAll(Collections.singleton(null));
-        if(CatList!=null) {
+        if(CatList.size()>0) {
+            findViewById(R.id.blank_msg).setVisibility(View.GONE);
+            findViewById(R.id.alert).setVisibility(View.GONE);
             ArrayAdapter<String> Adapter = new
                     ArrayAdapter<String>(this,
                     R.layout.customeditlist,
@@ -105,7 +110,10 @@ public class EditCategory extends Activity {
 
                 }
             });
-        }else{
+        }
+        if (CatList.size()==0){
+            findViewById(R.id.blank_msg).setVisibility(View.VISIBLE);
+            findViewById(R.id.alert).setVisibility(View.VISIBLE);
             Log.d("message", "nothing is there in database");
         }
 
@@ -127,7 +135,7 @@ public class EditCategory extends Activity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                 String updateTextValue = String.valueOf(input.getText()).trim();;
+                 String updateTextValue = String.valueOf(input.getText()).trim();
 
                 if(updateTextValue.length()>0) {
                     UpdateCategory(defaultTextValue, updateTextValue,SelectedTopic);
@@ -142,7 +150,7 @@ public class EditCategory extends Activity {
         alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
-                String deleteTextValue = String.valueOf(input.getText());
+                String deleteTextValue = String.valueOf(input.getText()).trim();
                 Delete_Category(deleteTextValue, SelectedTopic);
                 EDitCatListView( SelectedTopic);
                // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
@@ -164,6 +172,8 @@ public class EditCategory extends Activity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Category " + deleteTextValue + " deleted successfully" ,
+                Toast.LENGTH_SHORT).show();
         //    EDitCatListView( selectedTopic);
     }
     public void UpdateCategory(String defaultTextValue, String updateTextValue,String selectedTopic){
@@ -182,7 +192,8 @@ public class EditCategory extends Activity {
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-
+                Toast.makeText(getApplicationContext(), " Category " + defaultTextValue + " Updated to " +updateTextValue,
+                        Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getApplicationContext(), "Category " + CategoryName + " Exists, Enter Unique Category Name to Update",
                         Toast.LENGTH_LONG).show();

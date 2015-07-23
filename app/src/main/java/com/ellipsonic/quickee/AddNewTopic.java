@@ -49,7 +49,7 @@ public class AddNewTopic extends Activity {
                     if(topicList.size()<=0){
                         TopicDb topicDb =new TopicDb(getApplicationContext());
                         NotesTable tableinfo = new NotesTable();
-                        tableinfo.topic_name = Topic_Name.getText().toString();
+                        tableinfo.topic_name = Topic_Name.getText().toString().trim();;
                         topicDb.insert_topic(tableinfo);
                         Topic_Name.setText("");
                         finish();

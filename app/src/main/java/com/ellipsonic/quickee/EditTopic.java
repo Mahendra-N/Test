@@ -60,7 +60,9 @@ public class EditTopic extends Activity {
 
       ArrayList<String> topicList = topic_Db.getEditTopicList();
       topicList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-      if (topicList != null) {
+      if (topicList.size()>0) {
+          findViewById(R.id.alert).setVisibility(View.GONE);
+          findViewById(R.id.blank_msg).setVisibility(View.GONE);
           ArrayAdapter<String> myAdapter = new
                   ArrayAdapter<String>(this,
                   R.layout.customeditlist,
@@ -77,7 +79,9 @@ public class EditTopic extends Activity {
                   AlertWindowTopic(clickedItem);
               }
           });
-      }else{
+      }if(topicList.size()==0){
+          findViewById(R.id.blank_msg).setVisibility(View.VISIBLE);
+          findViewById(R.id.alert).setVisibility(View.VISIBLE);
           Log.d("message", "nothing is there in database");
       }
   }
@@ -133,7 +137,7 @@ public class EditTopic extends Activity {
         alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
-                String deleteTextValue = String.valueOf(input.getText());
+                String deleteTextValue = String.valueOf(input.getText()).trim();
                 DeleteTopic(deleteTextValue);
                // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
                // dialog.cancel();
@@ -160,6 +164,8 @@ public class EditTopic extends Activity {
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), " Topic " + defaultTextValue + " Updated to " +updateTextValue,
+                        Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getApplicationContext(), "Topic " + TopicName + " Exists,Enter Unique Topic Name to Update",
                         Toast.LENGTH_LONG).show();
@@ -170,15 +176,15 @@ public class EditTopic extends Activity {
     }
 
     public void  DeleteTopic(String deleteTextValue){
-    //    Toast.makeText(getApplicationContext(), deleteTextValue, Toast.LENGTH_SHORT).show();
         TopicDb topicDb =new TopicDb(getApplicationContext());
         NotesTable tableinfo = new NotesTable();
         tableinfo.topic_name =deleteTextValue;
         topicDb.delete_topic(tableinfo);
         Intent intent = getIntent();
-       finish();
-       startActivity(intent);
-
+        finish();
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Topic " + deleteTextValue + " deleted successfully" ,
+                Toast.LENGTH_SHORT).show();
     }
 
 }

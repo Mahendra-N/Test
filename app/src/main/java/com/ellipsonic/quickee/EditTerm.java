@@ -85,7 +85,9 @@ public class EditTerm extends Activity {
         term_Db=new TermDb(getApplicationContext());
         TermList =  term_Db.getEditTermList(selectedTopic,selectedCategory);
         TermList.removeAll(Collections.singleton(null));
-        if(TermList!=null) {
+        if(TermList.size()>0) {
+            findViewById(R.id.blank_msg).setVisibility(View.GONE);
+            findViewById(R.id.alert).setVisibility(View.GONE);
             ArrayAdapter<String> Adapter = new
                     ArrayAdapter<String>(this,
                     R.layout.customeditlist,
@@ -101,7 +103,9 @@ public class EditTerm extends Activity {
 
                 }
             });
-              }else{
+              }if (TermList.size()==0){
+            findViewById(R.id.blank_msg).setVisibility(View.VISIBLE);
+            findViewById(R.id.alert).setVisibility(View.VISIBLE);
             Log.d("message", "nothing is there in database");
         }
 
@@ -137,7 +141,7 @@ public class EditTerm extends Activity {
         alertDialog.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
-                String deleteTextValue = String.valueOf(input.getText());
+                String deleteTextValue = String.valueOf(input.getText()).trim();
                 Delete_Term(deleteTextValue, selectedTopic, selectedCategory);
 
             }
@@ -158,6 +162,8 @@ public class EditTerm extends Activity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+        Toast.makeText(getApplicationContext(), "Term " + deleteTextValue + " deleted successfully" ,
+                Toast.LENGTH_SHORT).show();
       //  EditTermListView(selectedTopic, selectedCategory);
     }
 
@@ -180,6 +186,8 @@ public class EditTerm extends Activity {
                Intent intent = getIntent();
                 finish();
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), " Term " + defaultTextValue + " Updated to " +updateTextValue,
+                        Toast.LENGTH_SHORT).show();
 
             }else{
                 Toast.makeText(getApplicationContext(), "Term " + selectedTerm + " Exists,Enter Unique Term to Update",

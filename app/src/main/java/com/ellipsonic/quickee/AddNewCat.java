@@ -53,7 +53,7 @@ public class AddNewCat extends Activity {
                     if(CatList.size()<=0){
                         CategoryDb categoryDb = new CategoryDb(getApplicationContext());
                         NotesTable tableinfo = new NotesTable();
-                        tableinfo.category_name = Category_Name.getText().toString();
+                        tableinfo.category_name = Category_Name.getText().toString().trim();
                         tableinfo.topic_name = selectedTopic;
                         categoryDb.insert_category(tableinfo);
                         finish();

@@ -97,17 +97,14 @@ import java.util.Collections;
             ArrayList<String>   CatList =  cat_Db.getEditCatList(SelectedTopic);
             move_to_cat = (Spinner) findViewById(R.id.move_to_cat);
             CatList.removeAll(Collections.singleton(null));// String[]  myStringArray={"Air Force","Plane","Auto","Military","Sachin","BMW","AUDI","KING","Lemon","sweet"};
-            if (CatList != null) {
+            if (CatList.size()>0) {
                 ArrayAdapter<String> myAdapter = new   ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item,   CatList);
                 myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 move_to_cat.setAdapter(myAdapter);
-
                 move_to_cat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         String sel_cat = (String) parentView.getItemAtPosition(position);
                         old_category=sel_cat;
-                       // EditTermListView(SelectedTopic,SelectedCategory);
-
                     }
 
                     @Override
@@ -121,15 +118,22 @@ import java.util.Collections;
             TermDb term_Db = new TermDb(getApplicationContext());
             ArrayList<String> TermList = term_Db.getEditTermList(selectedTopic, selectedCategory);
             TermList.removeAll(Collections.singleton(null));
-            if (TermList != null) {
+            if (TermList.size()>0) {
+                findViewById(R.id.alert).setVisibility(View.GONE);
+                findViewById(R.id.blank_msg).setVisibility(View.GONE);
                 Adapter = new
                         ArrayAdapter<String>(this,  android.R.layout.simple_list_item_multiple_choice, TermList);
                 List = (ListView) this.findViewById(R.id.move_cat_list);
                 List.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                 List.setAdapter(Adapter);
+                save.setEnabled(true);
                 save.setOnClickListener(this);
-
-        }
+            }
+            if(TermList.size()==0){
+                findViewById(R.id.alert).setVisibility(View.VISIBLE);
+                findViewById(R.id.blank_msg).setVisibility(View.VISIBLE);
+                save.setEnabled(false);
+            }
         }
         public void onClick(View v) {
             SparseBooleanArray checked_val = List.getCheckedItemPositions();
@@ -170,7 +174,7 @@ import java.util.Collections;
                     }
                 }
             }else{
-                Toast.makeText(getApplicationContext(), "Select atleast Term to Move",
+                Toast.makeText(getApplicationContext(), "Select atleast one Term to Move",
                         Toast.LENGTH_SHORT).show();
                 flag=false;
             }

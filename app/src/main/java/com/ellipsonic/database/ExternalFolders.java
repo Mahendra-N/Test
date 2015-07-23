@@ -26,6 +26,10 @@ public class ExternalFolders {
             File  video_folder= new File(Environment.getExternalStorageDirectory()+"/Quickee/Video");
             File  database_folder= new File(Environment.getExternalStorageDirectory()+"/Quickee/Database");
             boolean success = true;
+
+            if( root_folder.exists()) {
+                    deleteDirectory(root_folder);
+            }
             if (!root_folder.exists()) {
                 success= root_folder.mkdir();
                 video_folder.mkdirs();
@@ -47,8 +51,23 @@ public class ExternalFolders {
         }
 
     }
+    public static void  deleteDirectory(File path) {
+        // TODO Auto-generated method stub
+        if( path.exists() ) {
+            File[] files = path.listFiles();
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteDirectory(files[i]);
+                }
+                else {
+                    files[i].delete();
+                }
+            }
+        }
 
+    }
     public void SdCardNotFound(){
+
         AlertDialog.Builder alertDialog;
         alertDialog = new AlertDialog.Builder(context);
 
@@ -64,7 +83,6 @@ public class ExternalFolders {
             }
 
         });
-
         // Showing Alert Message
         alertDialog.show();
     }

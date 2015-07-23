@@ -20,9 +20,15 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AppKeyPair;
 import com.ellipsonic.database.CsvFiles;
+import com.ellipsonic.database.ExternalFolders;
+import com.ellipsonic.database.NotesTable;
+import com.ellipsonic.database.TermDb;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class DropboxFragment extends Fragment {
@@ -79,21 +85,12 @@ public class DropboxFragment extends Fragment {
 
                 if (mDBApi != null) {
                    if (mDBApi.getSession().authenticationSuccessful()) {
-
-                       mProgressDialog = new ProgressDialog(getActivity());
-                       mProgressDialog.setMessage(" Uploading files please wait..!");
-                       mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                       mProgressDialog.setCancelable(false);
-                       mProgressDialog.show();
-
-                     UploadFileToDropbox upload = new UploadFileToDropbox(context, mDBApi, FILE_DIR, mProgressDialog );
-                       upload.execute();
-
+                          StartExporting();
                     }else{
-                        AlertWindow();
+                        AlertWindow("export");
                     }
                 }else{
-                    AlertWindow();
+                    AlertWindow("export");
                 }
             }
         });
@@ -103,33 +100,99 @@ public class DropboxFragment extends Fragment {
             public void onClick(View view) {
                 if (mDBApi != null) {
                     if (mDBApi.getSession().authenticationSuccessful()) {
-
-                        mProgressDialog = new ProgressDialog(getActivity());
-                        mProgressDialog.setMessage("importing files please wait..!");
-                        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                        mProgressDialog.setCancelable(false);
-                        mProgressDialog.show();
-                        ImportFromDropbox import_from_dp = new ImportFromDropbox(context, mDBApi,  mProgressDialog );
-                        import_from_dp.execute();
-
+                        StartImporting();
                     }else{
-                        AlertWindow();
+                        AlertWindow("import");
                     }
                 }else{
-                    AlertWindow();
+                    AlertWindow("import");
                 }
             }
         });
         return rootView;
     }
-
-    public void AlertWindow() {
+    public void StartExporting() {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         // Setting Dialog Title
         alertDialog.setTitle("Quickee");
 
-        alertDialog.setMessage("You need to login to export");
+        alertDialog.setMessage("Are you sure you want to Export, Existing data in dropbox will be replaced..!");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                mProgressDialog = new ProgressDialog(getActivity());
+                mProgressDialog.setMessage(" Uploading files please wait..!");
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.show();
+
+                UploadFileToDropbox upload = new UploadFileToDropbox(context, mDBApi, FILE_DIR, mProgressDialog );
+                upload.execute();
+
+            }
+        });
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (mDBApi != null) {
+                    flag=true;
+                    mDBApi.getSession().unlink();
+                    mDBApi=null;
+                }
+                dialog.dismiss();
+
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+    }
+    public void StartImporting() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+
+        alertDialog.setMessage("Are you sure you want to import, Existing data will be lost..!");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                mProgressDialog = new ProgressDialog(getActivity());
+                mProgressDialog.setMessage("importing files please wait..!");
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.show();
+                ExternalFolders folder=new ExternalFolders();
+                folder.Createfolder(context);
+                ImportFromDropbox import_from_dp = new ImportFromDropbox(context, mDBApi,  mProgressDialog );
+                import_from_dp.execute();
+
+            }
+        });
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            if (mDBApi != null) {
+                    flag=true;
+                    mDBApi.getSession().unlink();
+                    mDBApi=null;
+                }
+                dialog.dismiss();
+
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+    }
+    public void AlertWindow(String val) {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        // Setting Dialog Title
+        alertDialog.setTitle("Quickee");
+
+        alertDialog.setMessage("You need to link to "+val );
 
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -198,7 +261,11 @@ class UploadFileToDropbox extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-
+        try {
+            dropbox.delete(path + "quickee.zip");
+        } catch (DropboxException e) {
+            e.printStackTrace();
+        }
         try {
             CsvFiles file = new CsvFiles();
             file.CreateFile(context);
@@ -214,6 +281,7 @@ class UploadFileToDropbox extends AsyncTask<Void, Void, Boolean> {
             FileInputStream fileInputStream = new FileInputStream(myfile);
                 dropbox.putFile(path + "quickee.zip", fileInputStream,
                         myfile.length(), null, null);
+
 
             return true;
         } catch (IOException e) {
@@ -231,14 +299,10 @@ class UploadFileToDropbox extends AsyncTask<Void, Void, Boolean> {
         if (result) {
              mProgressDialog.dismiss();
             Toast.makeText(context, "File uploaded successfully!", Toast.LENGTH_LONG).show();
-            File myfile = new File(root + "/quickee.zip/");
-            if(myfile.exists()){
-                myfile.delete();
-            }
 
         } else {
             mProgressDialog.dismiss();
-            Toast.makeText(context, "Failed to upload file, Check bandwidth..!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Failed to upload file..!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -282,15 +346,60 @@ class ImportFromDropbox extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean result) {
         if (result) {
             context.deleteDatabase("Quickee.db");
-           // DatabaseHandler db =new DatabaseHandler(context);
+            String dir = Environment.getExternalStorageDirectory()+"/Quickee/Database";
+            File dirObj = new File(dir);
+            File[] files = dirObj.listFiles();
+            BufferedReader br = null;
+            String line = "";
+            String cvsSplitBy = ",(?=(?:(?:[^\\\"]*+\\\"){2})*+[^\\\"]*+$)";
+            TermDb   term_Db=new TermDb(context);
+            NotesTable tableinfo = new NotesTable();
+            for (int i = 0; i < files.length; i++) {
 
-           // db.onUpgrade();
-            mProgressDialog.dismiss();
-            Toast.makeText(context, "File downloaded successfully!", Toast.LENGTH_LONG).show();
+                try {
+
+                    br = new BufferedReader(new FileReader(files[i]));
+                    while ((line = br.readLine()) != null) {
+                        // use comma as separator
+                        String[] Topic = line.split(cvsSplitBy,-1);
+                        tableinfo.topic_name=(Topic[1].equals("null")) ? null: Topic[1];
+                        tableinfo.category_name=(Topic[2].equals("null")) ? null : Topic[2];
+                        tableinfo.term_name=(Topic[3].equals("null")) ? null : Topic[3];
+                        String description=(Topic[4].equals("null")) ? null : Topic[4];
+                        if(description!=null){
+                         tableinfo.description= description.replaceAll("\"","");
+                        }else{
+                            tableinfo.description=description;
+                        }
+                        tableinfo.image=(Topic[5].equals("null")) ? null : Topic[5];
+                        tableinfo.audio=(Topic[6].equals("null")) ? null : Topic[6];
+                        tableinfo.video=(Topic[7].equals("null")) ? null : Topic[7];
+                        term_Db.insert_term(tableinfo);
+
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                mProgressDialog.dismiss();
+            }
+
+           Toast.makeText(context, "File downloaded successfully!", Toast.LENGTH_LONG).show();
 
         } else {
             mProgressDialog.dismiss();
-            Toast.makeText(context, "Failed to download file, Check bandwidth..!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Failed to download file..!", Toast.LENGTH_LONG).show();
         }
     }
 

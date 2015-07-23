@@ -1,4 +1,4 @@
-package com.ellipsonic.quickee.model.adapter;
+package com.ellipsonic.quickee.adapter;
 
 import android.app.Activity;
 import android.content.Context;

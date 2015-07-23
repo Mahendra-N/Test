@@ -52,7 +52,7 @@ public class AddNewTerm extends Activity {
     public EditText term_name;
     public EditText sel_topic;
     public EditText button;
-     public EditText description;
+    public EditText description;
     public  String selectedTopic;
     public  String selectedCategory;
     public  String selectedTerm;
@@ -410,6 +410,7 @@ public class AddNewTerm extends Activity {
 
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Video/");
+                if(myDir.exists()){
                 Random generator = new Random();
                 int n = 10000;
                 n = generator.nextInt(n);
@@ -428,6 +429,11 @@ public class AddNewTerm extends Activity {
                 fos.close();
                 ConfirmWindow("Video");
                 video.setImageResource(R.drawable.ic_video_red);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Unable to add video, storage directory not found",Toast.LENGTH_LONG
+                    ).show();
+                }
+
             }
             catch (Exception e)
             {
@@ -444,24 +450,29 @@ public class AddNewTerm extends Activity {
 
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Audio/");
-                Random generator = new Random();
-                int n = 10000;
-                n = generator.nextInt(n);
-                String fname = "Audio"+ n +".mp3";
-                audio_path_to_db =root + "/Quickee/Audio/"+fname;
-                File   file=new File(myDir,fname );
+        if (myDir.exists()) {
+            Random generator = new Random();
+            int n = 10000;
+            n = generator.nextInt(n);
+            String fname = "Audio" + n + ".mp3";
+            audio_path_to_db = root + "/Quickee/Audio/" + fname;
+            File file = new File(myDir, fname);
 
-                FileOutputStream fos = new FileOutputStream(file);
+            FileOutputStream fos = new FileOutputStream(file);
 
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = fis.read(buf)) > 0) {
-                    fos.write(buf, 0, len);
-                }
-                fis.close();
-                fos.close();
-                ConfirmWindow("Audio");
-                audio.setImageResource(R.drawable.ic_audio_red);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = fis.read(buf)) > 0) {
+                fos.write(buf, 0, len);
+            }
+            fis.close();
+            fos.close();
+            ConfirmWindow("Audio");
+            audio.setImageResource(R.drawable.ic_audio_red);
+        }else{
+            Toast.makeText(getApplicationContext(),"Unable to add Audio, storage directory not found",Toast.LENGTH_LONG
+            ).show();
+        }
             }
             catch (Exception e)
             {
@@ -491,31 +502,35 @@ public class AddNewTerm extends Activity {
         }
         if (requestCode == REQUEST_Video_CAPTURE) {
 
-            try
-            {
+            try {
                 AssetFileDescriptor videoAsset = getContentResolver().openAssetFileDescriptor(data.getData(), "r");
                 FileInputStream fis = videoAsset.createInputStream();
 
                 String root = Environment.getExternalStorageDirectory().toString();
                 File myDir = new File(root + "/Quickee/Video/");
-                Random generator = new Random();
-                int n = 10000;
-                n = generator.nextInt(n);
-                String fname = "Video"+ n +".mp4";
-                video_path_to_db =root + "/Quickee/Video/"+fname;
-                File   file=new File(myDir,fname );
+                if (myDir.exists()) {
+                    Random generator = new Random();
+                    int n = 10000;
+                    n = generator.nextInt(n);
+                    String fname = "Video" + n + ".mp4";
+                    video_path_to_db = root + "/Quickee/Video/" + fname;
+                    File file = new File(myDir, fname);
 
-                FileOutputStream fos = new FileOutputStream(file);
+                    FileOutputStream fos = new FileOutputStream(file);
 
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = fis.read(buf)) > 0) {
-                    fos.write(buf, 0, len);
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = fis.read(buf)) > 0) {
+                        fos.write(buf, 0, len);
+                    }
+                    fis.close();
+                    fos.close();
+                    ConfirmWindow("Video");
+                    video.setImageResource(R.drawable.ic_video_red);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Unable to add video, storage directory not found",Toast.LENGTH_LONG
+                    ).show();
                 }
-                fis.close();
-                fos.close();
-                ConfirmWindow("Video");
-                video.setImageResource(R.drawable.ic_video_red);
             }
             catch (Exception e)
             {
@@ -528,22 +543,27 @@ public class AddNewTerm extends Activity {
 
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/Quickee/Images/");
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "Image-" + n + ".png";
-        img_path_to_db = root + "/Quickee/Images/" + fname;
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-            out.flush();
-            out.close();
-            ConfirmWindow("Image");
-            image.setImageResource(R.drawable.ic_img_red);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(myDir.exists()) {
+            Random generator = new Random();
+            int n = 10000;
+            n = generator.nextInt(n);
+            String fname = "Image-" + n + ".png";
+            img_path_to_db = root + "/Quickee/Images/" + fname;
+            File file = new File(myDir, fname);
+            if (file.exists()) file.delete();
+            try {
+                FileOutputStream out = new FileOutputStream(file);
+                finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.flush();
+                out.close();
+                ConfirmWindow("Image");
+                image.setImageResource(R.drawable.ic_img_red);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Unable to add Image, storage directory not found",Toast.LENGTH_LONG
+            ).show();
         }
 
     }

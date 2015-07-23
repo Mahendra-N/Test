@@ -1,4 +1,4 @@
-package com.ellipsonic.quickee.model.adapter;
+package com.ellipsonic.quickee.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,9 +10,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.ellipsonic.quickee.model.CategoryPopulating;
+import com.ellipsonic.quickee.Category;
 import com.ellipsonic.quickee.R;
-import com.ellipsonic.quickee.Term;
+import com.ellipsonic.quickee.model.TopicPopulating;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,27 +21,26 @@ import java.util.Locale;
 /**
  * Created by Ellip sonic on 09-06-2015.
  */
-public class CustomCategoryListView extends BaseAdapter {
+public class CustomTopicListView extends BaseAdapter {
 
-    Context mContext;
-    LayoutInflater inflater;
-    private List<CategoryPopulating> worldpopulationlist = null;
-    private ArrayList<CategoryPopulating> arraylist;
-    String SelectedTopic;
-    public CustomCategoryListView(Activity context, List<CategoryPopulating> worldpopulationlist,String selectedTopic) {
-        // super(context, R.layout.custom_topic_adapter_view, Topic);
+ Context mContext;
+ LayoutInflater inflater;
+ private List<TopicPopulating> worldpopulationlist = null;
+    private ArrayList<TopicPopulating> arraylist;
+    public CustomTopicListView(Activity context, List<TopicPopulating> worldpopulationlist) {
+       // super(context, R.layout.custom_topic_adapter_view, Topic);
         // TODO Auto-generated constructor stub
-        this.SelectedTopic=selectedTopic;
+
         this.mContext= context;
         this.worldpopulationlist = worldpopulationlist;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<CategoryPopulating>();
+        this.arraylist = new ArrayList<TopicPopulating>();
         this.arraylist.addAll(worldpopulationlist);
     }
     public class ViewHolder {
+        TextView topic;
         TextView category;
-        TextView term;
-    }
+          }
 
     @Override
     public int getCount() {
@@ -49,7 +48,7 @@ public class CustomCategoryListView extends BaseAdapter {
     }
 
     @Override
-    public CategoryPopulating getItem(int position) {
+    public TopicPopulating getItem(int position) {
         return worldpopulationlist.get(position);
     }
 
@@ -61,31 +60,29 @@ public class CustomCategoryListView extends BaseAdapter {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.custom_category_adapter_view, null);
+            view = inflater.inflate(R.layout.custom_topic_adapter_view, null);
             // Locate the TextViews in listview_item.xml
-            holder.category = (TextView) view.findViewById(R.id.category);
-            holder.term = (TextView) view.findViewById(R.id.term);
+            holder.topic = (TextView) view.findViewById(R.id.topic);
+            holder.category = (TextView) view.findViewById(R.id.cat);
 
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
+        holder.topic.setText(worldpopulationlist.get(position).getTopic());
         holder.category.setText(worldpopulationlist.get(position).getCategory());
-        holder.term.setText(worldpopulationlist.get(position).getterm());
 
         view.setOnClickListener(new AdapterView.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(mContext,Term.class);
-                intent.putExtra("selectedCategory",(worldpopulationlist.get(position).getCategory()));
-                intent.putExtra("selectedTopic",SelectedTopic);
+                Intent intent = new Intent(mContext,Category.class);
+                intent.putExtra("selectedTopic",(worldpopulationlist.get(position).getTopic()));
                 mContext.startActivity(intent);
-
             }
         });
-        return view;
+           return view;
     }
 
     // Filter Class
@@ -97,9 +94,9 @@ public class CustomCategoryListView extends BaseAdapter {
         }
         else
         {
-            for (CategoryPopulating wp : arraylist)
+            for (TopicPopulating wp : arraylist)
             {
-                if (wp.getCategory().toLowerCase(Locale.getDefault()).contains(charText))
+                if (wp.getTopic().toLowerCase(Locale.getDefault()).contains(charText))
                 {
                     worldpopulationlist.add(wp);
                 }
@@ -107,4 +104,6 @@ public class CustomCategoryListView extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
+
+
 }

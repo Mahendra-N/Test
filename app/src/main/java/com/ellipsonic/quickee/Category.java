@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import com.ellipsonic.database.CategoryDb;
 import com.ellipsonic.quickee.model.CategoryPopulating;
-import com.ellipsonic.quickee.model.adapter.CustomCategoryListView;
+import com.ellipsonic.quickee.adapter.CustomCategoryListView;
 
 import java.util.ArrayList;
 import java.util.Collections;

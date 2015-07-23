@@ -56,6 +56,22 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:prompt="@string/Spiner"/>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Nothing to Edit"
+        android:paddingTop="15dp"
+        android:textSize="20dp"
+        android:id="@+id/blank_msg"
+        android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Nothing to Edit"
+        android:src="@drawable/ic_edit_black"
+        android:id="@+id/alert"
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
