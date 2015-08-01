@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\libs\json_simple-1.1.jar"
+        jar="C:\xampp\htdocs\HTDOCS_CONTENTS\Android_Working_Folder\quickee_latest_code\Quickee_native\app\libs\json_simple-1.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
-        <dex dex="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\json_simple-1.1-73a0af3d8b7126e1fb7c60f6ee7edfde2b1f81f0.jar" />
+        <dex dex="C:\xampp\htdocs\HTDOCS_CONTENTS\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\json_simple-1.1-8d6da76ec699a5f8a2a0e75b1068d64e091b80cd.jar" />
     </item>
     <item
-        jar="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\libs\dropbox-android-sdk-1.6.3.jar"
+        jar="C:\xampp\htdocs\HTDOCS_CONTENTS\Android_Working_Folder\quickee_latest_code\Quickee_native\app\libs\dropbox-android-sdk-1.6.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="986e7a58e925c6f91b88ae8d3224a0550b65acc7">
-        <dex dex="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\dropbox-android-sdk-1.6.3-eb614076b939c4451a3779c94e5e68f8f504ea1d.jar" />
+        <dex dex="C:\xampp\htdocs\HTDOCS_CONTENTS\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\dropbox-android-sdk-1.6.3-d1ee70900fbf0471943411cc3253baa77a57e5fd.jar" />
     </item>
     <item
         jar="C:\Users\Ellip sonic\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
-        <dex dex="C:\xampp\htdocs\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-17d6dd0d5c4949c30fe2135bc9464e85c4f1de53.jar" />
+        <dex dex="C:\xampp\htdocs\HTDOCS_CONTENTS\Android_Working_Folder\quickee_latest_code\Quickee_native\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-17d6dd0d5c4949c30fe2135bc9464e85c4f1de53.jar" />
     </item>
 
 </items>

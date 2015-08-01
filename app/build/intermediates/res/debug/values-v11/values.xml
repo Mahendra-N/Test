@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values-v11/styles.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values-v11/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!-- API 11 theme customizations can go here. -->
     </style>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values-v11/themes.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values-v11/themes.xml -->
     <eat-comment/>
     <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>

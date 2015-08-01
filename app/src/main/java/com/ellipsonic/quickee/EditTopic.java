@@ -138,7 +138,12 @@ public class EditTopic extends Activity {
             public void onClick(DialogInterface dialog, int which) {
 
                 String deleteTextValue = String.valueOf(input.getText()).trim();
-                DeleteTopic(deleteTextValue);
+                if(deleteTextValue.length()>0) {
+                    DeleteTopic(deleteTextValue, defaultTextValue);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Enter topic name to delete", Toast.LENGTH_SHORT).show();
+                }
+
                // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
                // dialog.cancel();
             }
@@ -175,16 +180,21 @@ public class EditTopic extends Activity {
 
     }
 
-    public void  DeleteTopic(String deleteTextValue){
-        TopicDb topicDb =new TopicDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.topic_name =deleteTextValue;
-        topicDb.delete_topic(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-        Toast.makeText(getApplicationContext(), "Topic " + deleteTextValue + " deleted successfully" ,
-                Toast.LENGTH_SHORT).show();
+    public void  DeleteTopic(String deleteTextValue, String defaultTextValue) {
+        if (deleteTextValue.equals(defaultTextValue)) {
+            TopicDb topicDb = new TopicDb(getApplicationContext());
+            NotesTable tableinfo = new NotesTable();
+            tableinfo.topic_name = deleteTextValue;
+            topicDb.delete_topic(tableinfo);
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Topic " + deleteTextValue + " deleted successfully",
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Topic not found to Delete",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

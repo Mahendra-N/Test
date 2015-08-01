@@ -142,7 +142,13 @@ public class EditTerm extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
                 String deleteTextValue = String.valueOf(input.getText()).trim();
-                Delete_Term(deleteTextValue, selectedTopic, selectedCategory);
+                Delete_Term(deleteTextValue, selectedTopic, selectedCategory, defaultTextValue);
+
+                if(deleteTextValue.length()>0) {
+                    Delete_Term(deleteTextValue, selectedTopic, selectedCategory, defaultTextValue);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Enter Term name to delete", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -151,20 +157,23 @@ public class EditTerm extends Activity {
         alertDialog.show();
     }
 
-    public void  Delete_Term(String deleteTextValue,String selectedTopic,String selectedCategory){
-        //    Toast.makeText(getApplicationContext(), deleteTextValue, Toast.LENGTH_SHORT).show();
-        term_Db=new TermDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.topic_name =selectedTopic;
-        tableinfo.category_name=selectedCategory;
-        tableinfo.term_name=deleteTextValue;
-        term_Db.delete_term(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-        Toast.makeText(getApplicationContext(), "Term " + deleteTextValue + " deleted successfully" ,
-                Toast.LENGTH_SHORT).show();
-      //  EditTermListView(selectedTopic, selectedCategory);
+    public void  Delete_Term(String deleteTextValue, String selectedTopic, String selectedCategory, String defaultTextValue){
+      if(deleteTextValue.equals(defaultTextValue)) {
+          term_Db = new TermDb(getApplicationContext());
+          NotesTable tableinfo = new NotesTable();
+          tableinfo.topic_name = selectedTopic;
+          tableinfo.category_name = selectedCategory;
+          tableinfo.term_name = deleteTextValue;
+          term_Db.delete_term(tableinfo);
+          Intent intent = getIntent();
+          finish();
+          startActivity(intent);
+          Toast.makeText(getApplicationContext(), "Term " + deleteTextValue + " deleted successfully",
+                  Toast.LENGTH_SHORT).show();
+      }else{
+          Toast.makeText(getApplicationContext(), "Term  not found to delete",
+                  Toast.LENGTH_SHORT).show();
+      }
     }
 
     public void UpdateTerm(String defaultTextValue, String updateTextValue,String selectedTopic,String selectedCategory){

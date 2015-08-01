@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
@@ -15,7 +15,7 @@
         <item>Dropbox Sync.</item>
         <item>Google Drive Sync.</item>
     </string-array>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/color.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="actionbar_background">#3671d0</color>
     <color name="actionbar_text">#fff</color>
@@ -25,11 +25,11 @@
     <color name="list_background_pressed">#446CB3</color>
     <color name="list_divider">#BCBDBD</color>
     <color name="list_item_title">#fff</color>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="AddDescriptionPlaceholder">Definition</string>
     <string name="Spiner">Choose Category</string>
@@ -62,7 +62,7 @@
     <string name="title_activity_move_term">MoveTerm</string>
     <string name="title_activity_term">Term</string>
     <string name="title_activity_zoom">ZoomActivity</string>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!--
@@ -75,7 +75,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here.
          -->
     </style>
-    <!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/themes.xml -->
+    <!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/values/themes.xml -->
     <eat-comment/>
     <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>

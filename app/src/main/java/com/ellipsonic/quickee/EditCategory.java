@@ -151,8 +151,13 @@ public class EditCategory extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to invoke NO event
                 String deleteTextValue = String.valueOf(input.getText()).trim();
-                Delete_Category(deleteTextValue, SelectedTopic);
-                EDitCatListView( SelectedTopic);
+
+                if(deleteTextValue.length()>0) {
+                    Delete_Category(deleteTextValue, SelectedTopic,defaultTextValue);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Enter category name to delete", Toast.LENGTH_SHORT).show();
+                }
+               // EDitCatListView( SelectedTopic);
                // Toast.makeText(getApplicationContext(), "You clicked Delete", Toast.LENGTH_SHORT).show();
                 //dialog.cancel();
             }
@@ -162,19 +167,21 @@ public class EditCategory extends Activity {
         alertDialog.show();
     }
 
-    public void  Delete_Category(String deleteTextValue,String selectedTopic){
-        //    Toast.makeText(getApplicationContext(), deleteTextValue, Toast.LENGTH_SHORT).show();
-        CategoryDb catDB =new CategoryDb(getApplicationContext());
-        NotesTable tableinfo = new NotesTable();
-        tableinfo.topic_name =selectedTopic;
-        tableinfo.category_name=deleteTextValue;
-        catDB.delete_category(tableinfo);
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-        Toast.makeText(getApplicationContext(), "Category " + deleteTextValue + " deleted successfully" ,
-                Toast.LENGTH_SHORT).show();
-        //    EDitCatListView( selectedTopic);
+    public void  Delete_Category(String deleteTextValue, String selectedTopic, String defaultTextValue){
+        if(deleteTextValue.equals(defaultTextValue)) {
+            CategoryDb catDB = new CategoryDb(getApplicationContext());
+            NotesTable tableinfo = new NotesTable();
+            tableinfo.topic_name = selectedTopic;
+            tableinfo.category_name = deleteTextValue;
+            catDB.delete_category(tableinfo);
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Category " + deleteTextValue + " deleted successfully",
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Category not found to delete",   Toast.LENGTH_SHORT).show();
+        }
     }
     public void UpdateCategory(String defaultTextValue, String updateTextValue,String selectedTopic){
         String CategoryName=updateTextValue;

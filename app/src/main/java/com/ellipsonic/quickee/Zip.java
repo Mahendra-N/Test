@@ -62,7 +62,7 @@ public class Zip extends Thread{
             FileInputStream in = new FileInputStream(files[i].getAbsolutePath());
             System.out.println(" Adding: " + files[i].getAbsolutePath());
           //  out.putNextEntry(new ZipEntry(files[i].getAbsolutePath()));
-            String pathAfterOmittingtheRootFolder=files[i].getAbsolutePath().replaceFirst("/storage/sdcard0", "");
+            String pathAfterOmittingtheRootFolder=files[i].getAbsolutePath().replaceFirst(String.valueOf(Environment.getExternalStorageDirectory()), "");
             out.putNextEntry(new ZipEntry(pathAfterOmittingtheRootFolder));
             int len;
             while ((len = in.read(tmpBuf)) > 0) {

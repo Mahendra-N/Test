@@ -117,4 +117,4 @@ tools:context="com.ellipsomic.qweekie.AudioRecoder"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-</RelativeLayout><!-- From: file:/C:/xampp/htdocs/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/audio_recorder.xml -->
+</RelativeLayout><!-- From: file:/C:/xampp/htdocs/HTDOCS_CONTENTS/Android_Working_Folder/quickee_latest_code/Quickee_native/app/src/main/res/layout/audio_recorder.xml -->
